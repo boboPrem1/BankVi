@@ -2,7 +2,7 @@
 
 *Version 0.2 · 7 novembre 2026 · Détaille EC-23 à EC-26 de [parcours_ecrans_p1.md](../../parcours_ecrans_p1.md), avec le [design system](../00-design-system/README.md). Mon horizon et la simulation sont dans la [maquette](../../maquettes/accueil-statut.html).*
 
-Chaque fiche se suffit à elle-même : textes exacts, mesures, couleurs en clair et en sombre, états et gestes.
+Chaque fiche se suffit à elle-même : l'écran dans ses sections numérotées, tout le reste dans son annexe générée.
 
 ## Enchaînement
 

@@ -2,7 +2,7 @@
 
 *Version 0.1 · 6 novembre 2026 · Détaille EC-01 à EC-11 de [parcours_ecrans_p1.md](../../parcours_ecrans_p1.md), avec le [design system](../00-design-system/README.md).*
 
-Chaque fiche se suffit à elle-même : textes exacts, mesures, couleurs en clair et en sombre, états et gestes. Les valeurs viennent de [tokens.json](../00-design-system/tokens.json).
+Chaque fiche se suffit à elle-même : l'écran dans ses sections numérotées, tout le reste dans son annexe générée. Les valeurs viennent de [tokens.json](../00-design-system/tokens.json).
 
 ## Enchaînement
 

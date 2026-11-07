@@ -17,6 +17,7 @@ Le thème suit le réglage du téléphone. Chaque couleur a un rôle : on choisi
 | `text.primary` | `#111B21` | `#E9EDEF` | Titres, montants, texte courant |
 | `text.secondary` | `#54656F` | `#AEBAC1` | Aides, descriptions |
 | `text.tertiary` | `#667781` | `#8696A0` | Axes, placeholders. En clair : sur fond blanc uniquement |
+| `text.timeOnExpense` | `#3B4A54` | `#D9FDD3` | Heure dans une bulle de dépense |
 | `text.disabled` | `#667781` | `#8696A0` | Libellé d'un bouton désactivé |
 | `text.link` | `#00735E` | `#25D366` | Boutons texte, liens, marque écrite |
 | `text.onAction` | `#0B141A` | `#0B141A` | Texte et icône sur le vert d'action |

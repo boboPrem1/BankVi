@@ -2,7 +2,7 @@
 
 *Version 0.1 · 7 novembre 2026 · Détaille EC-27 à EC-36 de [parcours_ecrans_p1.md](../../parcours_ecrans_p1.md), avec le [design system](../00-design-system/README.md). Ces écrans ne sont pas encore dans la maquette.*
 
-Chaque fiche se suffit à elle-même : textes exacts, mesures, couleurs en clair et en sombre, états et gestes.
+Chaque fiche se suffit à elle-même : l'écran dans ses sections numérotées, tout le reste dans son annexe générée.
 
 ## Enchaînement
 

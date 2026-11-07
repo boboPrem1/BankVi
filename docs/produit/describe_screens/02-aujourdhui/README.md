@@ -2,7 +2,7 @@
 
 *Version 0.2 · 7 novembre 2026 · Détaille EC-12 à EC-22 et EC-50 de [parcours_ecrans_p1.md](../../parcours_ecrans_p1.md), avec le [design system](../00-design-system/README.md). Rendu visible dans la [maquette](../../maquettes/accueil-statut.html) pour l'accueil, le statut et le bilan du soir.*
 
-Chaque fiche se suffit à elle-même : textes exacts, mesures, couleurs en clair et en sombre, états et gestes.
+Chaque fiche se suffit à elle-même : l'écran dans ses sections numérotées, tout le reste dans son annexe générée.
 
 ## Enchaînement
 

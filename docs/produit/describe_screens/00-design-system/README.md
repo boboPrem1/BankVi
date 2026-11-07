@@ -10,7 +10,7 @@ BankVi garde sa propre marque : son nom, son logo et son icône ne ressemblent p
 
 | Fichier | Contenu |
 | --- | --- |
-| [tokens.json](tokens.json) | Toutes les valeurs, lisibles par une machine. **Une valeur se change ici, puis dans les documents.** |
+| [tokens.json](tokens.json) | Toutes les valeurs, lisibles par une machine. **Une valeur se change ici, puis dans les documents, puis on relance `generer_annexes.py`.** |
 | [01 Principes et référence WhatsApp](01-principes-et-reference-whatsapp.md) | Ce qu'on reprend, ce qu'on adapte, ce qu'on écarte, et pourquoi |
 | [02 Couleurs](02-couleurs.md) | Palette claire et sombre, rôles, contrastes calculés |
 | [03 Typographie](03-typographie.md) | Police, échelle, chiffres, grossissement du texte |
@@ -35,6 +35,10 @@ BankVi garde sa propre marque : son nom, son logo et son icône ne ressemblent p
 2. Reprendre uniquement les composants décrits ici. Un besoin nouveau s'ajoute au système avant d'apparaître sur un écran.
 3. Vérifier la règle d'or : **un seul bouton vert par écran.**
 4. Vérifier les textes avec la [rédaction](14-redaction.md) : montants, tutoiement, aucun reproche, aucun conseil.
+
+## Fiches autonomes
+
+Chaque fiche d'écran contient en annexe ce qu'il faut du design system, de la philosophie, du parcours et de la bible pour finir l'écran avec ce seul fichier. Ces annexes sont générées : **une règle se change dans son document source, jamais dans une annexe.** On relance ensuite `python generer_annexes.py` depuis le dossier `describe_screens`, et `--verifier` signale une annexe qui n'est plus à jour.
 
 ## D'où viennent les valeurs
 

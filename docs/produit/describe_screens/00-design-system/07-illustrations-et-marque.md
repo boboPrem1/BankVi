@@ -23,7 +23,7 @@ Le style reprend l'esprit des illustrations de la refonte de WhatsApp : arrondi,
 | Sujets | Argent réel du quotidien : billets, pièces, carnet, calendrier, courbe |
 | Personnages | Aucun en P1, ce qui évite les caricatures et allège les fichiers |
 | Format | Vecteur (VectorDrawable ou SVG), 10 Ko au plus, une version par thème |
-| Texte | Tout texte visible dans une illustration est traduit par un nom lu par TalkBack |
+| Texte | Une illustration décorative est ignorée par TalkBack. Si son texte porte un sens, une phrase le dit. Le texte du dessin est converti en tracés, sans police embarquée |
 
 ## 3. Usage
 
