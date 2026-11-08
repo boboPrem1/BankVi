@@ -25,4 +25,6 @@ export function chargerSemaineDeCamille() {
     dep('2026-11-06T08:30', 'courses', 300, 'Pain'),
   );
   useRegistre.getState().ecrire(entrees);
+  // Le compte de Camille a le Pass Plus : on voit les 90 jours de l'horizon (choix de démonstration).
+  useRegistre.getState().modifier({ pass: true });
 }

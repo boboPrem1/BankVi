@@ -24,6 +24,8 @@ interface Props {
   estChoisi: (date: string) => boolean;
   /** Bande de période entre deux dates comprises (EC-16, mode Période). */
   bande?: [string, string] | undefined;
+  /** Jours hors d'atteinte : grisés, sans action (EC-25, 90 jours en avant au plus). */
+  horsLimite?: ((date: string) => boolean) | undefined;
   onJour: (date: string) => void;
 }
 
@@ -31,7 +33,7 @@ interface Props {
  * Calendrier mensuel (design system, sélecteur de date) : semaine du lundi, cercles de 40 dp
  * dans des zones de 48 dp, aujourd'hui entouré, un point sous chaque date future.
  */
-export function Calendrier({ mois, onMois, aujourdhui, min, max, estChoisi, bande, onJour }: Props) {
+export function Calendrier({ mois, onMois, aujourdhui, min, max, estChoisi, bande, horsLimite, onJour }: Props) {
   const { t } = useTranslation();
   const { colors } = useTheme();
   const [a, m] = mois.split('-').map(Number) as [number, number];
@@ -66,24 +68,26 @@ export function Calendrier({ mois, onMois, aujourdhui, min, max, estChoisi, band
           const choisi = estChoisi(date);
           const futur = date > aujourdhui;
           const dansBande = bande && date >= bande[0] && date <= bande[1];
+          const hors = horsLimite?.(date) ?? false;
           const lecture = `${dateLongueJour(date)}${futur ? `, ${t('calendrier.prevu')}` : ''}${choisi ? `, ${t('calendrier.selectionne')}` : ''}`;
           return (
             <View key={date} style={[styles.case, dansBande ? { backgroundColor: colors.bg.selected } : null]}>
               <Pressable
                 onPress={() => onJour(date)}
+                disabled={hors}
                 accessibilityRole="button"
                 accessibilityLabel={lecture}
-                accessibilityState={{ selected: choisi }}
+                accessibilityState={{ selected: choisi, disabled: hors }}
                 style={[
                   styles.rond,
                   choisi ? { backgroundColor: colors.action.primary } : null,
                   date === aujourdhui && !choisi ? { borderWidth: 1, borderColor: colors.border.focus } : null,
                 ]}
               >
-                <Text style={[type.bodyLarge, styles.chiffre, { color: choisi ? colors.text.onAction : colors.text.primary }]}>
+                <Text style={[type.bodyLarge, styles.chiffre, { color: choisi ? colors.text.onAction : hors ? colors.text.disabled : colors.text.primary }]}>
                   {Number(date.slice(8))}
                 </Text>
-                {futur && !choisi ? <View style={[styles.point, { backgroundColor: colors.text.tertiary }]} /> : null}
+                {futur && !choisi && !hors ?<View style={[styles.point, { backgroundColor: colors.text.tertiary }]} /> : null}
               </Pressable>
             </View>
           );

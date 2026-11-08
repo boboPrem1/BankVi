@@ -53,6 +53,10 @@ export interface Registre {
   /** Montant laissé dans « Noter » : il reste jusqu'à la fermeture de l'app. */
   brouillon: number | null;
   recentes: string[];
+  /** Pass Plus actif : 90 jours et simulations sans limite. Camille l'a, un nouveau compte non. */
+  pass: boolean;
+  /** Simulations faites sans pass : 3 offertes, sans recharge (EC-25). */
+  essais: number;
 
   /** Ajoute des écritures ; rend leurs identifiants. */
   ecrire: (entrees: { ecriture: DistributiveOmit<Ecriture, 'id'>; meta?: Meta }[]) => string[];
@@ -60,13 +64,16 @@ export interface Registre {
   annuler: (ids: string[]) => void;
   /** Remet une écriture annulée, sous un nouvel identifiant (« Annuler » d'une suppression). */
   retablir: (ids: string[]) => string[];
-  modifier: (p: Partial<Pick<Registre, 'prevus' | 'nonDetailles' | 'bilan' | 'statutVu' | 'carteSauvegardeFermee' | 'brouillon'>>) => void;
+  modifier: (p: Partial<Pick<Registre, 'prevus' | 'nonDetailles' | 'bilan' | 'statutVu' | 'carteSauvegardeFermee' | 'brouillon' | 'pass' | 'essais'>>) => void;
   retenirCategorie: (id: string) => void;
   remplir: (r: Partial<Pick<Registre, 'ecritures' | 'meta' | 'prevus' | 'nonDetailles'>>) => void;
   reinitialiser: () => void;
 }
 
 type DistributiveOmit<T, K extends PropertyKey> = T extends unknown ? Omit<T, K> : never;
+
+/** Simulations offertes sans Pass Plus (EC-25). */
+export const ESSAIS_OFFERTS = 3;
 
 let compteur = 1;
 export const nouvelId = (prefixe = 'e') => `${prefixe}-${Date.now().toString(36)}-${compteur++}`;
@@ -81,6 +88,8 @@ const VIDE = {
   carteSauvegardeFermee: false,
   brouillon: null,
   recentes: [] as string[],
+  pass: false,
+  essais: 0,
 };
 
 /**

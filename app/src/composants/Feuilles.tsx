@@ -84,20 +84,25 @@ interface DateProps {
   date: string;
   onChoix: (date: string) => void;
   onFermer: () => void;
+  /** Jours atteignables, compris. Par défaut : 12 mois en arrière et en avant. */
+  min?: string;
+  max?: string;
 }
 
 /** EC-15 Autre date : jusqu'à 12 mois en arrière et en avant ; toucher un jour ferme la feuille. */
-export function FeuilleDate({ visible, date, onChoix, onFermer }: DateProps) {
+export function FeuilleDate({ visible, date, onChoix, onFermer, min, max }: DateProps) {
   const [mois, setMois] = useState(moisDe(date));
+  const borne = min !== undefined || max !== undefined;
   return (
     <FeuilleBasse visible={visible} onFermer={onFermer} onAffichee={() => setMois(moisDe(date))}>
       <Calendrier
         mois={mois}
         onMois={setMois}
         aujourdhui={AUJOURDHUI}
-        min={moisDecale(moisDe(AUJOURDHUI), -12)}
-        max={moisDecale(moisDe(AUJOURDHUI), 12)}
+        min={min ? moisDe(min) : moisDecale(moisDe(AUJOURDHUI), -12)}
+        max={max ? moisDe(max) : moisDecale(moisDe(AUJOURDHUI), 12)}
         estChoisi={(d) => d === date}
+        horsLimite={borne ? (d) => (min !== undefined && d < min) || (max !== undefined && d > max) : undefined}
         onJour={onChoix}
       />
     </FeuilleBasse>

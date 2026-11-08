@@ -38,6 +38,9 @@ export default function Racine() {
         <Stack.Screen name="bilan/compter" options={{ animation: 'slide_from_bottom' }} />
         <Stack.Screen name="bilan/resultat" options={{ animation: 'fade', gestureEnabled: false }} />
         <Stack.Screen name="statut" options={{ animation: 'fade' }} />
+        {/* EC-24 : feuille posée sur l'écran d'origine, qui reste visible sous le voile. */}
+        <Stack.Screen name="origine" options={{ presentation: 'transparentModal', animation: 'none', contentStyle: { backgroundColor: 'transparent' } }} />
+        <Stack.Screen name="puis-je" options={{ animation: 'slide_from_bottom' }} />
       </Stack>
       {/* Le bandeau bas survit au changement d'écran. */}
       <HoteBandeauBas />

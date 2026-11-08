@@ -135,7 +135,7 @@ export default function Accueil() {
               <Text style={[type.bodyMedium, { color: BLANC }]}>{dateLongueJour(AUJOURDHUI)}</Text>
             </View>
             <Pressable
-              onPress={() => router.push({ pathname: '/a-venir', params: { code: 'EC-24' } })}
+              onPress={() => router.push('/origine')}
               accessible
               accessibilityRole="header"
               accessibilityLabel={
@@ -303,7 +303,7 @@ function BlocAVenir({ nom, date, montant }: { nom: string; date: string; montant
   const { colors } = useTheme();
   return (
     <Pressable
-      onPress={() => router.push({ pathname: '/a-venir', params: { code: 'EC-23' } })}
+      onPress={() => router.navigate('/horizon')}
       accessibilityRole="button"
       accessibilityLabel={`${nom}, ${date}, ${montant}`}
       android_ripple={{ color: colors.action.ripple }}

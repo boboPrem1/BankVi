@@ -8,7 +8,7 @@ import { AccessibilityInfo, Pressable, ScrollView, StyleSheet, Text, View } from
 import { annoncer } from '@/composants/BandeauBas';
 import { BoutonPrincipal, BoutonTexte } from '@/composants/Boutons';
 import { ChampCompact, ChampMontant, type RefSaisie } from '@/composants/Champs';
-import { Puce } from '@/composants/Choix';
+import { Puce, PuceMenu } from '@/composants/Choix';
 import { BandeauEtat } from '@/composants/Contenu';
 import { Ecran } from '@/composants/Ecran';
 import { FeuilleBasse } from '@/composants/FeuilleBasse';
@@ -301,27 +301,6 @@ export default function Noter() {
         </Text>
       </FeuilleBasse>
     </>
-  );
-}
-
-/** Puce avec chevron bas : elle ouvre un choix (catégorie, poche). */
-function PuceMenu({ libelle, icone, onPress }: { libelle: string; icone: Parameters<typeof Icone>[0]['nom']; onPress: () => void }) {
-  const { colors } = useTheme();
-  return (
-    <Pressable
-      onPress={onPress}
-      hitSlop={8}
-      accessibilityRole="button"
-      accessibilityLabel={libelle}
-      android_ripple={{ color: colors.action.ripple }}
-      style={[styles.puce, { borderColor: colors.border.control }]}
-    >
-      <Icone nom={icone} couleur={colors.text.primary} taille={size.iconSmall} />
-      <Text style={[type.bodyMedium, { color: colors.text.primary }]} numberOfLines={1}>
-        {libelle}
-      </Text>
-      <Icone nom="arrow_drop_down" couleur={colors.text.secondary} taille={size.iconSmall} />
-    </Pressable>
   );
 }
 

@@ -322,6 +322,25 @@ export function reperes(etat: Etat): { j3: PointHorizon; j7: PointHorizon; j30: 
   return { j3: points[3] as PointHorizon, j7: points[7] as PointHorizon, j30: points[30] as PointHorizon };
 }
 
+/**
+ * Le réel des derniers jours, à gauche d'aujourd'hui sur la courbe (EC-23) : le solde perso
+ * en fin de journée. Un jour n'apparaît que si chaque poche perso utilisée y était déjà
+ * comptée, sinon son solde serait inventé. Du plus ancien au plus récent, aujourd'hui exclu.
+ */
+export function soldesPasses(etat: Etat, jours = 7): { date: DateISO; solde: Montant }[] {
+  const utilisees = new Set(etat.ecritures.flatMap((e) => ("poche" in e ? [e.poche] : e.type === "transfert" ? [e.de, e.vers] : [])));
+  const perso = etat.poches.filter((p) => p.genre === "perso" && utilisees.has(p.id)).map((p) => p.id);
+  const passes: { date: DateISO; solde: Montant }[] = [];
+  for (let i = jours; i >= 1; i--) {
+    const date = ajouterJours(etat.aujourdhui, -i);
+    const reg = rejouer(etat, date);
+    const comptees = new Set(reg.ecritures.flatMap((e) => (e.type === "comptage" ? [e.poche] : [])));
+    if (perso.length === 0 || !perso.every((p) => comptees.has(p))) continue;
+    passes.push({ date, solde: soldesPerso(etat, reg.soldes) });
+  }
+  return passes;
+}
+
 /** La première date où le solde passe sous zéro, sur le reste du cycle. */
 export function premierManque(etat: Etat, jours = 90): { date: DateISO; solde: Montant } | undefined {
   const point = horizon(etat, jours).points.find((p) => p.solde < 0);

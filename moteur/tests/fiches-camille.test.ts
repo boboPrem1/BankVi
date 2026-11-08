@@ -11,6 +11,7 @@ import {
   repartirMaintenant,
   reperes,
   simuler,
+  soldesPasses,
   statutDuJour,
   type Ecriture,
   type Recette,
@@ -83,6 +84,24 @@ describe("EC-23 : mon horizon", () => {
     const etat = camille({ ecritures: [comptage("c", "especes", 9500)] });
     expect(calculer(etat).manque).toBe(8500);
     expect(premierManque(etat)).toEqual({ date: "2026-11-20", solde: -8500 });
+  });
+
+  it("montre le réel des jours passés seulement quand chaque poche utilisée était comptée", () => {
+    expect(soldesPasses(camille())).toEqual([]);
+    const etat = camille({
+      ecritures: [
+        comptage("e1", "especes", 40000, "2026-11-02T07:00"),
+        comptage("m1", "mixx", 60000, "2026-11-03T07:00"),
+        { id: "d1", at: "2026-11-04T12:00", type: "depense", poche: "especes", montant: 1500 },
+        comptage("c-especes", "especes", 32000),
+        comptage("c-mixx", "mixx", 58000),
+      ],
+    });
+    expect(soldesPasses(etat)).toEqual([
+      { date: "2026-11-03", solde: 100000 },
+      { date: "2026-11-04", solde: 98500 },
+      { date: "2026-11-05", solde: 98500 },
+    ]);
   });
 });
 

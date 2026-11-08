@@ -16,6 +16,11 @@ interface Props {
   children: ReactNode;
   /** Bouton principal de la feuille : le seul vert visible, la feuille recouvre le pied. Absent : toucher suffit. */
   pied?: ReactNode;
+  /**
+   * Feuille posée par un écran de la pile (EC-24) plutôt que dans une Modal : un écran ouvert
+   * depuis la feuille passe alors au-dessus, et le retour revient à la feuille.
+   */
+  sansModal?: boolean;
 }
 
 /**
@@ -23,21 +28,10 @@ interface Props {
  * Une saisie en cours ne se perd pas par un glissement accidentel : seuls le voile
  * et le retour Android ferment (design system, feuille basse).
  */
-export function FeuilleBasse({ visible, titre, onFermer, onAffichee, children, pied }: Props) {
+export function FeuilleBasse({ visible, titre, onFermer, onAffichee, children, pied, sansModal }: Props) {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
-  return (
-    <Modal
-      visible={visible}
-      transparent
-      animationType="none"
-      onRequestClose={onFermer}
-      onShow={() => {
-        setTimeout(() => onAffichee?.(), 50);
-      }}
-      statusBarTranslucent
-      navigationBarTranslucent
-    >
+  const corps = (
       <KeyboardAvoidingView behavior="padding" style={styles.racine}>
         <Animated.View entering={FadeIn.duration(motion.emphasized)} style={[StyleSheet.absoluteFill, { backgroundColor: colors.bg.scrim }]}>
           <Pressable style={StyleSheet.absoluteFill} onPress={onFermer} accessibilityRole="button" accessibilityLabel="Fermer" />
@@ -61,6 +55,21 @@ export function FeuilleBasse({ visible, titre, onFermer, onAffichee, children, p
           {pied ? <View style={styles.pied}>{pied}</View> : null}
         </Animated.View>
       </KeyboardAvoidingView>
+  );
+  if (sansModal) return visible ? corps : null;
+  return (
+    <Modal
+      visible={visible}
+      transparent
+      animationType="none"
+      onRequestClose={onFermer}
+      onShow={() => {
+        setTimeout(() => onAffichee?.(), 50);
+      }}
+      statusBarTranslucent
+      navigationBarTranslucent
+    >
+      {corps}
     </Modal>
   );
 }
