@@ -6,8 +6,10 @@ Les formules viennent de la [section 3 du parcours](../docs/produit/parcours_ecr
 
 ## Lancer
 
+Les dépendances s'installent depuis la racine du dépôt, qui regroupe le moteur et l'[app](../app/README.md) en workspaces npm. Les commandes se lancent ensuite ici :
+
 ```bash
-npm install
+npm install   # à la racine
 npm test
 npm run typecheck
 ```
