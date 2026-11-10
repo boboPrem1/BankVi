@@ -1,4 +1,4 @@
-import type { Ecriture, Prevu } from '@bankvi/moteur';
+import type { Ecriture, Prevu, Recette, RecetteActive } from '@bankvi/moteur';
 import { create } from 'zustand';
 
 import { AUJOURDHUI } from '@/parcours/store';
@@ -57,6 +57,14 @@ export interface Registre {
   pass: boolean;
   /** Simulations faites sans pass : 3 offertes, sans recharge (EC-25). */
   essais: number;
+  /** Recettes adoptées après le premier lancement, dans l'ordre (EC-08, EC-29, EC-32, EC-33). */
+  recettes: RecetteActive[];
+  /** Recettes qui ne sont pas au catalogue : ajustées, écrites, reçues. */
+  recettesPerso: Recette[];
+  /** Phrase d'EC-33, gardée jusqu'à la fermeture de l'app. */
+  phrase: string;
+  /** « Plus tard » sur EC-34 : les natures sont allées au pot du quotidien. */
+  parDefaut: { nombre: number; pot: string } | null;
 
   /** Ajoute des écritures ; rend leurs identifiants. */
   ecrire: (entrees: { ecriture: DistributiveOmit<Ecriture, 'id'>; meta?: Meta }[]) => string[];
@@ -64,7 +72,7 @@ export interface Registre {
   annuler: (ids: string[]) => void;
   /** Remet une écriture annulée, sous un nouvel identifiant (« Annuler » d'une suppression). */
   retablir: (ids: string[]) => string[];
-  modifier: (p: Partial<Pick<Registre, 'prevus' | 'nonDetailles' | 'bilan' | 'statutVu' | 'carteSauvegardeFermee' | 'brouillon' | 'pass' | 'essais'>>) => void;
+  modifier: (p: Partial<Pick<Registre, 'prevus' | 'nonDetailles' | 'bilan' | 'statutVu' | 'carteSauvegardeFermee' | 'brouillon' | 'pass' | 'essais' | 'recettes' | 'recettesPerso' | 'phrase' | 'parDefaut'>>) => void;
   retenirCategorie: (id: string) => void;
   remplir: (r: Partial<Pick<Registre, 'ecritures' | 'meta' | 'prevus' | 'nonDetailles'>>) => void;
   reinitialiser: () => void;
@@ -90,6 +98,10 @@ const VIDE = {
   recentes: [] as string[],
   pass: false,
   essais: 0,
+  recettes: [] as RecetteActive[],
+  recettesPerso: [] as Recette[],
+  phrase: '',
+  parDefaut: null,
 };
 
 /**

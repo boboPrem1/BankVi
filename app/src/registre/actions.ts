@@ -2,6 +2,7 @@ import type { Ecriture } from '@bankvi/moteur';
 
 import { AUJOURDHUI } from '@/parcours/store';
 
+import { natureDe } from './categories';
 import { maintenant } from './etat';
 import { nouvelId, useRegistre, type Meta, type Origine } from './store';
 
@@ -41,6 +42,7 @@ export function noter(n: Note): Trace {
         poche: n.poche,
         montant: n.montant,
         categorie: n.categorie,
+        ...(n.sens === 'depense' && natureDe(n.categorie) ? { nature: natureDe(n.categorie) } : {}),
       },
       meta,
     })),
@@ -80,7 +82,9 @@ export function remplacer(id: string, patch: Partial<Modifiable>, metaPatch?: Pa
   const r = useRegistre.getState();
   const ancienne = r.ecritures.find((e) => e.id === id);
   if (!ancienne) return undefined;
-  const { id: _ignore, ...reste } = { ...ancienne, ...patch } as Ecriture;
+  const cat = 'categorie' in patch ? patch.categorie : undefined;
+  const nature = cat && ancienne.type === 'depense' ? natureDe(cat) : undefined;
+  const { id: _ignore, ...reste } = { ...ancienne, ...patch, ...(nature ? { nature } : {}) } as Ecriture;
   void _ignore;
   const meta = r.meta[id] ? { ...r.meta[id], ...metaPatch } : metaPatch ? ({ origine: 'toi', ...metaPatch } as Meta) : undefined;
   r.annuler([id]);

@@ -14,13 +14,17 @@ export const potsEnPourcentage = (r: Recette) =>
   r.pots.flatMap((p) => (p.regle.type === 'pourcentage' ? [{ id: p.id, nom: p.nom, pct: p.regle.valeur }] : []));
 
 /** Barre des pots : 8 dp, segments proportionnels, trou de 2 dp, bouts arrondis. Ignorée par TalkBack. */
-export function BarrePots({ recette }: { recette: Recette }) {
+export function BarrePots({ recette, parts }: { recette: Recette; parts?: Record<string, number> }) {
   const { colors } = useTheme();
-  const pots = potsEnPourcentage(recette).filter((p) => p.pct > 0);
+  // Couleur par rang, « Le reste » exclu ; avec des montants (pot fixe), la part réelle de chacun.
+  const pots = recette.pots
+    .filter((p) => p.regle.type !== 'reste')
+    .map((p, i) => ({ id: p.id, rang: i, poids: parts ? (parts[p.id] ?? 0) : p.regle.type === 'pourcentage' ? p.regle.valeur : 0 }))
+    .filter((p) => p.poids > 0);
   return (
     <View style={styles.barre} importantForAccessibility="no-hide-descendants" accessible={false}>
-      {pots.map((p, i) => (
-        <View key={p.id} style={{ flex: p.pct, height: 8, backgroundColor: couleurPot(colors, i), borderRadius: radius.full }} />
+      {pots.map((p) => (
+        <View key={p.id} style={{ flex: p.poids, height: 8, backgroundColor: p.rang < 6 ? couleurPot(colors, p.rang) : colors.border.control, borderRadius: radius.full }} />
       ))}
     </View>
   );

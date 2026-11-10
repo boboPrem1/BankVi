@@ -1,5 +1,7 @@
 import { CATALOGUE, datePremierEffet, type Ecriture, type Etat, type Poche, type Prevu, type Recette } from '@bankvi/moteur';
 
+import { useRegistre } from '@/registre/store';
+
 import { AUJOURDHUI, type Parcours } from './store';
 
 type Reponses = Omit<Parcours, 'modifier' | 'reinitialiser'>;
@@ -42,8 +44,9 @@ export function etatDepuis(r: Reponses, recette?: Recette): Etat {
   return adoptee ? { ...etat, recettes: [{ recette: adoptee, effetDepuis: datePremierEffet(etat) }] } : etat;
 }
 
+/** Une recette du catalogue, ou une recette ajustée, écrite ou reçue. */
 export function recetteParId(id: string): Recette | undefined {
-  return (CATALOGUE as Record<string, Recette>)[id];
+  return (CATALOGUE as Record<string, Recette>)[id] ?? useRegistre.getState().recettesPerso.find((r) => r.id === id);
 }
 
 export const totalCharges = (r: Pick<Reponses, 'charges'>) => r.charges.reduce((s, c) => s + c.montant, 0);

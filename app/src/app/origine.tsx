@@ -98,6 +98,7 @@ export default function Origine() {
 
   const ouvrir = (source: Source) => {
     if (source === 'chiffre') router.push('/origine');
+    else if (source === 'EC-27') router.push('/pots');
     else router.push({ pathname: '/a-venir', params: { code: source } });
   };
 

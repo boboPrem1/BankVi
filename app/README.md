@@ -71,7 +71,7 @@ Les 11 fiches de [01-first-launch](../docs/produit/describe_screens/01-first-lau
 | `/quand-noter` | EC-09 Quand préfères-tu noter ? |
 | `/sauvegarde` | EC-10 Sauvegarde (`?compte=existant` pour « J'ai déjà un compte ») |
 | `/code` | EC-11 Code |
-| `/a-venir` | Destination des liens vers des écrans pas encore construits (EC-27, EC-32, EC-38, EC-39, EC-41, EC-47, conditions) |
+| `/a-venir` | Destination des liens vers des écrans pas encore construits (EC-38, EC-39, EC-41, EC-47, conditions) |
 
 ## État : Aujourd'hui, en écrans statiques
 
@@ -87,7 +87,7 @@ Les 12 fiches de [02-aujourdhui](../docs/produit/describe_screens/02-aujourdhui)
 | `/saisie/[id]` | EC-18 Détail d'une saisie (saisie, prévu, comptage, transfert, non détaillé) |
 | `/bilan/compter`, `/bilan/ecart`, `/bilan/resultat` | EC-19, EC-20, EC-21 Bilan du soir |
 | `/transfert` | EC-22 Transfert entre poches |
-| `/pots`, `/plus` | Onglets dont les écrans ne sont pas encore construits |
+| `/plus` | Onglet dont les écrans ne sont pas encore construits |
 
 **Pour voir ces écrans avec des données :** « J'ai déjà un compte » sur EC-01 charge la semaine fictive de Camille, du 2 au 6 novembre. On voit alors les suggestions d'habitude, l'historique et le fait « Hier » du statut.
 
@@ -111,7 +111,24 @@ Les 4 fiches de [03-horizon](../docs/produit/describe_screens/03-horizon) sont c
 
 **Pass Plus, choix de démonstration :** un nouveau compte n'a pas le pass. Il a 3 simulations offertes, puis la description d'EC-25 ; « 90 jours » mène à EC-41. « J'ai déjà un compte » charge Camille avec le pass actif : on voit les 90 jours et les simulations sans limite.
 
-**Liens encore vers « Écran à venir » :** les sources d'EC-24 (EC-27, EC-38, EC-39), les charges récurrentes de la liste « À venir » (EC-39) et le Pass Plus (EC-41). Les événements créés sur EC-26 ou EC-25 se rouvrent dans EC-26.
+## État : Pots et recettes, en écrans statiques
+
+Les 10 fiches de [04-pots-recettes](../docs/produit/describe_screens/04-pots-recettes) sont construites. Les calculs de répartition, cibles, réserves virtuelles, déplacements d'argent et partage de recette s'appuient sur le moteur (`repartir`, `repartirMaintenant`, `effetRecette`, `rejouer`).
+
+| Route | Fiche |
+| --- | --- |
+| `/pots` (onglet Pots) | EC-27 Mes pots (jauges, alertes pots vides, action déplacer) |
+| `/pot/[id]` | EC-28 Détail d'un pot (mouvements récents, natures lues, feuille de déplacement) |
+| `/ajouter-pot` | EC-29 Ajouter un pot (règles fixe, pourcentage ou « le reste ») |
+| `/recette` | EC-30 Ma recette (composition, pourcentages, lien vers ajuster et partager) |
+| `/catalogue` | EC-31 Catalogue des recettes (standard et personnalisées actives) |
+| `/ajuster` | EC-32 Ajuster (réglage au doigt par pas de 1 %, somme à 100 %, calcul d'impact direct) |
+| `/ecrire-recette` | EC-33 Écrire une recette en langage naturel (Pass Plus) |
+| `/natures` | EC-34 Natures non rangées (affectation des natures orphelines aux pots) |
+| `/partager` | EC-35 Partager ma recette (carte générique sans montants, lien WhatsApp et presse-papiers) |
+| `/recette-recue` | EC-36 Recette reçue (import sécurisé de recette sans exécuter de code) |
+
+**Liens encore vers « Écran à venir » :** les sources d'EC-24 (EC-38, EC-39), les charges récurrentes de la liste « À venir » (EC-39) et le Pass Plus (EC-41). Les événements créés sur EC-26 ou EC-25 se rouvrent dans EC-26.
 
 **Données fictives :**
 

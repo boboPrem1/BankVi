@@ -1,9 +1,11 @@
+import { useParcours } from '@/parcours/store';
+import { natureDe } from '@/registre/categories';
 import { useRegistre, type Registre } from '@/registre/store';
 
 type Entree = Parameters<Registre['ecrire']>[0][number];
 
 const dep = (at: string, categorie: string, montant: number, description?: string): Entree => ({
-  ecriture: { at, type: 'depense', poche: 'especes', montant, categorie },
+  ecriture: { at, type: 'depense', poche: 'especes', montant, categorie, ...(natureDe(categorie) ? { nature: natureDe(categorie) } : {}) },
   meta: { origine: 'toi', ...(description ? { description } : {}) },
 });
 
@@ -27,4 +29,6 @@ export function chargerSemaineDeCamille() {
   useRegistre.getState().ecrire(entrees);
   // Le compte de Camille a le Pass Plus : on voit les 90 jours de l'horizon (choix de démonstration).
   useRegistre.getState().modifier({ pass: true });
+  // Camille a adopté 70 / 20 / 10 le 6 novembre (README de 04-pots-recettes).
+  useParcours.getState().modifier({ recetteAdoptee: '70-20-10' });
 }

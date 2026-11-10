@@ -17,13 +17,15 @@ export function lireMontant(texte: string): number | null {
 interface Message {
   texte: string;
   erreur?: boolean;
+  /** Un fait d'attention (ambre, `warning`) : jamais une faute. */
+  attention?: boolean;
   icone?: 'error' | 'cloud_off';
 }
 
 function MessageSous({ message }: { message?: Message | undefined }) {
   const { colors } = useTheme();
   if (!message) return null;
-  const couleur = message.erreur ? colors.status.errorFg : colors.text.secondary;
+  const couleur = message.erreur ? colors.status.errorFg : message.attention ? colors.status.warnFg : colors.text.secondary;
   return (
     <View
       style={styles.message}
@@ -31,7 +33,9 @@ function MessageSous({ message }: { message?: Message | undefined }) {
       accessible
       accessibilityLabel={message.texte}
     >
-      {message.icone || message.erreur ? <Icone nom={message.icone ?? 'error'} couleur={couleur} taille={16} /> : null}
+      {message.icone || message.erreur || message.attention ? (
+        <Icone nom={message.icone ?? (message.attention ? 'warning' : 'error')} couleur={couleur} taille={16} />
+      ) : null}
       <Text style={[type.caption, { color: couleur, flexShrink: 1 }]}>{message.texte}</Text>
     </View>
   );

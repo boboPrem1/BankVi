@@ -21,12 +21,14 @@ export function maintenant(): string {
 export const heureDe = (at: string) => ({ h: Number(at.slice(11, 13)), m: Number(at.slice(14, 16)) });
 
 /** Les réponses du premier lancement, plus tout ce qui a été noté depuis. */
-export function etatComplet(p: Omit<Parcours, 'modifier' | 'reinitialiser'>, r: Pick<Registre, 'ecritures' | 'prevus'>): Etat {
+export function etatComplet(p: Omit<Parcours, 'modifier' | 'reinitialiser'>, r: Pick<Registre, 'ecritures' | 'prevus'> & Partial<Pick<Registre, 'recettes'>>): Etat {
   const base = etatDepuis(p);
+  const recettes = [...(base.recettes ?? []), ...(r.recettes ?? [])];
   return {
     ...base,
     ecritures: [...base.ecritures, ...r.ecritures],
     prevus: [...base.prevus, ...r.prevus.map((x) => x.prevu)],
+    ...(recettes.length ? { recettes } : {}),
   };
 }
 
@@ -34,7 +36,8 @@ export function useEtat(): Etat {
   const parcours = useParcours();
   const ecritures = useRegistre((r) => r.ecritures);
   const prevus = useRegistre((r) => r.prevus);
-  return useMemo(() => etatComplet(parcours, { ecritures, prevus }), [parcours, ecritures, prevus]);
+  const recettes = useRegistre((r) => r.recettes);
+  return useMemo(() => etatComplet(parcours, { ecritures, prevus, recettes }), [parcours, ecritures, prevus, recettes]);
 }
 
 export type Saisie = Extract<Ecriture, { type: 'depense' | 'revenu' }>;

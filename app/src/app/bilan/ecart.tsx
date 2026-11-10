@@ -15,7 +15,7 @@ import { fcfa, nombre } from '@/format/montant';
 import { Icone } from '@/icones/Icone';
 import { AUJOURDHUI } from '@/parcours/store';
 import { dejaNote, dernierComptage, ecartActuel } from '@/registre/bilan';
-import { categorie } from '@/registre/categories';
+import { categorie, natureDe } from '@/registre/categories';
 import { minuteAvant, suggestions, useEtat } from '@/registre/etat';
 import { nouvelId, useRegistre } from '@/registre/store';
 import { size, space, type, useTheme } from '@/theme';
@@ -103,7 +103,7 @@ export default function Ecart() {
     // Ces dépenses se placent juste avant le comptage : elles détaillent l'écart sans changer le solde compté.
     r.ecrire(
       choisies.map((p) => ({
-        ecriture: { at, type: 'depense' as const, poche: 'especes', montant: p.montant ?? 0, categorie: p.categorie },
+        ecriture: { at, type: 'depense' as const, poche: 'especes', montant: p.montant ?? 0, categorie: p.categorie, ...(natureDe(p.categorie) ? { nature: natureDe(p.categorie) } : {}) },
         meta: { origine: 'bilan' as const, ...(p.description ? { description: p.description } : {}) },
       })),
     );

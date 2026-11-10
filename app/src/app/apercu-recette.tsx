@@ -1,10 +1,11 @@
 import { effetRecette, repartir } from '@bankvi/moteur';
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { annoncer } from '@/composants/BandeauBas';
+import { BandeauEtat } from '@/composants/Contenu';
 import { BoutonPrincipal, BoutonTexte } from '@/composants/Boutons';
 import { Ecran } from '@/composants/Ecran';
 import { BarrePots, Pastille, couleurPot } from '@/composants/Pots';
@@ -12,6 +13,9 @@ import { jourDansPhrase } from '@/format/date';
 import { fcfa } from '@/format/montant';
 import { etatDepuis, recetteParId } from '@/parcours/etat';
 import { AUJOURDHUI, useParcours } from '@/parcours/store';
+import { adopterOuRanger } from '@/registre/adoption';
+import { useEtat } from '@/registre/etat';
+import { baseDe, recetteCourante, sourceDe } from '@/registre/pots';
 import { size, space, type, useTheme } from '@/theme';
 
 /** EC-08 Aperçu d'une recette : la recette en francs CFA, sur le revenu de l'utilisateur. */
@@ -19,21 +23,29 @@ export default function ApercuRecette() {
   const { t } = useTranslation();
   const { colors } = useTheme();
   const reponses = useParcours();
-  const recette = recetteParId(reponses.recetteChoisie ?? '70-20-10')!;
+  // Depuis le catalogue ou une recette reçue (`depuis`), l'app est déjà configurée.
+  const { id, depuis } = useLocalSearchParams<{ id?: string; depuis?: 'app' | 'recue' }>();
+  const dansApp = depuis === 'app' || depuis === 'recue';
+  const etatApp = useEtat();
+  const recette = recetteParId(dansApp && id ? id : (reponses.recetteChoisie ?? '70-20-10'))!;
   const plancher = reponses.typeRevenu === 'variable';
-  const base = reponses.montantRevenu ?? 0;
+  const base = dansApp ? baseDe(etatApp) : (reponses.montantRevenu ?? 0);
+  const active = dansApp ? recetteCourante(etatApp)?.recette : undefined;
 
   const { parts, effet } = useMemo(() => {
-    const etat = etatDepuis({ ...reponses, recetteAdoptee: null });
+    const etat = dansApp ? etatApp : etatDepuis({ ...reponses, recetteAdoptee: null });
     return { parts: repartir(base, recette), effet: effetRecette(etat, recette) };
-  }, [reponses, base, recette]);
+  }, [reponses, base, recette, dansApp, etatApp]);
 
   const date = jourDansPhrase(effet.depuis, AUJOURDHUI);
   const texteBase =
     base === 0 ? t('ec08.baseVide') : plancher ? t('ec08.basePlancher', { montant: fcfa(base) }) : t('ec08.base', { montant: fcfa(base) });
-  const sources = t('ec08.sources', { returnObjects: true }) as Record<string, string>;
 
   const adopter = () => {
+    if (dansApp) {
+      adopterOuRanger(etatApp, recette, t('ec08.adoptee'));
+      return;
+    }
     reponses.modifier({ recetteAdoptee: recette.id });
     router.push('/quand-noter');
     annoncer(t('ec08.adoptee'), () => useParcours.getState().modifier({ recetteAdoptee: null }));
@@ -46,10 +58,11 @@ export default function ApercuRecette() {
       pied={
         <>
           <BoutonPrincipal libelle={t('ec08.adopter')} onPress={adopter} />
-          <BoutonTexte libelle={t('ec08.ajuster')} onPress={() => router.push({ pathname: '/a-venir', params: { code: 'EC-32' } })} />
+          <BoutonTexte libelle={t('ec08.ajuster')} onPress={() => router.push({ pathname: '/ajuster', params: { id: recette.id, depuis: dansApp ? 'app' : 'parcours' } })} />
         </>
       }
     >
+      {depuis === 'recue' && active && active.id !== recette.id ? <BandeauEtat texte={t('ec36.remplacera')} /> : null}
       <Text style={[type.bodyLarge, styles.base, { color: colors.text.secondary }]}>{texteBase}</Text>
       <BarrePots recette={recette} />
       <View style={styles.liste}>
@@ -94,7 +107,7 @@ export default function ApercuRecette() {
             : t('ec08.effet', { date, montant: fcfa(effet.chiffre) })}
         </Text>
       ) : null}
-      <Text style={[type.caption, styles.source, { color: colors.text.secondary }]}>{sources[recette.id]}</Text>
+      <Text style={[type.caption, styles.source, { color: colors.text.secondary }]}>{sourceDe(recette, t)}</Text>
       <Text style={[type.bodyMedium, styles.mention, { color: colors.text.secondary }]}>{t('ec08.mention')}</Text>
     </Ecran>
   );
