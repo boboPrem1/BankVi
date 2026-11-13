@@ -13,6 +13,14 @@ import { BandeauEtat } from '@/composants/Contenu';
 import { Ecran } from '@/composants/Ecran';
 import { FeuilleBasse } from '@/composants/FeuilleBasse';
 import { FeuilleCategorie, FeuilleDate, FeuillePoche } from '@/composants/Feuilles';
+import {
+  cleSuggestion,
+  estCategorieSensible,
+  estLibelleSensible,
+  FeuilleLibelleSensible,
+  FeuillePourquoiSuggestion,
+  type SuggestionInfo,
+} from '@/composants/Partages';
 import { dateCourte, jourDansPhrase } from '@/format/date';
 import { fcfa, nombre } from '@/format/montant';
 import { Icone } from '@/icones/Icone';
@@ -51,8 +59,16 @@ export default function Noter() {
   const [feuille, setFeuille] = useState<'categorie' | 'poche' | 'date' | null>(null);
   const [serie, setSerie] = useState<{ count: number; total: number } | null>(depuisBilan ? { count: 0, total: 0 } : null);
   const [question, setQuestion] = useState<{ prevu: Mouvement; id: string; suite: () => void } | null>(null);
+  const [pourquoi, setPourquoi] = useState<SuggestionInfo | null>(null);
+  const [sensible, setSensible] = useState<{ cle: string; libelle: string; onConfirmer: () => void } | null>(null);
 
-  const liste = useMemo(() => suggestions(registre.ecritures, registre.meta, sens, maintenant()), [registre.ecritures, registre.meta, sens]);
+  const liste = useMemo(
+    () =>
+      suggestions(registre.ecritures, registre.meta, sens, maintenant()).filter(
+        (s) => !registre.suggestionsMasquees.includes(cleSuggestion(s.categorie, s.montant, s.description)),
+      ),
+    [registre.ecritures, registre.meta, registre.suggestionsMasquees, sens],
+  );
 
   const appliquer = (s: Suggestion, i: number) => {
     setMontant(s.montant);
@@ -86,8 +102,20 @@ export default function Noter() {
   const poches = etat.poches.map((p) => ({ id: p.id, nom: p.nom, solde: calculer(etat).soldes[p.id] ?? 0 }));
   const nomPoche = poches.find((p) => p.id === poche)?.nom ?? '';
 
-  const enregistrer = (encore: boolean) => {
+  const enregistrer = (encore: boolean, apresConsentement = false) => {
     if (!valide) return;
+    const desc = description.trim();
+    if (!apresConsentement && desc && estLibelleSensible(desc) && !registre.libellesSensiblesConsenties.includes(desc.toLowerCase())) {
+      setSensible({
+        cle: desc.toLowerCase(),
+        libelle: desc,
+        onConfirmer: () => {
+          setSensible(null);
+          enregistrer(encore, true);
+        },
+      });
+      return;
+    }
     const origine = choisie !== null ? 'suggestion' : 'toi';
     // Depuis le bilan, la dépense se place juste avant le comptage : le solde compté ne bouge pas, l'écart baisse.
     const bilan = useRegistre.getState().bilan;
@@ -201,7 +229,12 @@ export default function Noter() {
                     lecture={t('ec13.lectureSuggestion', { libelle: nom, montant: s.montant })}
                     choisie={choisie === i}
                     onPress={() => appliquer(s, i)}
-                    onLongPress={() => router.push({ pathname: '/a-venir', params: { code: 'EC-47' } })}
+                    onLongPress={() =>
+                      setPourquoi({
+                        cle: cleSuggestion(s.categorie, s.montant, s.description),
+                        libelle: nom,
+                      })
+                    }
                   />
                 );
               })}
@@ -248,8 +281,19 @@ export default function Noter() {
         actuelle={cat}
         onFermer={() => setFeuille(null)}
         onChoix={(id) => {
-          setCat(id);
           setFeuille(null);
+          if (estCategorieSensible(id) && !registre.libellesSensiblesConsenties.includes(id)) {
+            setSensible({
+              cle: id,
+              libelle: categorie(id)?.nom ?? id,
+              onConfirmer: () => {
+                setCat(id);
+                setSensible(null);
+              },
+            });
+            return;
+          }
+          setCat(id);
         }}
       />
       <FeuillePoche
@@ -300,6 +344,19 @@ export default function Noter() {
           {question ? `${libelle({ categorie: cat })} · ${fcfa(Math.abs(question.prevu.montant))}` : ''}
         </Text>
       </FeuilleBasse>
+
+      <FeuillePourquoiSuggestion visible={pourquoi !== null} suggestion={pourquoi} onFermer={() => setPourquoi(null)} />
+      <FeuilleLibelleSensible
+        visible={sensible !== null}
+        cle={sensible?.cle ?? ''}
+        libelle={sensible?.libelle ?? ''}
+        onConfirmer={() => sensible?.onConfirmer()}
+        onAutreCategorie={() => {
+          setSensible(null);
+          setFeuille('categorie');
+        }}
+        onFermer={() => setSensible(null)}
+      />
     </>
   );
 }

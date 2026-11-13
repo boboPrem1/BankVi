@@ -64,7 +64,7 @@ export default function Horizon() {
 
   const choisirDuree = (d: '30' | '90') => {
     if (d === '90' && !pass) {
-      router.push({ pathname: '/a-venir', params: { code: 'EC-41' } });
+      router.push('/pass-plus' as any);
       return;
     }
     if (d === duree) return;
@@ -215,7 +215,7 @@ function Repere({ n, point, choisi, onPress, onLongPress }: { n: number; point: 
           : t('ec23.lectureRepere', { n, date: dateLongue(point.date), montant: point.solde })
       }
       android_ripple={{ color: colors.action.ripple }}
-      style={[styles.repere, { backgroundColor: fond }]}
+      style={[styles.repere, { backgroundColor: fond, borderColor: choisi ? colors.border.focus : colors.border.control }]}
     >
       <Text style={[type.captionMedium, { color: doux }]} numberOfLines={1}>
         {negatif ? t('ec23.manquerait') : t('ec23.dans', { count: n })}
@@ -281,7 +281,7 @@ const styles = StyleSheet.create({
   barre: { height: size.appBar, justifyContent: 'center', paddingHorizontal: size.gutterList },
   contenu: { paddingHorizontal: size.gutterList, paddingBottom: space.s3 },
   reperes: { flexDirection: 'row', columnGap: space.s2, marginTop: space.s3, marginBottom: space.s4 },
-  repere: { flex: 1, minHeight: 80, borderRadius: radius.md, padding: space.s2, justifyContent: 'space-between', overflow: 'hidden' },
+  repere: { flex: 1, minHeight: 80, borderWidth: 1, borderRadius: radius.md, padding: space.s2, justifyContent: 'space-between', overflow: 'hidden' },
   bandeau: { marginBottom: space.s3 },
   titreGraphique: { marginBottom: space.s2 },
   hypothese: { marginTop: space.s2, marginBottom: space.s4 },

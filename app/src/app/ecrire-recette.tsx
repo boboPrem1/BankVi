@@ -63,7 +63,7 @@ export default function EcrireRecette() {
         pied={
           <>
             <BoutonPrincipal libelle={t('ec25.fermer')} onPress={() => router.back()} />
-            <BoutonTexte libelle={t('ec25.voirPass')} onPress={() => router.push({ pathname: '/a-venir', params: { code: 'EC-41' } })} />
+            <BoutonTexte libelle={t('ec25.voirPass')} onPress={() => router.push('/pass-plus' as any)} />
           </>
         }
       >

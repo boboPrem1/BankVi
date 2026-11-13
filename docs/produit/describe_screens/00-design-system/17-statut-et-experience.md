@@ -58,20 +58,20 @@ L'ordre est fixe et ne se personnalise pas : ce que je peux dépenser, ce qui ar
 │ MES POCHES                         │
 │ [Espèces 32 000] [Mixx 58 000]     │ 72
 │ NOTÉ AUJOURD'HUI          Tout voir│
-│        ╭ Taxi · 500 FCFA · 8 h 12 ╮│ dépense, à droite
+│        ╭ Taxi · −500 FCFA · 8 h 12╮│ dépense, à droite
 │╭ Prêt rendu · +2 000 FCFA ╮        │ revenu, à gauche
 ├────────────────────────────────────┤
 │ (      + Noter une dépense       ) │ 64 barre d'action
 ├────────────────────────────────────┤
-│ ◉Aujourd'hui  Horizon  Pots  Plus  │ 72
+│ ◉Aujourd'hui  Horizon  Pots  Plus  │ 64
 └────────────────────────────────────┘
 ```
 
 | Zone | Contenu | Règle |
 | --- | --- | --- |
-| **Héros** | Paysage plein bord, sous la barre d'état ; anneau du statut et date en haut ; chiffre du jour | 280 dp en tout, barre d'état comprise. Texte `#FFFFFF`. Aucun bouton. Toucher le chiffre ouvre EC-24 ; toucher l'anneau ouvre EC-50 |
-| **À venir** | Deux blocs : la prochaine charge et le prochain revenu | Hauteur 72 dp, fond `#F0F2F5` en clair, `#111B21` en sombre, rayon 12 dp. Toucher ouvre EC-23 |
-| **Mes poches** | Un bloc par poche, en rangée qui défile | Solde en Roboto 16/24 sp, Medium (500), tabulaire. Toucher ouvre EC-22 |
+| **Héros** | Paysage plein bord, sous la barre d'état ; anneau du statut et date en haut ; chiffre du jour | 280 dp au repos, barre d'état comprise ; se replie à 120 dp au défilement (le paysage s'efface, la date et le chiffre restent visibles). Texte `#FFFFFF`. Aucun bouton. Toucher le chiffre ouvre EC-24 ; toucher l'anneau ouvre EC-50 |
+| **À venir** | Deux blocs : la prochaine charge et le prochain revenu | Hauteur 72 dp, fond `#F0F2F5` en clair, `#111B21` en sombre, contour de 1 dp `#7A8A94` en clair, `#667781` en sombre, rayon 12 dp. Toucher ouvre EC-23 |
+| **Mes poches** | Un bloc par poche, en rangée qui défile | Contour de 1 dp `#7A8A94` en clair, `#667781` en sombre. Solde en Roboto 16/24 sp, Medium (500), tabulaire. Toucher ouvre EC-22 |
 | **Carte** | Une seule au plus, entre poches et saisies | Absente si rien n'est utile |
 | **Noté aujourd'hui** | [Conversation](12-composants-contenu.md#saisies-en-conversation-sai-27) : dépenses à droite, revenus à gauche, les plus récentes en haut | 3 au plus, puis « Tout voir ». Vide : « Rien de noté aujourd'hui, c'est normal » |
 | **Action principale** | [Barre d'action](10-composants-actions.md#5-barre-daction) fixe, au-dessus des onglets ; le soir avant le bilan, « Noter » et « Faire mon bilan » côte à côte | Libellé selon l'état, comme le prévoit EC-12 ; un seul bouton vert |

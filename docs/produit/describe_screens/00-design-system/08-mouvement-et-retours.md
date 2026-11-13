@@ -34,7 +34,7 @@ Le mouvement explique ce qui vient de se passer, puis disparaît. Rien ne bouge 
 
 ## 4. Annuler
 
-Le bandeau reste 10000 ms, soit 10 secondes. Il ne disparaît pas plus tôt, sauf si l'utilisateur le balaye ou touche « Annuler ». Sur un changement d'écran, il reste visible jusqu'à la fin du délai.
+Le bandeau reste 10000 ms (10 secondes) au repos, et 20000 ms (20 secondes) lorsque TalkBack est actif. Il ne disparaît pas plus tôt, sauf si l'utilisateur le balaye ou touche « Annuler ». Sur un changement d'écran, il reste visible jusqu'à la fin du délai.
 
 ## 5. Interdits
 

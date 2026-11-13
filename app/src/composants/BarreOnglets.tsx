@@ -19,7 +19,7 @@ const ONGLETS: { route: Route; icone: NomIcone }[] = [
 const LIBELLES = { accueil: 'aujourdhui', horizon: 'horizon', pots: 'pots', plus: 'plus' } as const;
 
 /**
- * Barre du bas (design system, navigation) : 72 dp, quatre onglets, l'actif sur une pastille
+ * Barre du bas (design system, navigation) : 64 dp, quatre onglets, l'actif sur une pastille
  * vert pâle de 56 × 32 dp avec l'icône pleine.
  */
 export function Onglets({ actif, onOnglet, bas }: { actif: Route; onOnglet: (route: Route) => void; bas: number }) {

@@ -166,6 +166,81 @@ export function Segments<T extends string>({ segments, valeur, onChoix }: { segm
   );
 }
 
+/** Interrupteur (switch) : 52 × 32 dp, rail et poignée selon le design system. */
+export function Interrupteur({
+  actif,
+  onChangement,
+  lecture,
+  disabled = false,
+}: {
+  actif: boolean;
+  onChangement: (v: boolean) => void;
+  lecture?: string;
+  disabled?: boolean;
+}) {
+  const { colors } = useTheme();
+  return (
+    <Pressable
+      onPress={() => !disabled && onChangement(!actif)}
+      accessibilityRole="switch"
+      accessibilityState={{ checked: actif, disabled }}
+      accessibilityLabel={lecture}
+      hitSlop={8}
+      style={[
+        styles.switchRail,
+        actif
+          ? { backgroundColor: colors.action.primary, borderColor: 'transparent' }
+          : { backgroundColor: 'transparent', borderColor: colors.border.control },
+        disabled ? { opacity: 0.5 } : null,
+      ]}
+    >
+      <View
+        style={[
+          styles.switchPoignee,
+          actif
+            ? [styles.switchPoigneeActive, { backgroundColor: colors.bg.canvas, right: 3 }]
+            : [styles.switchPoigneeCoupee, { backgroundColor: colors.border.control, left: 5 }],
+        ]}
+      />
+    </Pressable>
+  );
+}
+
+/** Ligne complète avec texte à gauche et interrupteur à droite. */
+export function LigneInterrupteur({
+  titre,
+  description,
+  actif,
+  onChangement,
+  disabled = false,
+  sousTitreCouleur,
+}: {
+  titre: string;
+  description?: string;
+  actif: boolean;
+  onChangement: (v: boolean) => void;
+  disabled?: boolean;
+  sousTitreCouleur?: string;
+}) {
+  const { colors } = useTheme();
+  return (
+    <Pressable
+      onPress={() => !disabled && onChangement(!actif)}
+      accessibilityRole="switch"
+      accessibilityState={{ checked: actif, disabled }}
+      accessibilityLabel={`${titre}${description ? `, ${description}` : ''}`}
+      android_ripple={{ color: colors.action.ripple }}
+      style={styles.ligneInterrupteur}
+    >
+      <View style={styles.flex}>
+        <Text style={[type.bodyStrong, { color: colors.text.primary }]}>{titre}</Text>
+        {description ? <Text style={[type.body, { color: sousTitreCouleur ?? colors.text.secondary }]}>{description}</Text> : null}
+      </View>
+      <Interrupteur actif={actif} onChangement={onChangement} disabled={disabled} />
+    </Pressable>
+  );
+}
+
 const styles = StyleSheet.create({
   flex: { flex: 1 },
   radio: { width: 20, height: 20, borderRadius: 10, borderWidth: 2, alignItems: 'center', justifyContent: 'center' },
@@ -193,4 +268,32 @@ const styles = StyleSheet.create({
   segments: { flexDirection: 'row', minHeight: 40, borderWidth: 1, borderRadius: radius.full, overflow: 'hidden', alignSelf: 'flex-start' },
   segment: { minWidth: 120, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', columnGap: space.s2, paddingHorizontal: space.s4 },
   centre: { alignItems: 'center' },
+  switchRail: {
+    width: 52,
+    height: 32,
+    borderRadius: 16,
+    borderWidth: 2,
+    justifyContent: 'center',
+    position: 'relative',
+  },
+  switchPoignee: {
+    position: 'absolute',
+    borderRadius: 12,
+  },
+  switchPoigneeCoupee: {
+    width: 16,
+    height: 16,
+  },
+  switchPoigneeActive: {
+    width: 24,
+    height: 24,
+  },
+  ligneInterrupteur: {
+    minHeight: 56,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    columnGap: space.s4,
+    paddingVertical: space.s2,
+  },
 });

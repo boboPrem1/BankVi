@@ -12,6 +12,7 @@ Les règles se changent dans leur document source, jamais dans une annexe : on
 relance ensuite ce script.
 """
 import glob
+import json
 import os
 import re
 import sys
@@ -19,6 +20,7 @@ import sys
 ICI = os.path.dirname(os.path.abspath(__file__))
 PRODUIT = os.path.dirname(ICI)
 DS = os.path.join(ICI, "00-design-system")
+TOKENS_PATH = os.path.join(DS, "tokens.json")
 DEBUT_TETE = "<!-- fiche-autonome:debut -->"
 FIN_TETE = "<!-- fiche-autonome:fin -->"
 DEBUT = "<!-- annexe:debut — partie générée par generer_annexes.py, à ne pas modifier à la main -->"
@@ -129,8 +131,87 @@ def lire(chemin):
         return f.read().replace("\r\n", "\n")
 
 
+TOKENS = json.loads(lire(TOKENS_PATH))
+
+
+def _luminance(hex_color):
+    h = hex_color.lstrip("#")
+    if len(h) != 6:
+        raise ValueError(f"Couleur hex invalide : {hex_color}")
+    canaux = []
+    for i in (0, 2, 4):
+        c = int(h[i : i + 2], 16) / 255.0
+        canaux.append(c / 12.92 if c <= 0.03928 else ((c + 0.055) / 1.055) ** 2.4)
+    return 0.2126 * canaux[0] + 0.7152 * canaux[1] + 0.0722 * canaux[2]
+
+
+def ratio_contraste(c1, c2):
+    l1, l2 = _luminance(c1), _luminance(c2)
+    clair, sombre = max(l1, l2), min(l1, l2)
+    return (clair + 0.05) / (sombre + 0.05)
+
+
+def resoudre_jetons(t):
+    """Remplace @color.<groupe>.<cle>[.light|.dark] par les valeurs de tokens.json."""
+    couleurs = TOKENS.get("color", {})
+
+    def _remplacer(m):
+        groupe, cle, theme = m.group(1), m.group(2), m.group(3)
+        entree = couleurs.get(groupe, {}).get(cle)
+        if not entree:
+            return m.group(0)
+        if theme:
+            val = entree.get(theme)
+            return f"`{val}`" if val else m.group(0)
+        clair, sombre = entree.get("light"), entree.get("dark")
+        if clair == sombre:
+            return f"`{clair}` (clair et sombre)"
+        return f"`{clair}` en clair, `{sombre}` en sombre"
+
+    return re.sub(r"@color\.([a-zA-Z0-9_]+)\.([a-zA-Z0-9_]+)(?:\.(light|dark))?", _remplacer, t)
+
+
+def _couleur_jeton(chemin_jeton, theme):
+    g, k = chemin_jeton.split(".", 1)
+    return TOKENS["color"][g][k][theme]
+
+
+def verifier_contrastes():
+    """Vérifie les contrastes WCAG de tokens.json et le tableau de 02-couleurs.md."""
+    erreurs = []
+
+    # 1. Vérification des paires définies dans tokens.json["contrast"] (clair et sombre)
+    for avant_cle, fond_cle, seuil in TOKENS.get("contrast", []):
+        for theme in ("light", "dark"):
+            avant = _couleur_jeton(avant_cle, theme)
+            fond = _couleur_jeton(fond_cle, theme)
+            r = ratio_contraste(avant, fond)
+            if round(r, 2) < seuil:
+                erreurs.append(f"{avant_cle} sur {fond_cle} ({theme} : {avant} / {fond}) : {r:.2f}:1 < {seuil}:1")
+
+    # 2. Vérification du tableau « 5. Contraste vérifié » dans 02-couleurs.md
+    doc_couleurs = ds("02")
+    m = re.search(r"^## 5\. Contraste vérifié\n(.*?)(?=^## |\Z)", doc_couleurs, flags=re.M | re.S)
+    if m:
+        for ligne in m.group(1).splitlines():
+            hexs = re.findall(r"#([0-9A-Fa-f]{6})", ligne)
+            ratio_m = re.search(r"(\d+),(\d+):1", ligne)
+            if len(hexs) >= 2 and ratio_m:
+                c1, c2 = "#" + hexs[0], "#" + hexs[1]
+                attendu = float(f"{ratio_m.group(1)}.{ratio_m.group(2)}")
+                calcule = round(ratio_contraste(c1, c2), 2)
+                if abs(calcule - attendu) > 0.02:
+                    erreurs.append(f"02-couleurs.md ({c1} sur {c2}) : écrit {attendu:.2f}:1, calculé {calcule:.2f}:1")
+                seuil_ligne = 3.0 if any(mot in ligne.lower() for mot in ("contour", "pot ", "courbe", "anneau")) else 4.5
+                if calcule < seuil_ligne:
+                    erreurs.append(f"02-couleurs.md ({c1} sur {c2}) : {calcule:.2f}:1 sous le seuil {seuil_ligne}:1")
+
+    if erreurs:
+        sys.exit("Erreurs de contraste WCAG :\n  - " + "\n  - ".join(erreurs))
+
+
 def ds(numero):
-    return lire(glob.glob(os.path.join(DS, numero + "-*.md"))[0])
+    return resoudre_jetons(lire(glob.glob(os.path.join(DS, numero + "-*.md"))[0]))
 
 
 def nettoyer(t):
@@ -387,6 +468,7 @@ def assembler(fiche, ecran, chemin, src):
 
 def main():
     verifier = "--verifier" in sys.argv
+    verifier_contrastes()
     src = Sources()
     chemins = sorted(glob.glob(os.path.join(ICI, "0[1-7]-*", "*.md")))
     perimes, total = [], 0
@@ -407,9 +489,9 @@ def main():
     if verifier:
         if perimes:
             sys.exit(f"Annexes à régénérer : {', '.join(perimes)}")
-        print(f"{total} fiches : annexes à jour")
+        print(f"{total} fiches : annexes à jour, contrastes WCAG vérifiés")
     else:
-        print(f"{total} fiches, {len(perimes)} mises à jour")
+        print(f"{total} fiches, {len(perimes)} mises à jour, contrastes WCAG vérifiés")
 
 
 if __name__ == "__main__":

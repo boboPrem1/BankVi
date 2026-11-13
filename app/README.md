@@ -128,7 +128,35 @@ Les 10 fiches de [04-pots-recettes](../docs/produit/describe_screens/04-pots-rec
 | `/partager` | EC-35 Partager ma recette (carte générique sans montants, lien WhatsApp et presse-papiers) |
 | `/recette-recue` | EC-36 Recette reçue (import sécurisé de recette sans exécuter de code) |
 
-**Liens encore vers « Écran à venir » :** les sources d'EC-24 (EC-38, EC-39), les charges récurrentes de la liste « À venir » (EC-39) et le Pass Plus (EC-41). Les événements créés sur EC-26 ou EC-25 se rouvrent dans EC-26.
+## État : Plus, en écrans statiques
+
+Les 11 fiches de [05-plus](../docs/produit/describe_screens/05-plus) sont construites :
+
+| Route | Fiche |
+| --- | --- |
+| `/plus` (onglet Plus) | EC-37 Menu (liste façon WhatsApp avec accès direct à tous les réglages) |
+| `/poches` | EC-38 Mes poches (soldes réels par poche, activation caisse d'activité, masquage/restauration) |
+| `/revenus-charges` | EC-39 Revenus et charges (gestion des récurrences, recalcul immédiat du chiffre du jour) |
+| `/rituel` | EC-40 Mon rituel et alertes (choix Au fil de la journée vs Le soir, heures, alertes découvert) |
+| `/pass-plus` | EC-41 Pass Plus (tarifs, avantages, sans aucun lien d'achat externe selon règles Google Play) |
+| `/pass-pro` | EC-42 Liste d'attente Pass Pro (inscription sans paiement, promesses produit) |
+| `/appris` | EC-43 Ce que l'app a appris (habitudes déduites avec réactions Juste / Faux / Oublier) |
+| `/mes-natures` | EC-44 Mes natures (cartes à glisser Envie vs Besoin pour qualifier ses catégories) |
+| `/donnees` | EC-45 Mes données (statut sauvegarde cloud/local, export CSV, suppression de compte) |
+| `/a-propos` | EC-46 À propos (version, avertissement légal, mentions légales et licences lisibles hors ligne) |
+| `/securite` | EC-52 Sécurité (verrouillage biométrique/code, numéro de compte, e-mail de secours) |
+
+## État : Partages et cas transverses, en écrans statiques
+
+Les 5 fiches de [06-partages](../docs/produit/describe_screens/06-partages) sont construites :
+
+| Route / Composant | Fiche |
+| --- | --- |
+| `FeuillePourquoiSuggestion` (`src/composants/Partages.tsx`) | EC-47 Pourquoi cette suggestion ? (calcul local, « Ne plus proposer » avec annulation 10 s, lien vers `/appris`) |
+| `FeuilleLibelleSensible` (`src/composants/Partages.tsx`) | EC-48 Libellé sensible (consentement explicite avec case à cocher mémorisé) |
+| `/reprendre` | EC-49 Reprendre (paysage plein écran, « Compter ma poche » ou « Repartir de zéro ») |
+| `/deverrouillage` | EC-51 Déverrouillage (écran calme sans montants, demande d'empreinte/code du téléphone) |
+| `/numero-perdu` | EC-53 Numéro perdu (récupération via e-mail de secours et variante `?mode=inactif` à 90 jours) |
 
 **Données fictives :**
 

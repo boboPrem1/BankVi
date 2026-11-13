@@ -37,11 +37,11 @@ L'argent qui sort part comme un message envoyé. L'argent qui entre arrive comme
 
 | Saisie | Position | Fond | Coin aplati | Exemple |
 | --- | --- | --- | --- | --- |
-| **Dépense** | À droite | `#D9FDD3` en clair, `#005C4B` en sombre | Haut droit | Taxi · 500 FCFA · 8 h 12 |
+| **Dépense** | À droite | `#D9FDD3` en clair, `#005C4B` en sombre | Haut droit | Taxi · −500 FCFA · 8 h 12 |
 | **Revenu** | À gauche | `#F0F2F5` en clair, `#202C33` en sombre | Haut gauche | Salaire · +120 000 FCFA · 8 h 00 |
 | **Comptage, transfert, « Non détaillé »** | Au centre | Repère en pilule, 1 dp `#E9EDEF` en clair, `#2A3942` en sombre | Aucun | Comptage : 32 000 FCFA en espèces |
 
-Le sens ne repose jamais sur la seule position ou couleur : un revenu porte toujours « + », et TalkBack lit « Dépense : » ou « Revenu : » avant le libellé. Largeur de 80 % au plus. Heure en Roboto 12/16 sp, Regular (400), `#3B4A54` sur une dépense en clair, `#D9FDD3` en sombre ; `#54656F` sur un revenu en clair, `#AEBAC1` en sombre. Sans queue de bulle ni coche de lecture. Un toucher ouvre le détail, un appui long change la catégorie.
+Le sens ne repose jamais sur la seule position ou couleur : une dépense porte toujours « − » (U+2212), un revenu porte toujours « + », et TalkBack lit « Dépense : » ou « Revenu : » avant le libellé. Largeur de 80 % au plus. Heure en Roboto 12/16 sp, Regular (400), `#3B4A54` sur une dépense en clair, `#D9FDD3` en sombre ; `#54656F` sur un revenu en clair, `#AEBAC1` en sombre. Sans queue de bulle ni coche de lecture. Un toucher ouvre le détail, un appui long change la catégorie.
 
 **En P2 (SAI-20) :** un champ façon message s'ajoutera en bas : « salaire 200000 », « jus 100 », « déplacement 1500 ». La bulle prend aussitôt le bon côté, avec « Annuler ».
 
@@ -77,7 +77,7 @@ Si la feuille contient une saisie en cours, un glissement accidentel ne ferme pa
 | Hauteur | 48 dp au moins |
 | Rayon | 8 dp |
 | Ombre | `e2` |
-| Durée | 10 s avec « Annuler » ; 4 s pour une simple information |
+| Durée | 10 s avec « Annuler » (20 s avec TalkBack) ; 4 s pour une simple information |
 | TalkBack | Annoncé poliment, et l'action reste atteignable pendant toute la durée |
 
 ## 7. Bandeau d'état

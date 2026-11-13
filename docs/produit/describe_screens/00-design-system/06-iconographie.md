@@ -32,6 +32,7 @@
 | Transfert | `swap_vert` |
 | Groupe de saisies | `link` |
 | Son du statut | `volume_off`, `volume_up` |
+| Masquer ou afficher les montants | `visibility_off`, `visibility` |
 | Pause et reprise du statut | `pause`, `play_arrow` |
 | Modifier une description | `edit` |
 | Retirer une ligne | `close` |

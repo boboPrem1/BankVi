@@ -3,13 +3,18 @@
   "private": true,
   "workspaces": [
     "moteur",
-    "app"
+    "app",
+    "site"
   ],
   "overrides": {
-    "react": "19.3.0"
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
   },
   "scripts": {
     "test": "npm test --workspaces --if-present",
     "typecheck": "npm run typecheck --workspaces --if-present"
+  },
+  "dependencies": {
+    "react-dom": "^19.3.0"
   }
 }

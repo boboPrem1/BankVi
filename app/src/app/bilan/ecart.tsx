@@ -10,6 +10,7 @@ import { RangeePuces } from '@/composants/Choix';
 import { Bulle, BulleUtilisateur } from '@/composants/Contenu';
 import { Ecran } from '@/composants/Ecran';
 import { FeuilleBasse } from '@/composants/FeuilleBasse';
+import { cleSuggestion, FeuillePourquoiSuggestion, type SuggestionInfo } from '@/composants/Partages';
 import { nomJour } from '@/format/date';
 import { fcfa, nombre } from '@/format/montant';
 import { Icone } from '@/icones/Icone';
@@ -63,6 +64,7 @@ export default function Ecart() {
   });
   const [plus, setPlus] = useState<(typeof PLUS)[number] | null>(null);
   const [ajuster, setAjuster] = useState<{ cle: string; montant: number | null } | null>(null);
+  const [pourquoi, setPourquoi] = useState<SuggestionInfo | null>(null);
 
   const detaille = puces.filter((p) => p.choisie && p.montant).reduce((s, p) => s + (p.montant ?? 0), 0);
   const reste = ecart - detaille;
@@ -151,7 +153,9 @@ export default function Ecart() {
                       choisie={p.choisie}
                       onPress={() => toucher(p)}
                       onLongPress={() =>
-                        p.choisie ? setAjuster({ cle: p.cle, montant: p.montant }) : router.push({ pathname: '/a-venir', params: { code: 'EC-47' } })
+                        p.choisie
+                          ? setAjuster({ cle: p.cle, montant: p.montant })
+                          : setPourquoi({ cle: cleSuggestion(p.categorie, p.montant ?? 0, p.description), libelle: nom })
                       }
                     />
                   );
@@ -207,6 +211,7 @@ export default function Ecart() {
           autoFocus
         />
       </FeuilleBasse>
+      <FeuillePourquoiSuggestion visible={pourquoi !== null} suggestion={pourquoi} onFermer={() => setPourquoi(null)} />
     </>
   );
 }

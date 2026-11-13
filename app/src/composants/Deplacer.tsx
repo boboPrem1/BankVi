@@ -20,12 +20,12 @@ export function teinte(colors: ReturnType<typeof useTheme>['colors'], rang: numb
   return rang < 6 ? couleurPot(colors, rang) : colors.border.control;
 }
 
-/** Jauge de 8 dp : reste ÷ cible, couleur du pot. Ignorée par TalkBack, sa valeur est écrite. */
+/** Jauge de 8 dp : reste ÷ cible, couleur du pot, contour border.control de 1 dp. Ignorée par TalkBack, sa valeur est écrite. */
 export function Jauge({ part, couleur }: { part: number; couleur: string }) {
   const { colors } = useTheme();
   return (
-    <View style={[styles.jauge, { backgroundColor: colors.border.subtle }]} importantForAccessibility="no-hide-descendants">
-      <View style={{ width: `${Math.round(Math.max(0, Math.min(1, part)) * 100)}%`, height: 8, borderRadius: 4, backgroundColor: couleur }} />
+    <View style={[styles.jauge, { backgroundColor: colors.bg.canvas, borderColor: colors.border.control }]} importantForAccessibility="no-hide-descendants">
+      <View style={{ width: `${Math.round(Math.max(0, Math.min(1, part)) * 100)}%`, height: '100%', borderRadius: 4, backgroundColor: couleur }} />
     </View>
   );
 }
@@ -151,7 +151,7 @@ function ListePots({ pots, onChoix }: { pots: EtatPot[]; onChoix: (id: string) =
 
 const styles = StyleSheet.create({
   flex: { flex: 1 },
-  jauge: { height: 8, borderRadius: 4, overflow: 'hidden' },
+  jauge: { height: 8, borderRadius: 4, borderWidth: 1, overflow: 'hidden' },
   ligne: { minHeight: 56, flexDirection: 'row', alignItems: 'center', columnGap: space.s3 },
   role: { width: 40 },
   liste: { borderRadius: 12, paddingVertical: space.s1, marginBottom: space.s2 },

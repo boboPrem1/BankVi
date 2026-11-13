@@ -1,0 +1,15 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/offres/layout,_N_T_/offres/page,_N_T_/offres"
+  },
+  "routeCache": {
+    "key": "/route-cache/APP_PAGE/42f678a27542382c37ed939c4877b1fbb9a175b1b688c16ad45f12ed7ebae197/$/offres",
+    "owner": {
+      "kind": "APP_PAGE",
+      "sourceRoute": "/offres/page"
+    },
+    "isFallback": false
+  }
+}

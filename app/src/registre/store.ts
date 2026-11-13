@@ -65,6 +65,30 @@ export interface Registre {
   phrase: string;
   /** « Plus tard » sur EC-34 : les natures sont allées au pot du quotidien. */
   parDefaut: { nombre: number; pot: string } | null;
+  /** Poches masquées (EC-38). */
+  pochesMasquees: string[];
+  /** Poche d'activité (EC-38) : null si inactive, sinon montant en FCFA. */
+  soldeActivite: number | null;
+  /** Alertes de l'utilisateur (EC-40). */
+  alertes: { decouvert: boolean; pass: boolean };
+  /** Rituel en pause après 5 jours ignorés (EC-40). */
+  rituelEnPause: boolean;
+  /** Inscrit à la liste d'attente Pass Pro (EC-42). */
+  listeAttentePro: boolean;
+  /** Apprentissage des habitudes (EC-43). */
+  appris: { actif: boolean; faux: string[]; oublies: string[] };
+  /** Catégories classées dans Mes natures (EC-44). */
+  naturesClassees: Record<string, string>;
+  /** Partage des statistiques d'usage anonymes (EC-45). */
+  statistiquesUsage: boolean;
+  /** Sécurité et verrouillage (EC-52). */
+  securite: { verrouillage: boolean; email?: string };
+  /** Suggestions masquées par l'utilisateur (EC-47). */
+  suggestionsMasquees: string[];
+  /** Libellés ou catégories sensibles déjà consenties (EC-48). */
+  libellesSensiblesConsenties: string[];
+  /** Masquage facultatif des montants à l'accueil (désactivé par défaut). */
+  masquerMontants: boolean;
 
   /** Ajoute des écritures ; rend leurs identifiants. */
   ecrire: (entrees: { ecriture: DistributiveOmit<Ecriture, 'id'>; meta?: Meta }[]) => string[];
@@ -72,9 +96,10 @@ export interface Registre {
   annuler: (ids: string[]) => void;
   /** Remet une écriture annulée, sous un nouvel identifiant (« Annuler » d'une suppression). */
   retablir: (ids: string[]) => string[];
-  modifier: (p: Partial<Pick<Registre, 'prevus' | 'nonDetailles' | 'bilan' | 'statutVu' | 'carteSauvegardeFermee' | 'brouillon' | 'pass' | 'essais' | 'recettes' | 'recettesPerso' | 'phrase' | 'parDefaut'>>) => void;
+  modifier: (p: Partial<Pick<Registre, 'prevus' | 'nonDetailles' | 'bilan' | 'statutVu' | 'carteSauvegardeFermee' | 'brouillon' | 'pass' | 'essais' | 'recettes' | 'recettesPerso' | 'phrase' | 'parDefaut' | 'pochesMasquees' | 'soldeActivite' | 'alertes' | 'rituelEnPause' | 'listeAttentePro' | 'appris' | 'naturesClassees' | 'statistiquesUsage' | 'securite' | 'suggestionsMasquees' | 'libellesSensiblesConsenties' | 'masquerMontants'>>) => void;
   retenirCategorie: (id: string) => void;
   remplir: (r: Partial<Pick<Registre, 'ecritures' | 'meta' | 'prevus' | 'nonDetailles'>>) => void;
+  repartirDeZero: () => void;
   reinitialiser: () => void;
 }
 
@@ -102,6 +127,18 @@ const VIDE = {
   recettesPerso: [] as Recette[],
   phrase: '',
   parDefaut: null,
+  pochesMasquees: [] as string[],
+  soldeActivite: null as number | null,
+  alertes: { decouvert: true, pass: true },
+  rituelEnPause: false,
+  listeAttentePro: false,
+  appris: { actif: true, faux: [] as string[], oublies: [] as string[] },
+  naturesClassees: {} as Record<string, string>,
+  statistiquesUsage: false,
+  securite: { verrouillage: false },
+  suggestionsMasquees: [] as string[],
+  libellesSensiblesConsenties: [] as string[],
+  masquerMontants: false,
 };
 
 /**
@@ -138,5 +175,14 @@ export const useRegistre = create<Registre>()((set, get) => ({
   modifier: (p) => set(p),
   retenirCategorie: (id) => set((r) => ({ recentes: [id, ...r.recentes.filter((x) => x !== id)].slice(0, 6) })),
   remplir: (p) => set(p),
+  repartirDeZero: () =>
+    set({
+      ecritures: [],
+      meta: {},
+      prevus: [],
+      nonDetailles: [],
+      bilan: null,
+      brouillon: null,
+    }),
   reinitialiser: () => set(VIDE),
 }));

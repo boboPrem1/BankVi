@@ -171,7 +171,7 @@ function CartePot({ p, rempli, jour, charges }: { p: EtatPot; rempli: boolean; j
           : t('ec27.lecturePrevu', { nom: p.pot.nom, cible: p.cible })
       }
       android_ripple={{ color: colors.action.ripple }}
-      style={[styles.carte, { borderColor: colors.border.subtle, backgroundColor: colors.bg.elevated }]}
+      style={[styles.carte, { borderColor: colors.border.control, backgroundColor: colors.bg.elevated }]}
     >
       <View style={styles.ligne}>
         {couleur ? <Pastille couleur={couleur} /> : null}

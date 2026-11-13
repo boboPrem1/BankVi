@@ -42,7 +42,7 @@ Le thème suit le réglage du téléphone. Chaque couleur a un rôle : on choisi
 | `chart.zero` | `#7A8A94` | `#667781` | Ligne du zéro |
 | `chart.lack` | `rgba(138,75,0,0.12)` | `rgba(255,210,122,0.14)` | Lavis de la zone sous zéro |
 | `pot.1` | `#008069` | `#00A884` | Premier pot d'une recette |
-| `pot.2` | `#D97A00` | `#C47F00` | Deuxième pot |
+| `pot.2` | `#B86200` | `#C47F00` | Deuxième pot |
 | `pot.3` | `#7F66FF` | `#8B75FF` | Troisième pot |
 | `pot.4` | `#E0568A` | `#E0588A` | Quatrième pot |
 | `pot.5` | `#027EB5` | `#2E9BD6` | Cinquième pot |
@@ -87,7 +87,7 @@ Calcul WCAG 2.1. Le seuil est de 4,5:1 pour le texte et de 3:1 pour les contours
 | `chart.line` | `bg.canvas` | 3:1 | 4,89:1 | 9,38:1 |
 | `chart.zero` | `bg.canvas` | 3:1 | 3,57:1 | 4,00:1 |
 | `pot.1` | `bg.canvas` | 3:1 | 4,89:1 | 6,14:1 |
-| `pot.2` | `bg.canvas` | 3:1 | 3,12:1 | 5,65:1 |
+| `pot.2` | `bg.canvas` | 3:1 | 4,60:1 | 5,65:1 |
 | `pot.3` | `bg.canvas` | 3:1 | 4,00:1 | 5,39:1 |
 | `pot.4` | `bg.canvas` | 3:1 | 3,58:1 | 5,25:1 |
 | `pot.5` | `bg.canvas` | 3:1 | 4,51:1 | 6,00:1 |
@@ -101,7 +101,7 @@ Calcul WCAG 2.1. Le seuil est de 4,5:1 pour le texte et de 3:1 pour les contours
 | **Lien** | `#00735E` en clair, `#25D366` en sombre pour les boutons texte et les liens. |
 | **Argent qui manque** | `#8A4B00` en clair, `#FFD27A` en sombre sur `#FFF3D6` en clair, `#3A2C10` en sombre, toujours avec une icône et une phrase. Jamais de rouge : un manque est un fait, pas une faute. |
 | **Rouge** | `#B3261E` en clair, `#F2B8B5` en sombre seulement pour une erreur de saisie et une action destructive. |
-| **Dépense et revenu** | Même couleur de texte (`#111B21` en clair, `#E9EDEF` en sombre). Le signe et le libellé les distinguent. Un revenu peut s'écrire avec « + ». |
+| **Dépense et revenu** | Même couleur de texte (`#111B21` en clair, `#E9EDEF` en sombre). Le signe et le libellé les distinguent : une dépense dans une bulle porte « − » (U+2212), un revenu porte « + ». |
 | **Couleur seule** | Jamais : une couleur d'état s'accompagne toujours d'une icône et de texte. |
 | **Texte tertiaire en clair** | Sur `#FFFFFF` en clair, `#0B141A` en sombre uniquement. Sur `#F0F2F5` il tombe à 4,14:1 : utiliser `#54656F` en clair, `#AEBAC1` en sombre. |
 | **Couleurs des pots** | Pour une pastille ou une barre, jamais pour du texte. L'ordre est fixe. Un pot garde sa couleur tant qu'il existe. |

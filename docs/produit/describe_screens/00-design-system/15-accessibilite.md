@@ -32,7 +32,7 @@ Les résultats sont calculés dans [les couleurs](02-couleurs.md#2-contrastes-ca
 | Erreurs | Annoncées dès qu'elles apparaissent |
 | Graphiques | Une phrase complète de résumé |
 | Illustrations | Décoratives : ignorées. Porteuses de sens : une phrase |
-| Bandeau Annuler | Annoncé, et la durée s'allonge jusqu'à ce que le lecteur l'ait parcouru |
+| Bandeau Annuler | Annoncé, et la durée passe de 10 s à 20 s pour que le lecteur ait le temps de l'atteindre |
 
 ## 4. Texte agrandi
 
@@ -56,4 +56,4 @@ Beaucoup d'utilisateurs lisent peu ou lentement le français : phrases courtes, 
 
 ## 9. Confidentialité à l'écran
 
-Les captures d'écran restent permises en P1. Les outils d'enregistrement d'écran tiers ne sont pas utilisés sur les écrans financiers.
+Les captures d'écran restent permises par défaut en P1 ; sur Android, l'activation du verrouillage (EC-51, EC-52) masque l'aperçu dans les applications récentes et bloque les captures d'écran. Les outils d'enregistrement d'écran tiers ne sont pas utilisés sur les écrans financiers.

@@ -53,11 +53,11 @@ Inspiré de l'écran d'inscription de WhatsApp.
 | Attribut | Valeur |
 | --- | --- |
 | Cases | 6 cases de 44 × 56 dp, écart de 8 dp, centrées |
-| Forme | Soulignement seul, comme WhatsApp |
+| Forme | Case à rayon de 8 dp et contour de 1 dp (2 dp sur la case active), ou soulignement seul |
 | Chiffre | Roboto 24/32 sp, Medium (500), chiffres tabulaires, centré, `#111B21` en clair, `#E9EDEF` en sombre |
-| Soulignement | Repos 1 dp `#7A8A94` en clair, `#667781` en sombre ; case active 2 dp `#008069` en clair, `#25D366` en sombre ; erreur 2 dp `#B3261E` en clair, `#F2B8B5` en sombre |
+| Soulignement / contour | Repos 1 dp `#7A8A94` en clair, `#667781` en sombre ; case active 2 dp `#008069` en clair, `#25D366` en sombre ; erreur 2 dp `#B3261E` en clair, `#F2B8B5` en sombre |
 | Saisie | Un seul champ caché sur toute la rangée, qui remplit les cases une à une, ce qui permet le coller et l'effacement |
-| Clavier | Numérique (`number-pad`), avec lecture automatique du SMS (`one-time-code`) |
+| Clavier | Numérique (`number-pad`), avec lecture automatique du SMS sans permission via l'API SMS Retriever d'Android (`sms-otp` / `one-time-code`) |
 
 ## 6. Carte de choix
 
@@ -81,7 +81,7 @@ Pour une décision entre deux à quatre options exclusives.
 
 Sur fond sélectionné, le titre et la description passent en `#0A3D2E` en clair, `#D9FDD3` en sombre.
 
-**Carte contenant une barre de pots :** le fond reste celui du repos et seuls le contour et le rond changent. Sur le vert pâle, la couleur orange des pots passerait à 2,85:1, sous le seuil de 3:1.
+**Carte contenant une barre de pots :** le fond reste celui du repos et seuls le contour et le rond changent, pour que les six teintes des pots gardent toute leur lisibilité.
 
 ## 7. Sélecteur d'heure
 

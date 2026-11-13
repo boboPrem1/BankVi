@@ -90,7 +90,11 @@ export default function Sauvegarde() {
         {lien(t('ec10.confidentialite'), 'Confidentialité')}
         {t('ec10.fin')}
       </Text>
-      {existant ? null : <BoutonTexte libelle={t('commun.plusTard')} onPress={() => terminerParcours()} />}
+      {existant ? (
+        <BoutonTexte libelle={t('ec10.numeroPerdu')} onPress={() => router.push('/numero-perdu' as any)} />
+      ) : (
+        <BoutonTexte libelle={t('commun.plusTard')} onPress={() => terminerParcours()} />
+      )}
     </Ecran>
   );
 }

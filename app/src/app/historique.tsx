@@ -120,7 +120,7 @@ export default function Historique() {
           key={x.id}
           sens={x.sens}
           prevu
-          texte={`${x.nom} · ${fcfa(x.montant)} · ${t('saisie.prevu')}`}
+          texte={`${x.nom} · ${x.sens === 'depense' ? '−' : '+'}${fcfa(x.montant)} · ${t('saisie.prevu')}`}
           lecture={`${t('saisie.prevu')} : ${x.nom}, ${x.montant} francs CFA`}
           onPress={() => router.push({ pathname: '/saisie/[id]', params: { id: x.id } })}
         />,

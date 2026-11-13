@@ -15,6 +15,8 @@ WhatsApp n'a pas de graphiques. Ces composants sont propres à BankVi, mais suiv
 
 **S'il manque de l'argent :** jamais de nombre négatif seul. La phrase devient « Il manque », puis le nombre en `#8A4B00` en clair, `#FFD27A` en sombre avec son unité, puis « pour tes charges jusqu'au 28 ». L'icône `warning` de 24 dp précède « Il manque ».
 
+**Masquer les montants (en public) :** réglage facultatif, désactivé par défaut pour garder le chiffre visible à 0 tap. Lorsqu'il est activé, une icône `visibility` / `visibility_off` (zone 48 dp) permet de remplacer les montants par « •••• FCFA » d'un toucher.
+
 ## 2. Courbe de l'horizon
 
 **Forme :** une seule courbe en ligne, car le sujet est l'évolution d'un solde dans le temps. Une seule série, donc pas de légende : le titre la nomme.
@@ -56,7 +58,7 @@ Une barre segmentée fine montre le partage d'un tout.
 | Bouts | Arrondis aux deux extrémités |
 | Largeur des segments | Proportionnelle au pourcentage |
 | Séparation | Trou de 2 dp de la couleur du fond, jamais de contour |
-| Couleurs | Dans l'ordre : `#008069` en clair, `#00A884` en sombre, `#D97A00` en clair, `#C47F00` en sombre, `#7F66FF` en clair, `#8B75FF` en sombre, `#E0568A` en clair, `#E0588A` en sombre, `#027EB5` en clair, `#2E9BD6` en sombre, `#8F7A1F` en clair, `#93852A` en sombre |
+| Couleurs | Dans l'ordre : `#008069` en clair, `#00A884` en sombre, `#B86200` en clair, `#C47F00` en sombre, `#7F66FF` en clair, `#8B75FF` en sombre, `#E0568A` en clair, `#E0588A` en sombre, `#027EB5` en clair, `#2E9BD6` en sombre, `#8F7A1F` en clair, `#93852A` en sombre |
 | Texte dans la barre | Aucun |
 | Accompagnement | Toujours la liste des pots dessous, avec une pastille de 12 dp |
 | Segment à 0 % | Non dessiné |
@@ -87,8 +89,8 @@ Trois blocs côte à côte au-dessus de la courbe, de largeur égale, avec 8 dp 
 | Échéance | Dans 7 jours | Roboto 12/16 sp, Medium (500), `#54656F` en clair, `#AEBAC1` en sombre |
 | Solde prévu | 67 600 | Roboto 16/24 sp, Medium (500), chiffres tabulaires, `#111B21` en clair, `#E9EDEF` en sombre |
 | Unité et date | FCFA · 13 nov. | Roboto 12/16 sp, Regular (400), `#54656F` en clair, `#AEBAC1` en sombre |
-| Bloc | — | Fond `#F0F2F5` en clair, `#111B21` en sombre, rayon 12 dp, marges 8 dp, zone tactile de 48 dp au moins |
-| Bloc sélectionné | — | Fond `#D8FDD2` en clair, `#103529` en sombre, texte `#0A3D2E` en clair, `#D9FDD3` en sombre |
+| Bloc | — | Fond `#F0F2F5` en clair, `#111B21` en sombre, contour de 1 dp `#7A8A94` en clair, `#667781` en sombre, rayon 12 dp, marges 8 dp, zone tactile de 48 dp au moins |
+| Bloc sélectionné | — | Fond `#D8FDD2` en clair, `#103529` en sombre, contour de 2 dp `#008069` en clair, `#25D366` en sombre, texte `#0A3D2E` en clair, `#D9FDD3` en sombre |
 | Manque | Il manquerait / 4 000 / FCFA · 24 nov. | Texte `#8A4B00` en clair, `#FFD27A` en sombre, fond `#FFF3D6` en clair, `#3A2C10` en sombre, icône `warning` de 16 dp |
 
 « FCFA » passe sous le nombre, car un bloc ne fait que 104 dp de large. Le chiffre héros reste unique : ces soldes restent en 16 sp. À 200 % de texte, les blocs s'empilent. TalkBack lit : « Dans 7 jours, le 13 novembre, 67 600 francs CFA prévus. »
@@ -109,5 +111,5 @@ Revenus et dépenses gardent la même couleur de texte. Aucun rouge, aucune ment
 
 ## 8. Jauge de pot
 
-Barre pleine de 8 dp, bouts arrondis. La part remplie est le reste ÷ la cible, dans la couleur du pot, sur un fond `#E9EDEF` en clair, `#2A3942` en sombre. Pas de seuil de couleur : la couleur identifie le pot, elle ne juge pas son état. Un pot vide s'écrit en toutes lettres, avec une icône.
+Barre pleine de 8 dp, bouts arrondis. La part remplie est le reste ÷ la cible, dans la couleur du pot, sur un fond `#FFFFFF` en clair, `#111B21` en sombre avec un contour de 1 dp `#7A8A94` en clair, `#667781` en sombre. Pas de seuil de couleur : la couleur identifie le pot, elle ne juge pas son état. Un pot vide s'écrit en toutes lettres, avec une icône.
 

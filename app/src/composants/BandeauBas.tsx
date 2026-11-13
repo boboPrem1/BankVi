@@ -59,9 +59,26 @@ export function HoteBandeauBas() {
   useEffect(() => {
     if (!annonce) return;
     AccessibilityInfo.announceForAccessibility(annonce.texte);
-    const delai = annonce.onAnnuler ? motion.undoDuration : 4000;
-    const minuterie = setTimeout(() => fermer(annonce.id), delai);
-    return () => clearTimeout(minuterie);
+    let actif = true;
+    let minuterie: ReturnType<typeof setTimeout> | undefined;
+    if (annonce.onAnnuler) {
+      AccessibilityInfo.isScreenReaderEnabled()
+        .then((lecteur) => {
+          if (!actif) return;
+          const delai = lecteur ? motion.undoDurationA11y : motion.undoDuration;
+          minuterie = setTimeout(() => fermer(annonce.id), delai);
+        })
+        .catch(() => {
+          if (!actif) return;
+          minuterie = setTimeout(() => fermer(annonce.id), motion.undoDuration);
+        });
+    } else {
+      minuterie = setTimeout(() => fermer(annonce.id), 4000);
+    }
+    return () => {
+      actif = false;
+      if (minuterie) clearTimeout(minuterie);
+    };
   }, [annonce, fermer]);
 
   if (!annonce) return null;

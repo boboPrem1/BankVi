@@ -18,7 +18,7 @@ Présente sur les écrans principaux seulement, jamais pendant une tâche ni au 
 
 | Attribut | Valeur |
 | --- | --- |
-| Hauteur | 72 dp, plus la barre système |
+| Hauteur | 64 dp, plus la barre système |
 | Fond | `#FFFFFF` en clair, `#0B141A` en sombre, trait du haut 1 dp `#E9EDEF` en clair, `#2A3942` en sombre |
 | Onglets | Quatre, dans cet ordre et sans jamais bouger : Aujourd'hui, Horizon, Pots, Plus |
 | Icône inactive | Contour, 24 dp, `#54656F` en clair, `#AEBAC1` en sombre |

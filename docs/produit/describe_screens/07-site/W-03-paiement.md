@@ -323,7 +323,7 @@ Ces pages suivent le même design system, avec ces correspondances :
 | `chart.zero` | `#7A8A94` | `#667781` | Ligne du zéro |
 | `chart.lack` | `rgba(138,75,0,0.12)` | `rgba(255,210,122,0.14)` | Lavis de la zone sous zéro |
 | `pot.1` | `#008069` | `#00A884` | Premier pot d'une recette |
-| `pot.2` | `#D97A00` | `#C47F00` | Deuxième pot |
+| `pot.2` | `#B86200` | `#C47F00` | Deuxième pot |
 | `pot.3` | `#7F66FF` | `#8B75FF` | Troisième pot |
 | `pot.4` | `#E0568A` | `#E0588A` | Quatrième pot |
 | `pot.5` | `#027EB5` | `#2E9BD6` | Cinquième pot |
@@ -342,7 +342,7 @@ Ces pages suivent le même design system, avec ces correspondances :
 | **Lien** | `#00735E` en clair, `#25D366` en sombre pour les boutons texte et les liens. |
 | **Argent qui manque** | `#8A4B00` en clair, `#FFD27A` en sombre sur `#FFF3D6` en clair, `#3A2C10` en sombre, toujours avec une icône et une phrase. Jamais de rouge : un manque est un fait, pas une faute. |
 | **Rouge** | `#B3261E` en clair, `#F2B8B5` en sombre seulement pour une erreur de saisie et une action destructive. |
-| **Dépense et revenu** | Même couleur de texte (`#111B21` en clair, `#E9EDEF` en sombre). Le signe et le libellé les distinguent. Un revenu peut s'écrire avec « + ». |
+| **Dépense et revenu** | Même couleur de texte (`#111B21` en clair, `#E9EDEF` en sombre). Le signe et le libellé les distinguent : une dépense dans une bulle porte « − » (U+2212), un revenu porte « + ». |
 | **Couleur seule** | Jamais : une couleur d'état s'accompagne toujours d'une icône et de texte. |
 | **Texte tertiaire en clair** | Sur `#FFFFFF` en clair, `#0B141A` en sombre uniquement. Sur `#F0F2F5` il tombe à 4,14:1 : utiliser `#54656F` en clair, `#AEBAC1` en sombre. |
 | **Couleurs des pots** | Pour une pastille ou une barre, jamais pour du texte. L'ordre est fixe. Un pot garde sa couleur tant qu'il existe. |
@@ -595,7 +595,7 @@ Français seul en P1. Tous les textes restent dans un fichier de traduction, pou
 | Erreurs | Annoncées dès qu'elles apparaissent |
 | Graphiques | Une phrase complète de résumé |
 | Illustrations | Décoratives : ignorées. Porteuses de sens : une phrase |
-| Bandeau Annuler | Annoncé, et la durée s'allonge jusqu'à ce que le lecteur l'ait parcouru |
+| Bandeau Annuler | Annoncé, et la durée passe de 10 s à 20 s pour que le lecteur ait le temps de l'atteindre |
 
 #### Texte agrandi
 
@@ -619,7 +619,7 @@ Beaucoup d'utilisateurs lisent peu ou lentement le français : phrases courtes, 
 
 #### Confidentialité à l'écran
 
-Les captures d'écran restent permises en P1. Les outils d'enregistrement d'écran tiers ne sont pas utilisés sur les écrans financiers.
+Les captures d'écran restent permises par défaut en P1 ; sur Android, l'activation du verrouillage (EC-51, EC-52) masque l'aperçu dans les applications récentes et bloque les captures d'écran. Les outils d'enregistrement d'écran tiers ne sont pas utilisés sur les écrans financiers.
 
 ### G. Mouvement et retours
 
@@ -655,7 +655,7 @@ Les captures d'écran restent permises en P1. Les outils d'enregistrement d'écr
 
 #### Annuler
 
-Le bandeau reste 10000 ms, soit 10 secondes. Il ne disparaît pas plus tôt, sauf si l'utilisateur le balaye ou touche « Annuler ». Sur un changement d'écran, il reste visible jusqu'à la fin du délai.
+Le bandeau reste 10000 ms (10 secondes) au repos, et 20000 ms (20 secondes) lorsque TalkBack est actif. Il ne disparaît pas plus tôt, sauf si l'utilisateur le balaye ou touche « Annuler ». Sur un changement d'écran, il reste visible jusqu'à la fin du délai.
 
 #### Interdits
 
@@ -778,6 +778,8 @@ Une illustration apparaît seulement sur l'écran de bienvenue et les états vid
 | EC-37 | Menu |
 | EC-41 | Pass Plus |
 | EC-50 | Mon statut |
+| EC-51 | Déverrouillage |
+| EC-52 | Sécurité |
 | W-01 | Connexion |
 | W-02 | Offres |
 | W-04 | Confirmation |

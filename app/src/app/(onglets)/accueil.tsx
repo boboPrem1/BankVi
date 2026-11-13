@@ -3,7 +3,7 @@ import { router } from 'expo-router';
 import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, ScrollView, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
-import Animated, { FadeIn } from 'react-native-reanimated';
+import Animated, { Extrapolation, FadeIn, interpolate, useAnimatedScrollHandler, useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { annoncer } from '@/composants/BandeauBas';
@@ -37,7 +37,7 @@ export default function Accueil() {
   const etat = useEtat();
   const [corriger, setCorriger] = useState<{ id: string; sens: 'depense' | 'revenu'; categorie?: string } | null>(null);
   useBarreEtatClaire();
-  // Barre d'action (64 dp) au-dessus des onglets (72 dp).
+  // Barre d'action (64 dp) au-dessus des onglets (64 dp).
   useBasDEcran(64 + size.bottomNav);
 
   const { calcul, statut, points, demain } = useMemo(() => {
@@ -68,6 +68,26 @@ export default function Accueil() {
   const carteSauvegarde = !parcours.compte && !registre.carteSauvegardeFermee && duJour.some((e) => registre.meta[e.id]);
 
   const hauteurHeros = height < 600 ? 220 : height < 700 ? 240 : 280;
+  const courseRepli = Math.max(1, hauteurHeros - size.homeHeroCollapsed);
+  const defilement = useSharedValue(0);
+  const surDefilement = useAnimatedScrollHandler({
+    onScroll: (e) => {
+      defilement.value = e.contentOffset.y;
+    },
+  });
+  const styleHeros = useAnimatedStyle(() => ({
+    height: interpolate(defilement.value, [0, courseRepli], [hauteurHeros + insets.top, size.homeHeroCollapsed + insets.top], Extrapolation.CLAMP),
+  }));
+  const styleSecondaire = useAnimatedStyle(() => ({
+    opacity: interpolate(defilement.value, [0, courseRepli * 0.55], [1, 0], Extrapolation.CLAMP),
+  }));
+  const styleChiffre = useAnimatedStyle(() => ({
+    transform: [
+      { translateY: interpolate(defilement.value, [0, courseRepli], [0, -22], Extrapolation.CLAMP) },
+      { scale: interpolate(defilement.value, [0, courseRepli], [1, 0.72], Extrapolation.CLAMP) },
+    ],
+  }));
+  const masque = registre.masquerMontants;
   const largeurPoche = (width - 2 * size.gutterList - space.s2) / 2;
 
   const confirmer = () => {
@@ -96,96 +116,32 @@ export default function Accueil() {
 
   return (
     <View style={[styles.ecran, { backgroundColor: colors.bg.canvas }]}>
-      <ScrollView contentContainerStyle={{ paddingBottom: space.s4 }}>
-        {/* Héros plein bord, barre d'état comprise. Texte toujours blanc : il dépasse 5:1 sur chaque ciel. */}
-        <View style={{ height: hauteurHeros + insets.top }}>
-          <View style={StyleSheet.absoluteFill}>
-            <Paysage
-              largeur={width}
-              hauteur={hauteurHeros + insets.top}
-              cadre="accueil"
-              soldes={points.slice(0, 31).map((p) => p.solde)}
-              progression={statut.soleil.ecoules / statut.soleil.total}
-              etat={statut.etat}
-              graine={Number(AUJOURDHUI.replaceAll('-', ''))}
-            />
-          </View>
-          <View style={[styles.contenuHeros, { paddingTop: insets.top + space.s2 }]}>
-            <View style={styles.ligneHaut}>
-              <Pressable
-                onPress={ouvrirStatut}
-                accessibilityRole="button"
-                accessibilityLabel={registre.statutVu ? t('ec12.anneauVu') : t('ec12.anneauAVoir')}
-                style={styles.zoneAnneau}
-              >
-                <View style={[styles.anneau, { borderColor: registre.statutVu ? 'rgba(255,255,255,0.45)' : BLANC }]}>
-                  <View style={styles.miniature}>
-                    <Paysage
-                      largeur={36}
-                      hauteur={36}
-                      cadre="miniature"
-                      soldes={points.slice(0, 31).map((p) => p.solde)}
-                      progression={statut.soleil.ecoules / statut.soleil.total}
-                      etat={statut.etat}
-                      graine={0}
-                    />
-                  </View>
-                </View>
-              </Pressable>
-              <Text style={[type.bodyMedium, { color: BLANC }]}>{dateLongueJour(AUJOURDHUI)}</Text>
-            </View>
-            <Pressable
-              onPress={() => router.push('/origine')}
-              accessible
-              accessibilityRole="header"
-              accessibilityLabel={
-                hero.manque !== undefined
-                  ? t('chiffreDuJour.lectureManque', { montant: hero.manque, jour })
-                  : `${bilanFait ? t('ec12.demain') : t('chiffreDuJour.amorce')} ${hero.chiffre} francs CFA ${t('chiffreDuJour.echeance', { jour })}.`
-              }
-              style={styles.chiffre}
-            >
-              <Animated.View key={`${statut.etat}-${bilanFait}`} entering={FadeIn.duration(300)}>
-                {hero.manque !== undefined ? (
-                  <>
-                    <View style={styles.ligne}>
-                      <Icone nom="warning" couleur={BLANC} />
-                      <Text style={[type.bodyLarge, { color: BLANC }]}>{t('chiffreDuJour.manqueAmorce')}</Text>
-                    </View>
-                    <View style={styles.ligneChiffre}>
-                      <Text style={[type.hero, { color: BLANC }]} maxFontSizeMultiplier={HERO_MAX}>{nombre(hero.manque)}</Text>
-                      <Text style={[type.subtitle, { color: BLANC }]}>{t('commun.fcfa')}</Text>
-                    </View>
-                    <Text style={[type.bodyLarge, { color: BLANC }]}>{t('chiffreDuJour.manqueSuite', { jour })}</Text>
-                  </>
-                ) : (
-                  <>
-                    <Text style={[type.bodyLarge, { color: BLANC }]}>{bilanFait ? t('ec12.demain') : t('chiffreDuJour.amorce')}</Text>
-                    <View style={styles.ligneChiffre}>
-                      <Text style={[type.hero, { color: BLANC }]} maxFontSizeMultiplier={HERO_MAX}>{nombre(hero.chiffre)}</Text>
-                      <Text style={[type.subtitle, { color: BLANC }]}>{t('commun.fcfa')}</Text>
-                    </View>
-                    <Text style={[type.bodyLarge, { color: BLANC }]}>{t('chiffreDuJour.echeance', { jour })}</Text>
-                  </>
-                )}
-              </Animated.View>
-            </Pressable>
-          </View>
-        </View>
-
+      <Animated.ScrollView
+        onScroll={surDefilement}
+        scrollEventThrottle={16}
+        contentContainerStyle={{ paddingTop: hauteurHeros + insets.top, paddingBottom: space.s4 }}
+      >
         <View style={styles.corps}>
           <TitreZone texte={t('ec12.aVenir')} />
           <View style={styles.rangee}>
             {prochaineCharge ? (
-              <BlocAVenir nom={prochaineCharge.nom} date={t('ec12.leJour', { jour: jourDansPhrase(prochaineCharge.date, AUJOURDHUI) })} montant={fcfa(prochaineCharge.montant)} />
+              <BlocAVenir
+                nom={prochaineCharge.nom}
+                date={t('ec12.leJour', { jour: jourDansPhrase(prochaineCharge.date, AUJOURDHUI) })}
+                montant={masque ? '•••• FCFA' : fcfa(prochaineCharge.montant)}
+              />
             ) : null}
             {variable ? (
-              <BlocAVenir nom={t('ec12.finDuMois')} date="" montant={t('ec12.auMoins', { montant: fcfa(parcours.montantRevenu ?? 0) })} />
+              <BlocAVenir
+                nom={t('ec12.finDuMois')}
+                date=""
+                montant={masque ? '•••• FCFA' : t('ec12.auMoins', { montant: fcfa(parcours.montantRevenu ?? 0) })}
+              />
             ) : prochainRevenu ? (
               <BlocAVenir
                 nom={prochainRevenu.nom}
                 date={t('ec12.leJour', { jour: jourDansPhrase(prochainRevenu.date, AUJOURDHUI) })}
-                montant={`+${fcfa(prochainRevenu.montant)}`}
+                montant={masque ? '•••• FCFA' : `+${fcfa(prochainRevenu.montant)}`}
               />
             ) : null}
           </View>
@@ -197,12 +153,12 @@ export default function Accueil() {
                 key={p.id}
                 onPress={() => router.push({ pathname: '/transfert', params: { de: p.id } })}
                 accessibilityRole="button"
-                accessibilityLabel={`${p.nom}, ${p.solde} francs CFA`}
+                accessibilityLabel={masque ? `${p.nom}, ${t('ec12.montantsMasques')}` : `${p.nom}, ${p.solde} francs CFA`}
                 android_ripple={{ color: colors.action.ripple }}
-                style={[styles.poche, { width: largeurPoche, borderColor: colors.border.subtle }]}
+                style={[styles.poche, { width: largeurPoche, borderColor: colors.border.control }]}
               >
                 <Text style={[type.caption, { color: colors.text.secondary }]}>{p.genre === 'activite' ? t('ec12.activite') : p.nom}</Text>
-                <Text style={[type.bodyStrong, styles.tabulaire, { color: colors.text.primary }]}>{fcfa(p.solde)}</Text>
+                <Text style={[type.bodyStrong, styles.tabulaire, { color: colors.text.primary }]}>{masque ? '•••• FCFA' : fcfa(p.solde)}</Text>
               </Pressable>
             ))}
           </ScrollView>
@@ -247,9 +203,97 @@ export default function Accueil() {
             </View>
           )}
         </View>
-      </ScrollView>
+      </Animated.ScrollView>
 
-      {/* Le héros défile ; sous la barre d'état, la couleur du haut du ciel garde l'heure et les icônes lisibles. */}
+      {/* Héros plein bord repliable au défilement (280 → 120 dp), barre d'état comprise. Texte toujours blanc : > 5:1 sur chaque ciel. */}
+      <Animated.View style={[styles.herosFixe, styleHeros]}>
+        <View style={StyleSheet.absoluteFill}>
+          <Paysage
+            largeur={width}
+            hauteur={hauteurHeros + insets.top}
+            cadre="accueil"
+            soldes={points.slice(0, 31).map((p) => p.solde)}
+            progression={statut.soleil.ecoules / statut.soleil.total}
+            etat={statut.etat}
+            graine={Number(AUJOURDHUI.replaceAll('-', ''))}
+          />
+        </View>
+        <View style={[styles.contenuHeros, { paddingTop: insets.top + space.s2 }]}>
+          <View style={styles.ligneHaut}>
+            <Pressable
+              onPress={ouvrirStatut}
+              accessibilityRole="button"
+              accessibilityLabel={registre.statutVu ? t('ec12.anneauVu') : t('ec12.anneauAVoir')}
+              style={styles.zoneAnneau}
+            >
+              <View style={[styles.anneau, { borderColor: registre.statutVu ? 'rgba(255,255,255,0.45)' : BLANC }]}>
+                <View style={styles.miniature}>
+                  <Paysage
+                    largeur={36}
+                    hauteur={36}
+                    cadre="miniature"
+                    soldes={points.slice(0, 31).map((p) => p.solde)}
+                    progression={statut.soleil.ecoules / statut.soleil.total}
+                    etat={statut.etat}
+                    graine={0}
+                  />
+                </View>
+              </View>
+            </Pressable>
+            <Text style={[type.bodyMedium, styles.dateHaut, { color: BLANC }]}>{dateLongueJour(AUJOURDHUI)}</Text>
+            <Pressable
+              onPress={() => registre.modifier({ masquerMontants: !masque })}
+              accessibilityRole="button"
+              accessibilityLabel={masque ? t('ec12.afficherMontants') : t('ec12.masquerMontants')}
+              style={styles.zoneAnneau}
+            >
+              <Icone nom={masque ? 'visibility_off' : 'visibility'} couleur={BLANC} />
+            </Pressable>
+          </View>
+          <Pressable
+            onPress={() => router.push('/origine')}
+            accessible
+            accessibilityRole="header"
+            accessibilityLabel={
+              masque
+                ? t('ec12.montantsMasques')
+                : hero.manque !== undefined
+                  ? t('chiffreDuJour.lectureManque', { montant: hero.manque, jour })
+                  : `${bilanFait ? t('ec12.demain') : t('chiffreDuJour.amorce')} ${hero.chiffre} francs CFA ${t('chiffreDuJour.echeance', { jour })}.`
+            }
+            style={styles.chiffre}
+          >
+            <Animated.View key={`${statut.etat}-${bilanFait}`} entering={FadeIn.duration(300)} style={styleChiffre}>
+              {hero.manque !== undefined ? (
+                <>
+                  <Animated.View style={[styles.ligne, styleSecondaire]}>
+                    <Icone nom="warning" couleur={BLANC} />
+                    <Text style={[type.bodyLarge, { color: BLANC }]}>{t('chiffreDuJour.manqueAmorce')}</Text>
+                  </Animated.View>
+                  <View style={styles.ligneChiffre}>
+                    <Text style={[type.hero, { color: BLANC }]} maxFontSizeMultiplier={HERO_MAX}>{masque ? '••••' : nombre(hero.manque)}</Text>
+                    <Text style={[type.subtitle, { color: BLANC }]}>{t('commun.fcfa')}</Text>
+                  </View>
+                  <Animated.Text style={[type.bodyLarge, styleSecondaire, { color: BLANC }]}>{t('chiffreDuJour.manqueSuite', { jour })}</Animated.Text>
+                </>
+              ) : (
+                <>
+                  <Animated.Text style={[type.bodyLarge, styleSecondaire, { color: BLANC }]}>
+                    {bilanFait ? t('ec12.demain') : t('chiffreDuJour.amorce')}
+                  </Animated.Text>
+                  <View style={styles.ligneChiffre}>
+                    <Text style={[type.hero, { color: BLANC }]} maxFontSizeMultiplier={HERO_MAX}>{masque ? '••••' : nombre(hero.chiffre)}</Text>
+                    <Text style={[type.subtitle, { color: BLANC }]}>{t('commun.fcfa')}</Text>
+                  </View>
+                  <Animated.Text style={[type.bodyLarge, styleSecondaire, { color: BLANC }]}>{t('chiffreDuJour.echeance', { jour })}</Animated.Text>
+                </>
+              )}
+            </Animated.View>
+          </Pressable>
+        </View>
+      </Animated.View>
+
+      {/* Sous la barre d'état, la couleur du haut du ciel garde l'heure et les icônes lisibles. */}
       <View style={[styles.sousBarreEtat, { height: insets.top, backgroundColor: artwork.skies[statut.etat][0] }]} pointerEvents="none" />
 
       {/* Barre d'action fixe, au-dessus des onglets : elle ne recouvre jamais le contenu. */}
@@ -307,7 +351,7 @@ function BlocAVenir({ nom, date, montant }: { nom: string; date: string; montant
       accessibilityRole="button"
       accessibilityLabel={`${nom}, ${date}, ${montant}`}
       android_ripple={{ color: colors.action.ripple }}
-      style={[styles.bloc, { backgroundColor: colors.bg.subtle }]}
+      style={[styles.bloc, { backgroundColor: colors.bg.subtle, borderColor: colors.border.control }]}
     >
       <Text style={[type.bodyMedium, { color: colors.text.primary }]} numberOfLines={1}>
         {nom}
@@ -322,9 +366,11 @@ function BlocAVenir({ nom, date, montant }: { nom: string; date: string; montant
 
 const styles = StyleSheet.create({
   ecran: { flex: 1 },
+  herosFixe: { position: 'absolute', top: 0, left: 0, right: 0, overflow: 'hidden' },
   sousBarreEtat: { position: 'absolute', top: 0, left: 0, right: 0 },
   contenuHeros: { paddingHorizontal: size.gutterList },
   ligneHaut: { flexDirection: 'row', alignItems: 'center', columnGap: space.s2, marginLeft: -4 },
+  dateHaut: { flex: 1 },
   zoneAnneau: { width: size.touchMin, height: size.touchMin, alignItems: 'center', justifyContent: 'center' },
   anneau: { width: 44, height: 44, borderRadius: 22, borderWidth: 2.5, alignItems: 'center', justifyContent: 'center' },
   miniature: { width: 36, height: 36, borderRadius: 18, overflow: 'hidden' },
@@ -334,7 +380,7 @@ const styles = StyleSheet.create({
   corps: { paddingHorizontal: size.gutterList, paddingTop: space.s4 },
   titreZone: { marginBottom: space.s2 },
   rangee: { flexDirection: 'row', columnGap: space.s2, marginBottom: space.s4 },
-  bloc: { flex: 1, minHeight: 72, borderRadius: radius.md, padding: space.s3, justifyContent: 'space-between', overflow: 'hidden' },
+  bloc: { flex: 1, minHeight: 72, borderWidth: 1, borderRadius: radius.md, padding: space.s3, justifyContent: 'space-between', overflow: 'hidden' },
   ligneBloc: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'baseline', columnGap: space.s2, flexWrap: 'wrap' },
   horsMarge: { marginHorizontal: -size.gutterList, marginBottom: space.s4 },
   poches: { paddingHorizontal: size.gutterList, columnGap: space.s2 },

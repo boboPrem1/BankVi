@@ -49,7 +49,7 @@ export default function Transfert() {
       <Ecran titre={t('ec22.titre')} marge={size.gutterList}>
         <Text style={[type.bodyLarge, { color: colors.text.secondary }]}>{t('ec22.seule')}</Text>
         <View style={styles.lien}>
-          <BoutonTexte libelle={t('ec22.mesPoches')} onPress={() => router.push({ pathname: '/a-venir', params: { code: 'EC-38' } })} />
+          <BoutonTexte libelle={t('ec22.mesPoches')} onPress={() => router.push('/poches' as any)} />
         </View>
       </Ecran>
     );

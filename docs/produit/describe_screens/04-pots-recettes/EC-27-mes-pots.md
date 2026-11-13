@@ -44,7 +44,7 @@ En haut, une ligne rappelle la recette active. Dessous, une carte par pot : une 
 ├────────────────────────────────────┤
 │ ( + Ajouter un pot ) ( Déplacer  ) │ 64
 ├────────────────────────────────────┤
-│  Aujourd'hui Horizon ◉Pots  Plus   │ 72
+│  Aujourd'hui Horizon ◉Pots  Plus   │ 64
 └────────────────────────────────────┘
 ```
 
@@ -56,7 +56,7 @@ En haut, une ligne rappelle la recette active. Dessous, une carte par pot : une 
 | Ligne de recette | 48 dp | 8 dp |
 | Carte de pot | 96 dp, plus la ligne de détail | 12 dp |
 | Barre d'action | 64 dp | 0 |
-| Barre du bas | 72 dp | — |
+| Barre du bas | 64 dp | — |
 
 ## 5. Éléments
 
@@ -66,11 +66,11 @@ En haut, une ligne rappelle la recette active. Dessous, une carte par pot : une 
 | Titre | Mes pots | Roboto 22/28 sp, Medium (500) | `#111B21` en clair, `#E9EDEF` en sombre |
 | Ligne de recette | 70 / 20 / 10 · Ma recette | Roboto 14/20 sp, Medium (500), `chevron_right` | `#00735E` en clair, `#25D366` en sombre |
 | Carte | — | Rayon 12 dp, marges 16 dp, contour 1 dp | Fond `#FFFFFF` en clair, `#202C33` en sombre, contour `#E9EDEF` en clair, `#2A3942` en sombre |
-| Pastille | — | 12 dp | Pot 1 `#008069` en clair, `#00A884` en sombre ; pot 2 `#D97A00` en clair, `#C47F00` en sombre ; pot 3 `#7F66FF` en clair, `#8B75FF` en sombre |
+| Pastille | — | 12 dp | Pot 1 `#008069` en clair, `#00A884` en sombre ; pot 2 `#B86200` en clair, `#C47F00` en sombre ; pot 3 `#7F66FF` en clair, `#8B75FF` en sombre |
 | Nom | Vie courante | Roboto 16/24 sp, Medium (500) | `#111B21` en clair, `#E9EDEF` en sombre |
 | Reste | 24 000 FCFA | Roboto 18/24 sp, Medium (500), tabulaire | `#111B21` en clair, `#E9EDEF` en sombre |
 | Cible | sur 84 000 | Roboto 14/20 sp, Regular (400), tabulaire, à droite | `#54656F` en clair, `#AEBAC1` en sombre |
-| Jauge | — | 8 dp, bouts arrondis, reste ÷ cible | Remplie : couleur du pot. Fond : `#E9EDEF` en clair, `#2A3942` en sombre |
+| Jauge | — | 8 dp, bouts arrondis, contour 1 dp, reste ÷ cible | Remplie : couleur du pot. Fond : `#FFFFFF` en clair, `#111B21` en sombre, contour `#7A8A94` en clair, `#667781` en sombre |
 | Détail | Reste jusqu'au 28 · 18 000 de charges à venir | Roboto 12/16 sp, Regular (400) | `#54656F` en clair, `#AEBAC1` en sombre |
 | Bouton à contour | Ajouter un pot | 48 dp, pilule, 40 % | Contour `#7A8A94` en clair, `#667781` en sombre, texte `#00735E` en clair, `#25D366` en sombre |
 | Bouton principal | Déplacer de l'argent | 48 dp, pilule, 60 % | Fond `#25D366` (clair et sombre), texte `#0B141A` (clair et sombre) |
@@ -418,7 +418,7 @@ La date de référence des exemples est le **vendredi 6 novembre 2026**.
 | `chart.zero` | `#7A8A94` | `#667781` | Ligne du zéro |
 | `chart.lack` | `rgba(138,75,0,0.12)` | `rgba(255,210,122,0.14)` | Lavis de la zone sous zéro |
 | `pot.1` | `#008069` | `#00A884` | Premier pot d'une recette |
-| `pot.2` | `#D97A00` | `#C47F00` | Deuxième pot |
+| `pot.2` | `#B86200` | `#C47F00` | Deuxième pot |
 | `pot.3` | `#7F66FF` | `#8B75FF` | Troisième pot |
 | `pot.4` | `#E0568A` | `#E0588A` | Quatrième pot |
 | `pot.5` | `#027EB5` | `#2E9BD6` | Cinquième pot |
@@ -437,7 +437,7 @@ La date de référence des exemples est le **vendredi 6 novembre 2026**.
 | **Lien** | `#00735E` en clair, `#25D366` en sombre pour les boutons texte et les liens. |
 | **Argent qui manque** | `#8A4B00` en clair, `#FFD27A` en sombre sur `#FFF3D6` en clair, `#3A2C10` en sombre, toujours avec une icône et une phrase. Jamais de rouge : un manque est un fait, pas une faute. |
 | **Rouge** | `#B3261E` en clair, `#F2B8B5` en sombre seulement pour une erreur de saisie et une action destructive. |
-| **Dépense et revenu** | Même couleur de texte (`#111B21` en clair, `#E9EDEF` en sombre). Le signe et le libellé les distinguent. Un revenu peut s'écrire avec « + ». |
+| **Dépense et revenu** | Même couleur de texte (`#111B21` en clair, `#E9EDEF` en sombre). Le signe et le libellé les distinguent : une dépense dans une bulle porte « − » (U+2212), un revenu porte « + ». |
 | **Couleur seule** | Jamais : une couleur d'état s'accompagne toujours d'une icône et de texte. |
 | **Texte tertiaire en clair** | Sur `#FFFFFF` en clair, `#0B141A` en sombre uniquement. Sur `#F0F2F5` il tombe à 4,14:1 : utiliser `#54656F` en clair, `#AEBAC1` en sombre. |
 | **Couleurs des pots** | Pour une pastille ou une barre, jamais pour du texte. L'ordre est fixe. Un pot garde sa couleur tant qu'il existe. |
@@ -726,7 +726,7 @@ Présente sur les écrans principaux seulement, jamais pendant une tâche ni au 
 
 | Attribut | Valeur |
 | --- | --- |
-| Hauteur | 72 dp, plus la barre système |
+| Hauteur | 64 dp, plus la barre système |
 | Fond | `#FFFFFF` en clair, `#0B141A` en sombre, trait du haut 1 dp `#E9EDEF` en clair, `#2A3942` en sombre |
 | Onglets | Quatre, dans cet ordre et sans jamais bouger : Aujourd'hui, Horizon, Pots, Plus |
 | Icône inactive | Contour, 24 dp, `#54656F` en clair, `#AEBAC1` en sombre |
@@ -767,11 +767,11 @@ L'argent qui sort part comme un message envoyé. L'argent qui entre arrive comme
 
 | Saisie | Position | Fond | Coin aplati | Exemple |
 | --- | --- | --- | --- | --- |
-| **Dépense** | À droite | `#D9FDD3` en clair, `#005C4B` en sombre | Haut droit | Taxi · 500 FCFA · 8 h 12 |
+| **Dépense** | À droite | `#D9FDD3` en clair, `#005C4B` en sombre | Haut droit | Taxi · −500 FCFA · 8 h 12 |
 | **Revenu** | À gauche | `#F0F2F5` en clair, `#202C33` en sombre | Haut gauche | Salaire · +120 000 FCFA · 8 h 00 |
 | **Comptage, transfert, « Non détaillé »** | Au centre | Repère en pilule, 1 dp `#E9EDEF` en clair, `#2A3942` en sombre | Aucun | Comptage : 32 000 FCFA en espèces |
 
-Le sens ne repose jamais sur la seule position ou couleur : un revenu porte toujours « + », et TalkBack lit « Dépense : » ou « Revenu : » avant le libellé. Largeur de 80 % au plus. Heure en Roboto 12/16 sp, Regular (400), `#3B4A54` sur une dépense en clair, `#D9FDD3` en sombre ; `#54656F` sur un revenu en clair, `#AEBAC1` en sombre. Sans queue de bulle ni coche de lecture. Un toucher ouvre le détail, un appui long change la catégorie.
+Le sens ne repose jamais sur la seule position ou couleur : une dépense porte toujours « − » (U+2212), un revenu porte toujours « + », et TalkBack lit « Dépense : » ou « Revenu : » avant le libellé. Largeur de 80 % au plus. Heure en Roboto 12/16 sp, Regular (400), `#3B4A54` sur une dépense en clair, `#D9FDD3` en sombre ; `#54656F` sur un revenu en clair, `#AEBAC1` en sombre. Sans queue de bulle ni coche de lecture. Un toucher ouvre le détail, un appui long change la catégorie.
 
 **En P2 (SAI-20) :** un champ façon message s'ajoutera en bas : « salaire 200000 », « jus 100 », « déplacement 1500 ». La bulle prend aussitôt le bon côté, avec « Annuler ».
 
@@ -807,7 +807,7 @@ Si la feuille contient une saisie en cours, un glissement accidentel ne ferme pa
 | Hauteur | 48 dp au moins |
 | Rayon | 8 dp |
 | Ombre | `e2` |
-| Durée | 10 s avec « Annuler » ; 4 s pour une simple information |
+| Durée | 10 s avec « Annuler » (20 s avec TalkBack) ; 4 s pour une simple information |
 | TalkBack | Annoncé poliment, et l'action reste atteignable pendant toute la durée |
 
 #### Bandeau d'état
@@ -844,7 +844,7 @@ Aucune décimale, aucune abréviation « k » ni « M » dans l'app, car elles s
 
 #### Jauge de pot
 
-Barre pleine de 8 dp, bouts arrondis. La part remplie est le reste ÷ la cible, dans la couleur du pot, sur un fond `#E9EDEF` en clair, `#2A3942` en sombre. Pas de seuil de couleur : la couleur identifie le pot, elle ne juge pas son état. Un pot vide s'écrit en toutes lettres, avec une icône.
+Barre pleine de 8 dp, bouts arrondis. La part remplie est le reste ÷ la cible, dans la couleur du pot, sur un fond `#FFFFFF` en clair, `#111B21` en sombre avec un contour de 1 dp `#7A8A94` en clair, `#667781` en sombre. Pas de seuil de couleur : la couleur identifie le pot, elle ne juge pas son état. Un pot vide s'écrit en toutes lettres, avec une icône.
 
 #### Retour Android
 
@@ -957,7 +957,7 @@ Français seul en P1. Tous les textes restent dans un fichier de traduction, pou
 | Erreurs | Annoncées dès qu'elles apparaissent |
 | Graphiques | Une phrase complète de résumé |
 | Illustrations | Décoratives : ignorées. Porteuses de sens : une phrase |
-| Bandeau Annuler | Annoncé, et la durée s'allonge jusqu'à ce que le lecteur l'ait parcouru |
+| Bandeau Annuler | Annoncé, et la durée passe de 10 s à 20 s pour que le lecteur ait le temps de l'atteindre |
 
 #### Texte agrandi
 
@@ -981,7 +981,7 @@ Beaucoup d'utilisateurs lisent peu ou lentement le français : phrases courtes, 
 
 #### Confidentialité à l'écran
 
-Les captures d'écran restent permises en P1. Les outils d'enregistrement d'écran tiers ne sont pas utilisés sur les écrans financiers.
+Les captures d'écran restent permises par défaut en P1 ; sur Android, l'activation du verrouillage (EC-51, EC-52) masque l'aperçu dans les applications récentes et bloque les captures d'écran. Les outils d'enregistrement d'écran tiers ne sont pas utilisés sur les écrans financiers.
 
 ### G. Mouvement et retours
 
@@ -1017,7 +1017,7 @@ Les captures d'écran restent permises en P1. Les outils d'enregistrement d'écr
 
 #### Annuler
 
-Le bandeau reste 10000 ms, soit 10 secondes. Il ne disparaît pas plus tôt, sauf si l'utilisateur le balaye ou touche « Annuler ». Sur un changement d'écran, il reste visible jusqu'à la fin du délai.
+Le bandeau reste 10000 ms (10 secondes) au repos, et 20000 ms (20 secondes) lorsque TalkBack est actif. Il ne disparaît pas plus tôt, sauf si l'utilisateur le balaye ou touche « Annuler ». Sur un changement d'écran, il reste visible jusqu'à la fin du délai.
 
 #### Interdits
 
@@ -1184,6 +1184,8 @@ Une illustration apparaît seulement sur l'écran de bienvenue et les états vid
 | EC-37 | Menu |
 | EC-40 | Mon rituel et alertes |
 | EC-50 | Mon statut |
+| EC-51 | Déverrouillage |
+| EC-52 | Sécurité |
 
 #### Parcours
 

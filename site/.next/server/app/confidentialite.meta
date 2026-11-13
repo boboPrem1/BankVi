@@ -1,0 +1,15 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/confidentialite/layout,_N_T_/confidentialite/page,_N_T_/confidentialite"
+  },
+  "routeCache": {
+    "key": "/route-cache/APP_PAGE/2f55d5f235ea12b9480134ef10541d0dbe22b34bbd210885c25008974512aa7f/$/confidentialite",
+    "owner": {
+      "kind": "APP_PAGE",
+      "sourceRoute": "/confidentialite/page"
+    },
+    "isFallback": false
+  }
+}

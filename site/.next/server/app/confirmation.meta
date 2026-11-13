@@ -1,0 +1,15 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/confirmation/layout,_N_T_/confirmation/page,_N_T_/confirmation"
+  },
+  "routeCache": {
+    "key": "/route-cache/APP_PAGE/94cb7b883f9160143e1713f6e4d35d15ecc39da88fd80deda7a0a0329bb27eaf/$/confirmation",
+    "owner": {
+      "kind": "APP_PAGE",
+      "sourceRoute": "/confirmation/page"
+    },
+    "isFallback": false
+  }
+}
