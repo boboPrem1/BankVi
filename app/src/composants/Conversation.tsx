@@ -39,10 +39,14 @@ export function BulleSaisie({ sens, texte, lecture, sousLigne, groupe, prevu, on
         android_ripple={{ color: colors.action.ripple }}
         style={[
           styles.bulle,
-          depense ? styles.coinDepense : styles.coinRevenu,
           prevu
             ? { borderWidth: 1, borderStyle: 'dashed', borderColor: colors.border.control }
-            : { backgroundColor: depense ? colors.bg.bubbleUser : colors.bg.bubbleIncome },
+            : [
+                { backgroundColor: depense ? colors.bg.bubbleUser : colors.bg.bubbleIncome },
+                depense
+                  ? { borderRightWidth: 3, borderRightColor: colors.action.primary }
+                  : { borderLeftWidth: 3, borderLeftColor: colors.chart.line },
+              ],
           !prevu && scheme === 'light' ? styles.e1 : null,
         ]}
       >
@@ -81,13 +85,11 @@ const styles = StyleSheet.create({
   bulle: {
     maxWidth: '80%',
     paddingHorizontal: space.s3,
-    paddingVertical: space.s2 - 2,
-    borderRadius: radius.md,
+    paddingVertical: space.s2 - 1,
+    borderRadius: radius.lg,
     overflow: 'hidden',
   },
-  coinDepense: { borderTopRightRadius: radius.xs },
-  coinRevenu: { borderTopLeftRadius: radius.xs },
-  e1: { elevation: 1, shadowColor: '#0B141A' },
+  e1: { elevation: 1, shadowColor: '#1C1613' },
   tabulaire: { fontVariant: ['tabular-nums'] },
   sous: { flexDirection: 'row', alignItems: 'center', columnGap: space.s1 },
   centre: { alignItems: 'center' },

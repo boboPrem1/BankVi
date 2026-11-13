@@ -46,7 +46,7 @@ Les personnes de référence sont Camille, salariée, et Karim, indépendant. L'
 
 TRAVAIL = """1. Partir du cadre de référence : 360 × 800 dp, thème clair, puis décliner en sombre.
 2. Reprendre uniquement les composants et les valeurs de ce fichier. Ne rien inventer : si rien ne convient, le signaler au lieu de créer une valeur.
-3. Vérifier la règle d'or : **un seul bouton vert par écran**, sauf si la fiche dit qu'il n'y en a aucun.
+3. Vérifier la règle d'or : **un seul bouton principal terracotta par écran**, sauf si la fiche dit qu'il n'y en a aucun.
 4. Reprendre les textes de la fiche mot pour mot, et appliquer la rédaction ci-dessous à tout texte d'adaptation."""
 
 FINI_APP = """- [ ] Clair et sombre dessinés, avec des valeurs propres à chaque thème.
@@ -189,22 +189,27 @@ def verifier_contrastes():
             if round(r, 2) < seuil:
                 erreurs.append(f"{avant_cle} sur {fond_cle} ({theme} : {avant} / {fond}) : {r:.2f}:1 < {seuil}:1")
 
-    # 2. Vérification du tableau « 5. Contraste vérifié » dans 02-couleurs.md
+    # 2. Vérification du tableau « 2. Contrastes calculés » dans 02-couleurs.md
     doc_couleurs = ds("02")
-    m = re.search(r"^## 5\. Contraste vérifié\n(.*?)(?=^## |\Z)", doc_couleurs, flags=re.M | re.S)
+    m = re.search(r"^## 2\. Contrastes calculés\n(.*?)(?=^## |\Z)", doc_couleurs, flags=re.M | re.S)
     if m:
         for ligne in m.group(1).splitlines():
-            hexs = re.findall(r"#([0-9A-Fa-f]{6})", ligne)
-            ratio_m = re.search(r"(\d+),(\d+):1", ligne)
-            if len(hexs) >= 2 and ratio_m:
-                c1, c2 = "#" + hexs[0], "#" + hexs[1]
-                attendu = float(f"{ratio_m.group(1)}.{ratio_m.group(2)}")
-                calcule = round(ratio_contraste(c1, c2), 2)
-                if abs(calcule - attendu) > 0.02:
-                    erreurs.append(f"02-couleurs.md ({c1} sur {c2}) : écrit {attendu:.2f}:1, calculé {calcule:.2f}:1")
-                seuil_ligne = 3.0 if any(mot in ligne.lower() for mot in ("contour", "pot ", "courbe", "anneau")) else 4.5
-                if calcule < seuil_ligne:
-                    erreurs.append(f"02-couleurs.md ({c1} sur {c2}) : {calcule:.2f}:1 sous le seuil {seuil_ligne}:1")
+            cols = [c.strip() for c in ligne.split("|")]
+            if len(cols) >= 6:
+                j1 = cols[1].strip("`")
+                j2 = cols[2].strip("`")
+                seuil_m = re.search(r"(\d+)(?:,(\d+))?:1", cols[3])
+                clair_m = re.search(r"(\d+),(\d+):1", cols[4])
+                sombre_m = re.search(r"(\d+),(\d+):1", cols[5])
+                if "." in j1 and "." in j2 and seuil_m and clair_m and sombre_m:
+                    attendu_c = float(f"{clair_m.group(1)}.{clair_m.group(2)}")
+                    attendu_s = float(f"{sombre_m.group(1)}.{sombre_m.group(2)}")
+                    calc_c = round(ratio_contraste(_couleur_jeton(j1, "light"), _couleur_jeton(j2, "light")), 2)
+                    calc_s = round(ratio_contraste(_couleur_jeton(j1, "dark"), _couleur_jeton(j2, "dark")), 2)
+                    if abs(calc_c - attendu_c) > 0.02:
+                        erreurs.append(f"02-couleurs.md {j1}/{j2} clair : écrit {attendu_c:.2f}:1, calculé {calc_c:.2f}:1")
+                    if abs(calc_s - attendu_s) > 0.02:
+                        erreurs.append(f"02-couleurs.md {j1}/{j2} sombre : écrit {attendu_s:.2f}:1, calculé {calc_s:.2f}:1")
 
     if erreurs:
         sys.exit("Erreurs de contraste WCAG :\n  - " + "\n  - ".join(erreurs))

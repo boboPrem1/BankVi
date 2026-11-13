@@ -12,7 +12,7 @@
 | Taille optique | 24 |
 | Tailles | 24 dp par défaut ; 20 dp dans une ligne dense ou un message |
 | Zone tactile | 48 dp, même si l'icône est plus petite |
-| Couleur | `#54656F` en clair, `#AEBAC1` en sombre par défaut ; `#111B21` en clair, `#E9EDEF` en sombre dans la barre du haut ; couleur d'état si l'icône porte un état |
+| Couleur | `#5C514B` en clair, `#B8AFA8` en sombre par défaut ; `#1C1613` en clair, `#F5F0EB` en sombre dans la barre du haut ; couleur d'état si l'icône porte un état |
 
 ## 2. Liste des icônes
 

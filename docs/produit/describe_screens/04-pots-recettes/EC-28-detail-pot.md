@@ -169,8 +169,8 @@ Les personnes de référence sont Camille, salariée, et Karim, indépendant. L'
 
 #### Sept principes
 
-1. **Le familier avant l'original.** Un geste connu de WhatsApp vaut mieux qu'une trouvaille. BankVi se distingue par son chiffre du jour, pas par ses composants.
-2. **Le vert veut dire « agir ».** Il n'est ni un décor ni un fond. Sur un écran ordinaire, il occupe moins de 10 % de la surface.
+1. **Le familier sans mimétisme.** Un geste connu vaut mieux qu'une trouvaille, mais BankVi affirme son identité propre (Terracotta & Lagune, capsules de flux, médaillon du jour, boutons adoucis à 16 dp) et se distingue par son chiffre du jour.
+2. **Le terracotta veut dire « agir ».** Il n'est ni un décor ni un fond. Sur un écran ordinaire, il occupe moins de 10 % de la surface.
 3. **Une seule décision par écran.** Un bouton principal, en bas, sous le pouce. Le reste s'efface.
 4. **Le chiffre est le héros.** Il a la plus grande taille de l'écran, et il n'y en a qu'un.
 5. **Les faits, sans jugement.** Aucun rouge pour de l'argent qui manque, aucune félicitation appuyée, aucun « tu devrais ».
@@ -252,7 +252,7 @@ Le mot « WhatsApp » n'apparaît dans l'app que là où il décrit un fait : «
 
 1. Partir du cadre de référence : 360 × 800 dp, thème clair, puis décliner en sombre.
 2. Reprendre uniquement les composants et les valeurs de ce fichier. Ne rien inventer : si rien ne convient, le signaler au lieu de créer une valeur.
-3. Vérifier la règle d'or : **un seul bouton vert par écran**, sauf si la fiche dit qu'il n'y en a aucun.
+3. Vérifier la règle d'or : **un seul bouton principal terracotta par écran**, sauf si la fiche dit qu'il n'y en a aucun.
 4. Reprendre les textes de la fiche mot pour mot, et appliquer la rédaction ci-dessous à tout texte d'adaptation.
 
 ### B. Cet écran dans le produit
@@ -371,78 +371,71 @@ La date de référence des exemples est le **vendredi 6 novembre 2026**.
 
 | Jeton | Clair | Sombre | Rôle |
 | --- | --- | --- | --- |
-| `bg.canvas` | `#FFFFFF` | `#0B141A` | Fond de tous les écrans |
-| `bg.subtle` | `#F0F2F5` | `#111B21` | Zones groupées, champ de recherche |
-| `bg.elevated` | `#FFFFFF` | `#202C33` | Cartes, feuilles basses, dialogues |
-| `bg.bubbleApp` | `#F0F2F5` | `#202C33` | Bulle : l'app explique quelque chose |
-| `bg.bubbleUser` | `#D9FDD3` | `#005C4B` | Bulle sortante : dépense notée, réponse de l'utilisateur |
-| `bg.bubbleIncome` | `#F0F2F5` | `#202C33` | Bulle entrante : revenu noté |
-| `bg.selected` | `#D8FDD2` | `#103529` | Puce, carte ou onglet sélectionnés |
-| `bg.scrim` | `rgba(11,20,26,0.40)` | `rgba(0,0,0,0.60)` | Voile derrière une feuille ou un dialogue |
-| `text.primary` | `#111B21` | `#E9EDEF` | Titres, montants, texte courant |
-| `text.secondary` | `#54656F` | `#AEBAC1` | Aides, descriptions |
-| `text.tertiary` | `#667781` | `#8696A0` | Axes, placeholders. En clair : sur fond blanc uniquement |
-| `text.timeOnExpense` | `#3B4A54` | `#D9FDD3` | Heure dans une bulle de dépense |
-| `text.disabled` | `#667781` | `#8696A0` | Libellé d'un bouton désactivé |
-| `text.link` | `#00735E` | `#25D366` | Boutons texte, liens, marque écrite |
-| `text.onAction` | `#0B141A` | `#0B141A` | Texte et icône sur le vert d'action |
-| `text.onSelected` | `#0A3D2E` | `#D9FDD3` | Texte sur fond sélectionné |
-| `action.primary` | `#25D366` | `#25D366` | Bouton principal |
-| `action.primaryPressed` | `#1FAD56` | `#1FAD56` | Bouton principal, état appuyé |
-| `action.disabled` | `#E9EDEF` | `#202C33` | Fond d'un bouton désactivé |
-| `action.ripple` | `rgba(17,27,33,0.10)` | `rgba(233,237,239,0.12)` | Retour tactile sur une surface |
-| `border.subtle` | `#E9EDEF` | `#2A3942` | Séparateurs, contour de carte |
-| `border.control` | `#7A8A94` | `#667781` | Soulignement de champ, contour de puce et de radio |
-| `border.focus` | `#008069` | `#25D366` | Champ actif, carte sélectionnée |
+| `bg.canvas` | `#FAF7F2` | `#0D1520` | Fond de tous les écrans (sable ivoire / bleu nuit atlantique) |
+| `bg.subtle` | `#F1ECE4` | `#142030` | Zones groupées, champ de recherche |
+| `bg.elevated` | `#FFFFFF` | `#1B2A3E` | Cartes, feuilles basses, dialogues |
+| `bg.bubbleApp` | `#F1ECE4` | `#1B2A3E` | Capsule : l'app explique quelque chose |
+| `bg.bubbleUser` | `#FCE8DF` | `#4A2218` | Capsule sortante : dépense notée, réponse de l'utilisateur |
+| `bg.bubbleIncome` | `#E4F2F7` | `#133447` | Capsule entrante : revenu noté |
+| `bg.selected` | `#F9DFD3` | `#4D2318` | Puce, carte ou onglet sélectionnés |
+| `bg.scrim` | `rgba(13,21,32,0.45)` | `rgba(0,0,0,0.65)` | Voile derrière une feuille ou un dialogue |
+| `text.primary` | `#1C1613` | `#F5F0EB` | Titres, montants, texte courant |
+| `text.secondary` | `#5C514B` | `#B8AFA8` | Aides, descriptions |
+| `text.tertiary` | `#6B5E57` | `#948B84` | Axes, placeholders. En clair : sur fond sable ou blanc uniquement |
+| `text.timeOnExpense` | `#52362C` | `#FAD8C8` | Heure dans une capsule de dépense |
+| `text.disabled` | `#6B5E57` | `#948B84` | Libellé d'un bouton désactivé |
+| `text.link` | `#A6331A` | `#FF8B6B` | Boutons texte, liens, marque écrite |
+| `text.onAction` | `#FFFFFF` | `#1C120E` | Texte et icône sur le terracotta d'action |
+| `text.onSelected` | `#5E1D0E` | `#FDE5DA` | Texte sur fond sélectionné |
+| `action.primary` | `#B83B20` | `#F07B5A` | Bouton principal (terracotta de Lomé / terracotta solaire) |
+| `action.primaryPressed` | `#962E17` | `#D96443` | Bouton principal, état appuyé |
+| `action.disabled` | `#E6DFD5` | `#1B2A3E` | Fond d'un bouton désactivé |
+| `action.ripple` | `rgba(28,22,19,0.10)` | `rgba(245,240,235,0.12)` | Retour tactile sur une surface |
+| `border.subtle` | `#E3DCD2` | `#26384F` | Séparateurs, contour de carte |
+| `border.control` | `#7A6D65` | `#728399` | Soulignement de champ, contour de puce et de radio |
+| `border.focus` | `#B83B20` | `#FF8B6B` | Champ actif, carte sélectionnée |
 | `status.warnFg` | `#8A4B00` | `#FFD27A` | Argent manquant, attention |
 | `status.warnBg` | `#FFF3D6` | `#3A2C10` | Fond de l'attention |
 | `status.errorFg` | `#B3261E` | `#F2B8B5` | Erreur de saisie, action destructive |
 | `status.errorBg` | `#FBE9E7` | `#3C1F1E` | Fond d'une erreur |
 | `status.infoFg` | `#0B5CAD` | `#A8D4FF` | Information neutre, marque « Exemple » |
 | `status.infoBg` | `#E3F0FB` | `#10283F` | Fond de l'information |
-| `status.successFg` | `#00735E` | `#25D366` | Confirmation, en texte et icône |
-| `chart.line` | `#008069` | `#25D366` | Courbe de l'horizon |
-| `chart.area` | `rgba(0,128,105,0.10)` | `rgba(37,211,102,0.10)` | Lavis sous la courbe |
-| `chart.grid` | `#E9EDEF` | `#2A3942` | Lignes de repère |
-| `chart.zero` | `#7A8A94` | `#667781` | Ligne du zéro |
+| `status.successFg` | `#0D6E52` | `#47D1A3` | Confirmation, en texte et icône |
+| `chart.line` | `#0E6BA8` | `#4DA8DA` | Courbe de l'horizon (bleu lagune) |
+| `chart.area` | `rgba(14,107,168,0.12)` | `rgba(77,168,218,0.14)` | Lavis sous la courbe |
+| `chart.grid` | `#E3DCD2` | `#26384F` | Lignes de repère |
+| `chart.zero` | `#7A6D65` | `#728399` | Ligne du zéro |
 | `chart.lack` | `rgba(138,75,0,0.12)` | `rgba(255,210,122,0.14)` | Lavis de la zone sous zéro |
-| `pot.1` | `#008069` | `#00A884` | Premier pot d'une recette |
-| `pot.2` | `#B86200` | `#C47F00` | Deuxième pot |
-| `pot.3` | `#7F66FF` | `#8B75FF` | Troisième pot |
-| `pot.4` | `#E0568A` | `#E0588A` | Quatrième pot |
-| `pot.5` | `#027EB5` | `#2E9BD6` | Cinquième pot |
-| `pot.6` | `#8F7A1F` | `#93852A` | Sixième pot |
-| `illustration.outline` | `#111B21` | `#E9EDEF` | Contour de toutes les illustrations |
-| `illustration.green` | `#25D366` | `#25D366` | Billet, éléments d'action |
-| `illustration.mint` | `#D9FDD3` | `#005C4B` | Grande surface d'une illustration |
+| `pot.1` | `#0E6BA8` | `#3898EC` | Premier pot d'une recette (Lagune) |
+| `pot.2` | `#B85A00` | `#E0862B` | Deuxième pot (Ocre) |
+| `pot.3` | `#6B52E0` | `#8B75FF` | Troisième pot (Indigo) |
+| `pot.4` | `#0D7A5F` | `#22B08C` | Quatrième pot (Émeraude) |
+| `pot.5` | `#C84374` | `#E66796` | Cinquième pot (Hibiscus) |
+| `pot.6` | `#826E18` | `#A89432` | Sixième pot (Or bronze) |
+| `illustration.outline` | `#1C1613` | `#F5F0EB` | Contour de toutes les illustrations |
+| `illustration.green` | `#B83B20` | `#F07B5A` | Billet, éléments d'action terracotta |
+| `illustration.mint` | `#FCE8DF` | `#133447` | Grande surface d'une illustration |
 | `illustration.amber` | `#FFBC38` | `#FFBC38` | Pièces de monnaie |
-| `illustration.paper` | `#FFFFFF` | `#202C33` | Surface neutre d'une illustration |
+| `illustration.paper` | `#FFFFFF` | `#1B2A3E` | Surface neutre d'une illustration |
 
 #### Règles d'usage
 
 | Règle | Détail |
 | --- | --- |
-| **Vert d'action** | `#25D366` (clair et sombre) : bouton principal seulement. Jamais comme texte sur fond clair (1,98:1 sur blanc). |
-| **Lien** | `#00735E` en clair, `#25D366` en sombre pour les boutons texte et les liens. |
+| **Terracotta d'action** | `#B83B20` en clair (texte `#FFFFFF`), `#F07B5A` en sombre (texte `#1C120E`) : bouton principal et barre d'accent des dépenses seulement. |
+| **Lien** | `#A6331A` en clair, `#FF8B6B` en sombre pour les boutons texte et les liens. |
 | **Argent qui manque** | `#8A4B00` en clair, `#FFD27A` en sombre sur `#FFF3D6` en clair, `#3A2C10` en sombre, toujours avec une icône et une phrase. Jamais de rouge : un manque est un fait, pas une faute. |
 | **Rouge** | `#B3261E` en clair, `#F2B8B5` en sombre seulement pour une erreur de saisie et une action destructive. |
-| **Dépense et revenu** | Même couleur de texte (`#111B21` en clair, `#E9EDEF` en sombre). Le signe et le libellé les distinguent : une dépense dans une bulle porte « − » (U+2212), un revenu porte « + ». |
+| **Dépense et revenu** | Même couleur de texte (`#1C1613` en clair, `#F5F0EB` en sombre). Capsule sortante argile (`#FCE8DF` / `#4A2218`) à droite avec bordure terracotta et signe « − » (U+2212) ; capsule entrante lagune (`#E4F2F7` / `#133447`) à gauche avec bordure bleu lagune et signe « + ». |
 | **Couleur seule** | Jamais : une couleur d'état s'accompagne toujours d'une icône et de texte. |
-| **Texte tertiaire en clair** | Sur `#FFFFFF` en clair, `#0B141A` en sombre uniquement. Sur `#F0F2F5` il tombe à 4,14:1 : utiliser `#54656F` en clair, `#AEBAC1` en sombre. |
+| **Texte tertiaire en clair** | Sur `#FAF7F2` en clair, `#0D1520` en sombre uniquement. Sur `#F1ECE4`, utiliser `#5C514B` en clair, `#B8AFA8` en sombre. |
 | **Couleurs des pots** | Pour une pastille ou une barre, jamais pour du texte. L'ordre est fixe. Un pot garde sa couleur tant qu'il existe. |
 
 #### Palette des pots
 
-Six couleurs, attribuées dans l'ordre des pots d'une recette. Au-delà de six pots, les suivants prennent le gris `#7A8A94` en clair, `#667781` en sombre et s'affichent par leur nom dans la liste, sans teinte nouvelle.
+Six couleurs, attribuées dans l'ordre des pots d'une recette : Lagune (`#0E6BA8`), Ocre (`#B85A00`), Indigo (`#6B52E0`), Émeraude (`#0D7A5F`), Hibiscus (`#C84374`) et Or bronze (`#826E18`). Au-delà de six pots, les suivants prennent le gris `#7A6D65` en clair, `#728399` en sombre et s'affichent par leur nom dans la liste, sans teinte nouvelle.
 
-La palette a été contrôlée au validateur de palettes catégorielles (écart perçu, daltonisme, luminosité, contraste) :
-
-| Thème | Résultat |
-| --- | --- |
-| Clair, sur `#FFFFFF` | Tous les contrôles réussis. Une paire adjacente, `#E0568A` et `#027EB5`, est dans la zone tolérée pour le daltonisme de type protan (écart de 6,6) : elle n'est autorisée qu'avec un moyen d'identification supplémentaire. |
-| Sombre, sur `#0B141A` | Tous les contrôles réussis, sans réserve. |
-
-Le moyen supplémentaire est obligatoire et prévu : un trou de 2 dp entre les segments et le nom de chaque pot dans la liste. Le contrôle ne couvre pas les couleurs d'interface comme le vert d'action, seulement les pots.
+Chaque segment de la barre des pots porte un trou de 2 dp entre segments et le nom de chaque pot est écrit dans la liste.
 
 #### Police
 
@@ -552,8 +545,8 @@ Le pied reste fixe en bas, au-dessus de la barre de navigation Android et du cla
 
 | Élément | Valeur |
 | --- | --- |
-| Fond | `#FFFFFF` en clair, `#0B141A` en sombre |
-| Trait du haut | Aucun au repos ; 1 dp `#E9EDEF` en clair, `#2A3942` en sombre si le contenu défile dessous |
+| Fond | `#FAF7F2` en clair, `#0D1520` en sombre |
+| Trait du haut | Aucun au repos ; 1 dp `#E3DCD2` en clair, `#26384F` en sombre si le contenu défile dessous |
 | Marge du haut | 12 dp |
 | Bouton principal | Pleine largeur moins les marges, 48 dp |
 | Bouton texte éventuel | 4 dp sous le bouton principal, 48 dp |
@@ -573,31 +566,31 @@ Le clavier numérique système occupe environ 270 dp, soit 458 dp restants dans 
 
 | Valeur | Usage |
 | --- | --- |
-| 4 dp | Coin aplati d'une bulle, petite marque, segment de barre |
+| 4 dp | Petite marque, segment de barre |
 | 8 dp | Case de code, pastille de la barre du bas (coins intérieurs) |
-| 12 dp | Bulle, carte de choix, carte |
-| 16 dp | Réservé, sans usage en P1 |
+| 14 dp | Carte de choix, carte d'information, bloc repère |
+| 16 dp | Bouton principal, bouton à contour, capsule de flux et médaillon du statut |
 | 28 dp | Coins supérieurs d'une feuille basse, dialogue |
-| Pilule (9999) | Bouton principal, bouton secondaire, puce, onglet actif, avatar |
+| Pilule (9999) | Puce, onglet actif, avatar |
 
-Une bulle a un seul coin aplati : en haut à gauche pour l'app et les revenus, en haut à droite pour les dépenses et les réponses de l'utilisateur. Elle n'a pas de queue.
+Les capsules de flux ont quatre coins adoucis à 16 dp (sans queue ni coin aplati de messagerie) et une barre latérale de 3 dp qui indique le sens du flux.
 
 #### Élévations
 
-WhatsApp reste très plat : l'ombre n'apparaît que lorsqu'un élément flotte vraiment.
+BankVi reste sobre et léger : l'ombre n'apparaît que lorsqu'un élément flotte vraiment.
 
 | Niveau | Ombre (x y flou couleur, en dp) | Élévation Android | Usage |
 | --- | --- | --- | --- |
 | `e0` | Aucune | 0 | Écran, ligne, barre du haut |
-| `e1` | 0 1 0.5 `rgba(11,20,26,0.13)` | 1 | Bulle, carte en clair |
-| `e2` | 0 2 5 `rgba(11,20,26,0.16)` | 3 | Bandeau Annuler, info-bulle |
-| `e3` | 0 12 32 `rgba(11,20,26,0.20)` | 8 | Feuille basse, dialogue |
+| `e1` | 0 1 0.5 `rgba(28,22,19,0.13)` | 1 | Capsule, carte en clair |
+| `e2` | 0 2 5 `rgba(28,22,19,0.16)` | 3 | Bandeau Annuler, info-bulle |
+| `e3` | 0 12 32 `rgba(28,22,19,0.20)` | 8 | Feuille basse, dialogue |
 
-**En sombre :** les ombres se voient peu. L'élévation s'exprime par la surface : `#FFFFFF` en clair, `#0B141A` en sombre pour le fond, `#F0F2F5` en clair, `#111B21` en sombre pour un groupe, `#FFFFFF` en clair, `#202C33` en sombre pour ce qui flotte.
+**En sombre :** les ombres se voient peu. L'élévation s'exprime par la surface : `#FAF7F2` en clair, `#0D1520` en sombre pour le fond, `#F1ECE4` en clair, `#142030` en sombre pour un groupe, `#FFFFFF` en clair, `#1B2A3E` en sombre pour ce qui flotte.
 
 #### Séparateurs
 
-- Trait de 1 dp en `#E9EDEF` en clair, `#2A3942` en sombre.
+- Trait de 1 dp en `#E3DCD2` en clair, `#26384F` en sombre.
 - Dans une liste avec avatar, il commence à l'aplomb du texte, pas au bord de l'écran.
 - Aucun trait entre deux blocs déjà séparés par un espace de 24 dp.
 - Pas de bordure autour d'un écran, d'une image ou d'une barre du haut.
@@ -614,7 +607,7 @@ WhatsApp reste très plat : l'ombre n'apparaît que lorsqu'un élément flotte v
 | Taille optique | 24 |
 | Tailles | 24 dp par défaut ; 20 dp dans une ligne dense ou un message |
 | Zone tactile | 48 dp, même si l'icône est plus petite |
-| Couleur | `#54656F` en clair, `#AEBAC1` en sombre par défaut ; `#111B21` en clair, `#E9EDEF` en sombre dans la barre du haut ; couleur d'état si l'icône porte un état |
+| Couleur | `#5C514B` en clair, `#B8AFA8` en sombre par défaut ; `#1C1613` en clair, `#F5F0EB` en sombre dans la barre du haut ; couleur d'état si l'icône porte un état |
 
 ##### Icônes de cet écran
 
@@ -653,17 +646,17 @@ Le thème suit le téléphone, sans réglage en P1. Le passage de l'un à l'autr
 | --- | --- |
 | Hauteur | 48 dp |
 | Largeur | Pleine largeur moins les marges |
-| Forme | Pilule |
+| Forme | Rectangle adouci (rayon `16 dp`) |
 | Libellé | Roboto 16/24 sp, Medium (500), centré, une ligne ; deux lignes si le texte est agrandi, la hauteur suit |
 | Texte | Verbe et résultat. Jamais « Suivant » ni « OK » |
 | Position | Dans le pied d'action |
 
 | État | Fond | Texte | Remarque |
 | --- | --- | --- | --- |
-| Repos | `#25D366` (clair et sombre) | `#0B141A` (clair et sombre) | |
-| Appuyé | `#1FAD56` (clair et sombre) | `#0B141A` (clair et sombre) | Ondulation |
-| Désactivé | `#E9EDEF` en clair, `#202C33` en sombre | `#667781` en clair, `#8696A0` en sombre | Un champ manquant ; une aide dit lequel. Non annoncé comme action par TalkBack, mais lu avec « désactivé » |
-| Chargement | `#25D366` (clair et sombre) | Cercle de progression de 20 dp, trait 2 dp, `#0B141A` (clair et sombre), à gauche du libellé | Bouton inactif, libellé modifié (« Envoi… »), après 300 ms d'attente seulement |
+| Repos | `#B83B20` en clair, `#F07B5A` en sombre | `#FFFFFF` en clair, `#1C120E` en sombre | Terracotta de Lomé / terracotta solaire |
+| Appuyé | `#962E17` en clair, `#D96443` en sombre | `#FFFFFF` en clair, `#1C120E` en sombre | Ondulation |
+| Désactivé | `#E6DFD5` en clair, `#1B2A3E` en sombre | `#6B5E57` en clair, `#948B84` en sombre | Un champ manquant ; une aide dit lequel. Non annoncé comme action par TalkBack, mais lu avec « désactivé » |
+| Chargement | `#B83B20` en clair, `#F07B5A` en sombre | Cercle de progression de 20 dp, trait 2 dp, `#FFFFFF` en clair, `#1C120E` en sombre, à gauche du libellé | Bouton inactif, libellé modifié (« Envoi… »), après 300 ms d'attente seulement |
 
 #### Puce
 
@@ -678,19 +671,19 @@ Le thème suit le téléphone, sans réglage en P1. Le passage de l'un à l'autr
 
 | État | Fond | Contour | Texte |
 | --- | --- | --- | --- |
-| Repos | Transparent | 1 dp `#7A8A94` en clair, `#667781` en sombre | `#111B21` en clair, `#E9EDEF` en sombre |
-| Appuyée | Ondulation | 1 dp `#7A8A94` en clair, `#667781` en sombre | `#111B21` en clair, `#E9EDEF` en sombre |
-| Sélectionnée | `#D8FDD2` en clair, `#103529` en sombre | Aucun | `#0A3D2E` en clair, `#D9FDD3` en sombre, avec icône `check` |
-| Désactivée | Transparent | 1 dp `#E9EDEF` en clair, `#2A3942` en sombre | `#667781` en clair, `#8696A0` en sombre |
+| Repos | Transparent | 1 dp `#7A6D65` en clair, `#728399` en sombre | `#1C1613` en clair, `#F5F0EB` en sombre |
+| Appuyée | Ondulation | 1 dp `#7A6D65` en clair, `#728399` en sombre | `#1C1613` en clair, `#F5F0EB` en sombre |
+| Sélectionnée | `#F9DFD3` en clair, `#4D2318` en sombre | Aucun | `#5E1D0E` en clair, `#FDE5DA` en sombre, avec icône `check` |
+| Désactivée | Transparent | 1 dp `#E3DCD2` en clair, `#26384F` en sombre | `#6B5E57` en clair, `#948B84` en sombre |
 
 #### Barre du haut
 
 | Attribut | Valeur |
 | --- | --- |
 | Hauteur | 56 dp |
-| Fond | `#FFFFFF` en clair, `#0B141A` en sombre, sans ombre ni trait au repos ; 1 dp `#E9EDEF` en clair, `#2A3942` en sombre dessous si le contenu défile |
-| Icône retour | `arrow_back`, 24 dp, `#111B21` en clair, `#E9EDEF` en sombre, zone de 48 dp, à 4 dp du bord gauche |
-| Titre | Roboto 22/28 sp, Medium (500), `#111B21` en clair, `#E9EDEF` en sombre, à gauche, une ligne avec coupure en fin |
+| Fond | `#FAF7F2` en clair, `#0D1520` en sombre, sans ombre ni trait au repos ; 1 dp `#E3DCD2` en clair, `#26384F` en sombre dessous si le contenu défile |
+| Icône retour | `arrow_back`, 24 dp, `#1C1613` en clair, `#F5F0EB` en sombre, zone de 48 dp, à 4 dp du bord gauche |
+| Titre | Roboto 22/28 sp, Medium (500), `#1C1613` en clair, `#F5F0EB` en sombre, à gauche, une ligne avec coupure en fin |
 | Actions | 2 icônes au plus, à droite |
 
 Dans le parcours de premier lancement, la barre ne porte en général que le retour : la question fait office de titre.
@@ -702,11 +695,11 @@ Le champ le plus important de l'app.
 | Attribut | Valeur |
 | --- | --- |
 | Hauteur | 72 dp avec son libellé |
-| Libellé | Au-dessus, Roboto 14/20 sp, Medium (500), `#54656F` en clair, `#AEBAC1` en sombre ; `#008069` en clair, `#25D366` en sombre si le champ est actif |
-| Valeur | Roboto 36/44 sp, Medium (500), chiffres tabulaires, `#111B21` en clair, `#E9EDEF` en sombre |
-| Placeholder | « 0 », même style, `#667781` en clair, `#8696A0` en sombre |
-| Unité | « FCFA », Roboto 18/24 sp, Medium (500), `#54656F` en clair, `#AEBAC1` en sombre, fixe à droite du champ |
-| Soulignement | Repos : 1 dp `#7A8A94` en clair, `#667781` en sombre. Actif : 2 dp `#008069` en clair, `#25D366` en sombre. Erreur : 2 dp `#B3261E` en clair, `#F2B8B5` en sombre |
+| Libellé | Au-dessus, Roboto 14/20 sp, Medium (500), `#5C514B` en clair, `#B8AFA8` en sombre ; `#B83B20` en clair, `#FF8B6B` en sombre si le champ est actif |
+| Valeur | Roboto 36/44 sp, Medium (500), chiffres tabulaires, `#1C1613` en clair, `#F5F0EB` en sombre |
+| Placeholder | « 0 », même style, `#6B5E57` en clair, `#948B84` en sombre |
+| Unité | « FCFA », Roboto 18/24 sp, Medium (500), `#5C514B` en clair, `#B8AFA8` en sombre, fixe à droite du champ |
+| Soulignement | Repos : 1 dp `#7A6D65` en clair, `#728399` en sombre. Actif : 2 dp `#B83B20` en clair, `#FF8B6B` en sombre. Erreur : 2 dp `#B3261E` en clair, `#F2B8B5` en sombre |
 | Clavier | Numérique système (`number-pad`) |
 | Mise en forme | Espaces des milliers ajoutés en direct : `120 000`. Zéros de tête retirés. Lettres et signes refusés sans message |
 | Maximum | 8 chiffres : `99 999 999` ; au-delà, la frappe est ignorée |
@@ -719,11 +712,11 @@ Pour les montants secondaires, le jour du mois ou un nom court.
 | Attribut | Valeur |
 | --- | --- |
 | Hauteur | 56 dp, zone tactile comprise |
-| Libellé | Au-dessus, Roboto 14/20 sp, Medium (500), `#54656F` en clair, `#AEBAC1` en sombre |
-| Valeur | Roboto 16/24 sp, Regular (400), `#111B21` en clair, `#E9EDEF` en sombre |
+| Libellé | Au-dessus, Roboto 14/20 sp, Medium (500), `#5C514B` en clair, `#B8AFA8` en sombre |
+| Valeur | Roboto 16/24 sp, Regular (400), `#1C1613` en clair, `#F5F0EB` en sombre |
 | Soulignement | Identique au champ montant |
 
-**Message sous un champ :** Roboto 12/16 sp, Regular (400), à 4 dp du soulignement. Aide en `#54656F` en clair, `#AEBAC1` en sombre. Erreur en `#B3261E` en clair, `#F2B8B5` en sombre, avec icône `error` de 16 dp. Il apparaît à la validation ou en quittant le champ, jamais à la première frappe.
+**Message sous un champ :** Roboto 12/16 sp, Regular (400), à 4 dp du soulignement. Aide en `#5C514B` en clair, `#B8AFA8` en sombre. Erreur en `#B3261E` en clair, `#F2B8B5` en sombre, avec icône `error` de 16 dp. Il apparaît à la validation ou en quittant le champ, jamais à la première frappe.
 
 #### Ligne de liste
 
@@ -731,38 +724,38 @@ Pour les montants secondaires, le jour du mois ou un nom court.
 | --- | --- | --- |
 | Hauteur | 56 dp | 72 dp |
 | Avatar | Facultatif | 40 dp, à 16 dp du texte |
-| Titre | Roboto 16/24 sp, Medium (500), `#111B21` en clair, `#E9EDEF` en sombre | Identique |
-| Sous-titre | — | Roboto 14/20 sp, Regular (400), `#54656F` en clair, `#AEBAC1` en sombre |
+| Titre | Roboto 16/24 sp, Medium (500), `#1C1613` en clair, `#F5F0EB` en sombre | Identique |
+| Sous-titre | — | Roboto 14/20 sp, Regular (400), `#5C514B` en clair, `#B8AFA8` en sombre |
 | Valeur à droite | Roboto 16/24 sp, Regular (400), chiffres tabulaires | Identique, sur la ligne du titre |
-| Séparateur | 1 dp `#E9EDEF` en clair, `#2A3942` en sombre, à l'aplomb du texte | Identique |
+| Séparateur | 1 dp `#E3DCD2` en clair, `#26384F` en sombre, à l'aplomb du texte | Identique |
 | Appui | Ondulation sur toute la ligne | Identique |
 
-#### Bulle
+#### Capsule de flux (ou capsule explicative)
 
-| Attribut | Bulle de l'app | Bulle de l'utilisateur |
+| Attribut | Capsule de l'app | Capsule de l'utilisateur |
 | --- | --- | --- |
 | Rôle | L'app explique un fait | Rappel de ce que l'utilisateur a noté |
-| Fond | `#F0F2F5` en clair, `#202C33` en sombre | `#D9FDD3` en clair, `#005C4B` en sombre |
-| Texte | Roboto 14/20 sp, Regular (400), `#111B21` en clair, `#E9EDEF` en sombre | Roboto 14/20 sp, Regular (400), `#111B21` en clair, `#E9EDEF` en sombre |
-| Coins | 12 dp, sauf haut gauche 4 dp | 12 dp, sauf haut droit 4 dp |
+| Fond | `#F1ECE4` en clair, `#1B2A3E` en sombre | `#FCE8DF` en clair, `#4A2218` en sombre |
+| Texte | Roboto 14/20 sp, Regular (400), `#1C1613` en clair, `#F5F0EB` en sombre | Roboto 14/20 sp, Regular (400), `#1C1613` en clair, `#F5F0EB` en sombre |
+| Coins et bordure | 16 dp sur les 4 coins, contour 1 dp `#E3DCD2` / `#26384F` | 16 dp sur les 4 coins (aucun coin aplati ni queue) |
 | Alignement | À gauche | À droite |
 | Marges intérieures | 12 dp horizontal, 8 dp vertical | Identique |
 | Largeur | Pleine largeur au plus | 80 % au plus |
 | Ombre | `e1` en clair, aucune en sombre | Identique |
 
-Une bulle explique ou rapporte un fait. Elle ne contient aucun bouton. Les réponses possibles, comme la répartition du bilan, sont des puces placées sous la bulle.
+Une capsule explique ou rapporte un fait. Elle ne contient aucun bouton. Les réponses possibles, comme la répartition du bilan, sont des puces placées sous la capsule.
 
-##### Saisies en conversation (SAI-27)
+##### Saisies en flux financier (SAI-27)
 
-L'argent qui sort part comme un message envoyé. L'argent qui entre arrive comme un message reçu.
+L'argent qui sort part vers la droite avec une barre terracotta ; l'argent qui entre arrive par la gauche avec une barre lagune.
 
-| Saisie | Position | Fond | Coin aplati | Exemple |
+| Saisie | Position | Fond | Barre latérale (3 dp) | Exemple |
 | --- | --- | --- | --- | --- |
-| **Dépense** | À droite | `#D9FDD3` en clair, `#005C4B` en sombre | Haut droit | Taxi · −500 FCFA · 8 h 12 |
-| **Revenu** | À gauche | `#F0F2F5` en clair, `#202C33` en sombre | Haut gauche | Salaire · +120 000 FCFA · 8 h 00 |
-| **Comptage, transfert, « Non détaillé »** | Au centre | Repère en pilule, 1 dp `#E9EDEF` en clair, `#2A3942` en sombre | Aucun | Comptage : 32 000 FCFA en espèces |
+| **Dépense** | À droite | `#FCE8DF` en clair, `#4A2218` en sombre | À droite, `#B83B20` / `#F07B5A` | Taxi · −500 FCFA · 8 h 12 |
+| **Revenu** | À gauche | `#E4F2F7` en clair, `#133447` en sombre | À gauche, `#0E6BA8` / `#4DA8DA` | Salaire · +120 000 FCFA · 8 h 00 |
+| **Comptage, transfert, « Non détaillé »** | Au centre | Repère en pilule, 1 dp `#E3DCD2` en clair, `#26384F` en sombre | Aucune | Comptage : 32 000 FCFA en espèces |
 
-Le sens ne repose jamais sur la seule position ou couleur : une dépense porte toujours « − » (U+2212), un revenu porte toujours « + », et TalkBack lit « Dépense : » ou « Revenu : » avant le libellé. Largeur de 80 % au plus. Heure en Roboto 12/16 sp, Regular (400), `#3B4A54` sur une dépense en clair, `#D9FDD3` en sombre ; `#54656F` sur un revenu en clair, `#AEBAC1` en sombre. Sans queue de bulle ni coche de lecture. Un toucher ouvre le détail, un appui long change la catégorie.
+Le sens ne repose jamais sur la seule position ou couleur : une dépense porte toujours « − » (U+2212), un revenu porte toujours « + », et TalkBack lit « Dépense : » ou « Revenu : » avant le libellé. Largeur de 80 % au plus. Heure en Roboto 12/16 sp, Regular (400), `#52362C` sur une dépense en clair, `#FAD8C8` en sombre ; `#5C514B` sur un revenu en clair, `#B8AFA8` en sombre. Sans queue ni coche de lecture. Un toucher ouvre le détail, un appui long change la catégorie.
 
 **En P2 (SAI-20) :** un champ façon message s'ajoutera en bas : « salaire 200000 », « jus 100 », « déplacement 1500 ». La bulle prend aussitôt le bon côté, avec « Annuler ».
 
@@ -770,16 +763,16 @@ Le sens ne repose jamais sur la seule position ou couleur : une dépense porte t
 
 | Attribut | Valeur |
 | --- | --- |
-| Fond | `#FFFFFF` en clair, `#202C33` en sombre |
+| Fond | `#FFFFFF` en clair, `#172436` en sombre |
 | Coins supérieurs | 28 dp |
-| Poignée | 32 × 4 dp, en pilule, `#7A8A94` en clair, `#667781` en sombre, centrée, à 8 dp du haut |
-| Titre | Roboto 18/24 sp, Medium (500), `#111B21` en clair, `#E9EDEF` en sombre, à 24 dp du haut |
+| Poignée | 32 × 4 dp, en pilule, `#7A6D65` en clair, `#728399` en sombre, centrée, à 8 dp du haut |
+| Titre | Roboto 18/24 sp, Medium (500), `#1C1613` en clair, `#F5F0EB` en sombre, à 24 dp du haut |
 | Marges | 24 dp |
 | Ombre | `e3` |
 | Voile | `rgba(11,20,26,0.40)` en clair, `rgba(0,0,0,0.60)` en sombre |
 | Hauteur | Selon le contenu, 90 % de l'écran au plus |
 | Fermeture | Glisser vers le bas, toucher le voile, retour Android |
-| Bouton | Le bouton principal de la feuille est le seul bouton vert visible : la feuille recouvre le pied de l'écran |
+| Bouton | Le bouton principal de la feuille est le seul bouton terracotta visible : la feuille recouvre le pied de l'écran |
 
 Si la feuille contient une saisie en cours, un glissement accidentel ne ferme pas : seuls le voile et le retour ferment, sans perdre la saisie tant que l'écran reste ouvert.
 
@@ -788,9 +781,9 @@ Si la feuille contient une saisie en cours, un glissement accidentel ne ferme pa
 | Attribut | Valeur |
 | --- | --- |
 | Position | 8 dp au-dessus du pied d'action ou de la barre du bas, marges de 8 dp |
-| Fond | `#111B21` en clair, `#E9EDEF` en sombre (inversé) |
-| Texte | Roboto 14/20 sp, Regular (400), `#FFFFFF` en clair, `#111B21` en sombre |
-| Action | « Annuler », Roboto 14/20 sp, Medium (500), `#25D366` en clair, `#00735E` en sombre |
+| Fond | `#1C1613` en clair, `#F5F0EB` en sombre (inversé) |
+| Texte | Roboto 14/20 sp, Regular (400), `#FAF7F2` en clair, `#1C1613` en sombre |
+| Action | « Annuler », Roboto 14/20 sp, Medium (500), `#FF8B6B` en clair, `#A6331A` en sombre |
 | Hauteur | 48 dp au moins |
 | Rayon | 8 dp |
 | Ombre | `e2` |
@@ -811,7 +804,7 @@ Rayon 8 dp, marges de 12 dp, icône de 20 dp, texte Roboto 14/20 sp, Regular (40
 
 #### Ligne de pot
 
-Pastille de 12 dp de la couleur du pot, nom en Roboto 16/24 sp, Regular (400), pourcentage en Roboto 16/24 sp, Regular (400) chiffres tabulaires, puis montant à droite. Le texte reste en `#111B21` en clair, `#E9EDEF` en sombre ou `#54656F` en clair, `#AEBAC1` en sombre, jamais dans la couleur du pot.
+Pastille de 12 dp de la couleur du pot, nom en Roboto 16/24 sp, Regular (400), pourcentage en Roboto 16/24 sp, Regular (400) chiffres tabulaires, puis montant à droite. Le texte reste en `#1C1613` en clair, `#F5F0EB` en sombre ou `#5C514B` en clair, `#B8AFA8` en sombre, jamais dans la couleur du pot.
 
 #### Formats de montant
 
@@ -827,7 +820,7 @@ Aucune décimale, aucune abréviation « k » ni « M » dans l'app, car elles s
 
 #### Jauge de pot
 
-Barre pleine de 8 dp, bouts arrondis. La part remplie est le reste ÷ la cible, dans la couleur du pot, sur un fond `#FFFFFF` en clair, `#111B21` en sombre avec un contour de 1 dp `#7A8A94` en clair, `#667781` en sombre. Pas de seuil de couleur : la couleur identifie le pot, elle ne juge pas son état. Un pot vide s'écrit en toutes lettres, avec une icône.
+Barre pleine de 8 dp, bouts arrondis. La part remplie est le reste ÷ la cible, dans la couleur du pot, sur un fond `#FFFFFF` en clair, `#172436` en sombre avec un contour de 1 dp `#7A6D65` en clair, `#728399` en sombre. Pas de seuil de couleur : la couleur identifie le pot, elle ne juge pas son état. Un pot vide s'écrit en toutes lettres, avec une icône.
 
 #### Retour Android
 
@@ -1080,19 +1073,19 @@ Le logo de BankVi n'existe pas encore.
 
 | Élément | Règle provisoire |
 | --- | --- |
-| **Marque écrite** | « BankVi » en Roboto 18/24 sp, Medium (500), couleur `#00735E` en clair, `#25D366` en sombre |
-| **Icône de l'app** | À créer. Fond `#FFFFFF` en clair, `#0B141A` en sombre ou vert foncé `#00735E`, forme propre à BankVi, par exemple un chiffre ou une courbe. **Pas de bulle, pas de téléphone, pas de cercle vert** |
-| **Écran de lancement Android** | Fond `#FFFFFF` en clair, `#0B141A` en sombre, icône de l'app centrée, sans texte |
+| **Marque écrite** | « BankVi » en Roboto 18/24 sp, Medium (500), couleur `#A6331A` en clair, `#FF8B6B` en sombre |
+| **Icône de l'app** | À créer. Fond `#FAF7F2` en clair, `#0D1520` en sombre ou terracotta `#B83B20`, forme propre à BankVi, par exemple un chiffre ou une courbe. **Pas de bulle, pas de téléphone, pas de cercle vert** |
+| **Écran de lancement Android** | Fond `#FAF7F2` en clair, `#0D1520` en sombre, icône de l'app centrée, sans texte |
 
 #### Style d'illustration
 
-Le style reprend l'esprit des illustrations de la refonte de WhatsApp : arrondi, doux, à contour noir.
+Le style privilégie des formes géométriques douces à contour net, aux couleurs Terracotta & Lagune propres à BankVi.
 
 | Attribut | Valeur |
 | --- | --- |
-| Contour | `#111B21` en clair, `#E9EDEF` en sombre, 2,5 dp, bouts et angles ronds |
+| Contour | `#1C1613` en clair, `#F5F0EB` en sombre, 2,5 dp, bouts et angles ronds |
 | Remplissage | Aplats sans dégradé ni texture |
-| Couleurs | `#25D366` (clair et sombre), `#D9FDD3` en clair, `#005C4B` en sombre, `#FFBC38` (clair et sombre), `#FFFFFF` en clair, `#202C33` en sombre |
+| Couleurs | `#B83B20` en clair, `#F07B5A` en sombre pour l'accent terracotta ; `#FCE8DF` en clair, `#133447` en sombre pour les grandes surfaces ; `#FFBC38` (clair et sombre) pour les pièces ; `#FFFFFF` en clair, `#1B2A3E` en sombre pour le papier |
 | Ombre | Aucune |
 | Sujets | Argent réel du quotidien : billets, pièces, carnet, calendrier, courbe |
 | Personnages | Aucun en P1, ce qui évite les caricatures et allège les fichiers |

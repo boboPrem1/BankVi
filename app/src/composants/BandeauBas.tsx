@@ -54,7 +54,7 @@ export function HoteBandeauBas() {
   const clair = couleurs('light');
   const fond = scheme === 'light' ? clair.text.primary : couleurs('dark').text.primary;
   const texte = scheme === 'light' ? clair.bg.canvas : clair.text.primary;
-  const action = scheme === 'light' ? clair.action.primary : clair.text.link;
+  const action = scheme === 'light' ? couleurs('dark').text.link : clair.text.link;
 
   useEffect(() => {
     if (!annonce) return;

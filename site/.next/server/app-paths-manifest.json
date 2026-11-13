@@ -1,6 +1,10 @@
 {
-  "/offres/page": "app/offres/page.js",
-  "/paiement/page": "app/paiement/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/confidentialite/page": "app/confidentialite/page.js",
+  "/conditions/page": "app/conditions/page.js",
   "/confirmation/page": "app/confirmation/page.js",
+  "/contact/page": "app/contact/page.js",
+  "/paiement/page": "app/paiement/page.js",
+  "/offres/page": "app/offres/page.js",
   "/page": "app/page.js"
 }

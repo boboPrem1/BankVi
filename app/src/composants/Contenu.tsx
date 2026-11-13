@@ -4,11 +4,11 @@ import { Icone } from '@/icones/Icone';
 import type { NomIcone } from '@/icones/chemins';
 import { radius, size, space, type, useTheme } from '@/theme';
 
-/** Bulle de l'app : elle explique un fait. Coin haut gauche aplati, sans queue. */
+/** Capsule explicative de l'app. */
 export function Bulle({ texte, titre = false }: { texte: string; titre?: boolean }) {
   const { colors, scheme } = useTheme();
   return (
-    <View style={[styles.bulle, { backgroundColor: colors.bg.bubbleApp }, scheme === 'light' && styles.e1]}>
+    <View style={[styles.bulle, { backgroundColor: colors.bg.bubbleApp, borderColor: colors.border.subtle }, scheme === 'light' && styles.e1]}>
       <Text style={[type.body, styles.tabulaire, { color: colors.text.primary }]} {...(titre ? { accessibilityRole: 'header' as const } : {})}>
         {texte}
       </Text>
@@ -16,12 +16,12 @@ export function Bulle({ texte, titre = false }: { texte: string; titre?: boolean
   );
 }
 
-/** Bulle de l'utilisateur : rappel de sa réponse, à droite, coin haut droit aplati, 80 % au plus. */
+/** Capsule de l'utilisateur : rappel de sa réponse, à droite, 80 % au plus. */
 export function BulleUtilisateur({ texte }: { texte: string }) {
   const { colors, scheme } = useTheme();
   return (
     <View style={styles.droite}>
-      <View style={[styles.bulle, styles.coinDroit, { backgroundColor: colors.bg.bubbleUser }, scheme === 'light' && styles.e1]}>
+      <View style={[styles.bulle, styles.coinDroit, { backgroundColor: colors.bg.bubbleUser, borderColor: colors.border.subtle }, scheme === 'light' && styles.e1]}>
         <Text style={[type.body, styles.tabulaire, { color: colors.text.primary }]}>{texte}</Text>
       </View>
     </View>
@@ -79,11 +79,11 @@ const styles = StyleSheet.create({
   bulle: {
     paddingHorizontal: space.s3,
     paddingVertical: space.s2,
-    borderRadius: radius.md,
-    borderTopLeftRadius: radius.xs,
+    borderRadius: radius.lg,
+    borderWidth: 1,
   },
-  e1: { elevation: 1, shadowColor: '#0B141A' },
-  coinDroit: { borderTopLeftRadius: radius.md, borderTopRightRadius: radius.xs, maxWidth: '80%' },
+  e1: { elevation: 1, shadowColor: '#1C1613' },
+  coinDroit: { maxWidth: '80%' },
   droite: { alignItems: 'flex-end' },
   tabulaire: { fontVariant: ['tabular-nums'] },
   bandeau: {

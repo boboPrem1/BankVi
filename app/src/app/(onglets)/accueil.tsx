@@ -224,13 +224,13 @@ export default function Accueil() {
               onPress={ouvrirStatut}
               accessibilityRole="button"
               accessibilityLabel={registre.statutVu ? t('ec12.anneauVu') : t('ec12.anneauAVoir')}
-              style={styles.zoneAnneau}
+              style={styles.zoneMedaillon}
             >
-              <View style={[styles.anneau, { borderColor: registre.statutVu ? 'rgba(255,255,255,0.45)' : BLANC }]}>
-                <View style={styles.miniature}>
+              <View style={[styles.capsuleStatut, { borderColor: registre.statutVu ? 'rgba(255,255,255,0.45)' : BLANC }]}>
+                <View style={[styles.miniature, { borderColor: registre.statutVu ? 'rgba(255,255,255,0.45)' : BLANC }]}>
                   <Paysage
                     largeur={36}
-                    hauteur={36}
+                    hauteur={28}
                     cadre="miniature"
                     soldes={points.slice(0, 31).map((p) => p.solde)}
                     progression={statut.soleil.ecoules / statut.soleil.total}
@@ -238,14 +238,14 @@ export default function Accueil() {
                     graine={0}
                   />
                 </View>
+                <Text style={[type.bodyMedium, { color: BLANC }]}>{dateLongueJour(AUJOURDHUI)}</Text>
               </View>
             </Pressable>
-            <Text style={[type.bodyMedium, styles.dateHaut, { color: BLANC }]}>{dateLongueJour(AUJOURDHUI)}</Text>
             <Pressable
               onPress={() => registre.modifier({ masquerMontants: !masque })}
               accessibilityRole="button"
               accessibilityLabel={masque ? t('ec12.afficherMontants') : t('ec12.masquerMontants')}
-              style={styles.zoneAnneau}
+              style={styles.zoneActionHaut}
             >
               <Icone nom={masque ? 'visibility_off' : 'visibility'} couleur={BLANC} />
             </Pressable>
@@ -369,11 +369,21 @@ const styles = StyleSheet.create({
   herosFixe: { position: 'absolute', top: 0, left: 0, right: 0, overflow: 'hidden' },
   sousBarreEtat: { position: 'absolute', top: 0, left: 0, right: 0 },
   contenuHeros: { paddingHorizontal: size.gutterList },
-  ligneHaut: { flexDirection: 'row', alignItems: 'center', columnGap: space.s2, marginLeft: -4 },
-  dateHaut: { flex: 1 },
-  zoneAnneau: { width: size.touchMin, height: size.touchMin, alignItems: 'center', justifyContent: 'center' },
-  anneau: { width: 44, height: 44, borderRadius: 22, borderWidth: 2.5, alignItems: 'center', justifyContent: 'center' },
-  miniature: { width: 36, height: 36, borderRadius: 18, overflow: 'hidden' },
+  ligneHaut: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', columnGap: space.s2 },
+  zoneMedaillon: { minHeight: size.touchMin, justifyContent: 'center' },
+  capsuleStatut: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    columnGap: space.s2,
+    minHeight: 44,
+    paddingLeft: 6,
+    paddingRight: space.s3,
+    borderRadius: radius.lg,
+    borderWidth: 1,
+    backgroundColor: 'rgba(13,21,32,0.28)',
+  },
+  miniature: { width: 36, height: 28, borderRadius: 10, borderWidth: 1.5, overflow: 'hidden' },
+  zoneActionHaut: { width: size.touchMin, height: size.touchMin, alignItems: 'center', justifyContent: 'center' },
   chiffre: { marginTop: space.s3, alignSelf: 'flex-start' },
   ligne: { flexDirection: 'row', alignItems: 'center', columnGap: space.s2 },
   ligneChiffre: { flexDirection: 'row', alignItems: 'baseline', flexWrap: 'wrap', columnGap: space.s2 },

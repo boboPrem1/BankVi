@@ -12,9 +12,9 @@ import { Icone } from '@/icones/Icone';
 import { useEtat } from '@/registre/etat';
 import { lienDe } from '@/registre/partage';
 import { recetteCourante } from '@/registre/pots';
-import { radius, size, space, type, useTheme } from '@/theme';
+import { artwork, radius, size, space, type, useTheme } from '@/theme';
 
-const BLANC = '#FFFFFF';
+const BLANC = artwork.text;
 
 /** EC-35 Partager : sa façon de répartir, à son initiative, sans jamais un montant. L2. */
 export default function Partager() {
@@ -62,8 +62,8 @@ export default function Partager() {
         <Svg width={cote} height={cote} style={StyleSheet.absoluteFill}>
           <Defs>
             <LinearGradient id="ciel" x1="0" y1="0" x2="0" y2="1">
-              <Stop offset="0" stopColor="#054D43" />
-              <Stop offset="1" stopColor="#0E7A6A" />
+              <Stop offset="0" stopColor={artwork.skies.suit[0]} />
+              <Stop offset="1" stopColor={artwork.skies.suit[1]} />
             </LinearGradient>
           </Defs>
           <Rect width={cote} height={cote} fill="url(#ciel)" />

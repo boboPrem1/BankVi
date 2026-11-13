@@ -53,8 +53,8 @@ Le pied reste fixe en bas, au-dessus de la barre de navigation Android et du cla
 
 | Élément | Valeur |
 | --- | --- |
-| Fond | `#FFFFFF` en clair, `#0B141A` en sombre |
-| Trait du haut | Aucun au repos ; 1 dp `#E9EDEF` en clair, `#2A3942` en sombre si le contenu défile dessous |
+| Fond | `#FAF7F2` en clair, `#0D1520` en sombre |
+| Trait du haut | Aucun au repos ; 1 dp `#E3DCD2` en clair, `#26384F` en sombre si le contenu défile dessous |
 | Marge du haut | 12 dp |
 | Bouton principal | Pleine largeur moins les marges, 48 dp |
 | Bouton texte éventuel | 4 dp sous le bouton principal, 48 dp |

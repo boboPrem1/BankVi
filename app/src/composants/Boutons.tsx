@@ -17,7 +17,7 @@ interface PrincipalProps {
   icone?: NomIcone;
 }
 
-/** Bouton principal : pilule verte de 48 dp. Un seul par écran. */
+/** Bouton principal : rectangle adouci (16 dp) de 48 dp. Un seul par écran. */
 export function BoutonPrincipal({ libelle, onPress, desactive, chargement, lectureDesactive, icone }: PrincipalProps) {
   const { colors } = useTheme();
   const inactif = desactive || !!chargement;
@@ -121,7 +121,7 @@ export function DeuxBoutonsTexte({ children }: { children: React.ReactNode }) {
 const styles = StyleSheet.create({
   principal: {
     minHeight: size.button,
-    borderRadius: radius.full,
+    borderRadius: radius.lg,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: space.s3,
-    borderRadius: radius.full,
+    borderRadius: radius.lg,
     overflow: 'hidden',
   },
   deux: { flexDirection: 'row', flexWrap: 'wrap', columnGap: space.s2 },

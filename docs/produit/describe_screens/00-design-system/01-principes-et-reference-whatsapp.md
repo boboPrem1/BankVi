@@ -2,8 +2,8 @@
 
 ## 1. Sept principes
 
-1. **Le familier avant l'original.** Un geste connu de WhatsApp vaut mieux qu'une trouvaille. BankVi se distingue par son chiffre du jour, pas par ses composants.
-2. **Le vert veut dire « agir ».** Il n'est ni un décor ni un fond. Sur un écran ordinaire, il occupe moins de 10 % de la surface.
+1. **Le familier sans mimétisme.** Un geste connu vaut mieux qu'une trouvaille, mais BankVi affirme son identité propre (Terracotta & Lagune, capsules de flux, médaillon du jour, boutons adoucis à 16 dp) et se distingue par son chiffre du jour.
+2. **Le terracotta veut dire « agir ».** Il n'est ni un décor ni un fond. Sur un écran ordinaire, il occupe moins de 10 % de la surface.
 3. **Une seule décision par écran.** Un bouton principal, en bas, sous le pouce. Le reste s'efface.
 4. **Le chiffre est le héros.** Il a la plus grande taille de l'écran, et il n'y en a qu'un.
 5. **Les faits, sans jugement.** Aucun rouge pour de l'argent qui manque, aucune félicitation appuyée, aucun « tu devrais ».
@@ -52,9 +52,9 @@ Le mot « WhatsApp » n'apparaît dans l'app que là où il décrit un fait : «
 
 | Point | WhatsApp | BankVi | Raison |
 | --- | --- | --- | --- |
-| Texte en vert sur blanc | Vert moyen, environ `#128C7E` à `#008069` | `#00735E` en clair, `#25D366` en sombre | `#128C7E` donne 4,14:1 sur blanc et `#008069` 4,36:1 sur `#F0F2F5` : c'est sous le seuil de 4,5:1. |
-| Texte secondaire | `#667781` partout | `#54656F` en clair, `#AEBAC1` en sombre | `#667781` donne 4,14:1 sur `#F0F2F5` en clair |
-| Texte sur le bouton vert | Sombre | `#0B141A` (clair et sombre) | Le blanc sur `#25D366` ne donne que 1,98:1 |
+| Bouton principal | Vert fluo `#25D366` en pilule, texte noir | Rectangle adouci (16 dp), terracotta `#B83B20` (clair) / `#F07B5A` (sombre) | Identité financière chaleureuse et dissociable de WhatsApp |
+| Fonds et surfaces | Blanc froid / gris-vert `#0B141A` | Sable ivoire `#FAF7F2` / bleu nuit atlantique `#0D1520` | Lisibilité chaleureuse au soleil, identité togolaise propre |
+| Capsules de flux et statuts | Bulles de chat vertes à queue/coin aplati et anneau de story rond | Capsules à rayon 16 dp avec barre d'accent latérale (terracotta / lagune) et médaillon « Météo de mon argent » unifié | Lire immédiatement un flux financier sans imiter une messagerie |
 | Chiffre très grand | Inexistant | Roboto 48/56 sp, Bold (700) | C'est la raison d'être de l'app |
 | Courbes et barres de pots | Inexistantes | [Fichier 13](13-graphiques-et-montants.md) | Besoin propre à BankVi |
 | Action de l'accueil | Bouton flottant vert | [Barre d'action fixe](10-composants-actions.md#5-barre-daction) | Le soir, deux actions : deux boutons flottants cacheraient le contenu |

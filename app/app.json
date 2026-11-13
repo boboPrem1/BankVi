@@ -10,11 +10,11 @@
     "icon": "./assets/images/icon.png",
     "scheme": "bankvi",
     "userInterfaceStyle": "automatic",
-    "backgroundColor": "#FFFFFF",
+    "backgroundColor": "#FAF7F2",
     "android": {
       "package": "tg.bankvi.app",
       "adaptiveIcon": {
-        "backgroundColor": "#FFFFFF",
+        "backgroundColor": "#FAF7F2",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
@@ -39,11 +39,11 @@
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#FFFFFF",
+          "backgroundColor": "#FAF7F2",
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 76,
           "dark": {
-            "backgroundColor": "#0B141A",
+            "backgroundColor": "#0D1520",
             "image": "./assets/images/splash-icon.png"
           }
         }

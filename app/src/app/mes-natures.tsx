@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
     rowGap: space.s3,
     padding: space.s4,
     elevation: 2,
-    shadowColor: '#0B141A',
+    shadowColor: '#1C1613',
     shadowOpacity: 0.1,
     shadowRadius: 4,
     shadowOffset: { width: 0, height: 2 },

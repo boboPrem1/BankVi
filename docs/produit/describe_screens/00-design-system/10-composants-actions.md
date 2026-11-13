@@ -15,27 +15,27 @@
 | --- | --- |
 | Hauteur | 48 dp |
 | Largeur | Pleine largeur moins les marges |
-| Forme | Pilule |
+| Forme | Rectangle adouci (rayon `16 dp`) |
 | Libellé | Roboto 16/24 sp, Medium (500), centré, une ligne ; deux lignes si le texte est agrandi, la hauteur suit |
 | Texte | Verbe et résultat. Jamais « Suivant » ni « OK » |
 | Position | Dans le pied d'action |
 
 | État | Fond | Texte | Remarque |
 | --- | --- | --- | --- |
-| Repos | `#25D366` (clair et sombre) | `#0B141A` (clair et sombre) | |
-| Appuyé | `#1FAD56` (clair et sombre) | `#0B141A` (clair et sombre) | Ondulation |
-| Désactivé | `#E9EDEF` en clair, `#202C33` en sombre | `#667781` en clair, `#8696A0` en sombre | Un champ manquant ; une aide dit lequel. Non annoncé comme action par TalkBack, mais lu avec « désactivé » |
-| Chargement | `#25D366` (clair et sombre) | Cercle de progression de 20 dp, trait 2 dp, `#0B141A` (clair et sombre), à gauche du libellé | Bouton inactif, libellé modifié (« Envoi… »), après 300 ms d'attente seulement |
+| Repos | `#B83B20` en clair, `#F07B5A` en sombre | `#FFFFFF` en clair, `#1C120E` en sombre | Terracotta de Lomé / terracotta solaire |
+| Appuyé | `#962E17` en clair, `#D96443` en sombre | `#FFFFFF` en clair, `#1C120E` en sombre | Ondulation |
+| Désactivé | `#E6DFD5` en clair, `#1B2A3E` en sombre | `#6B5E57` en clair, `#948B84` en sombre | Un champ manquant ; une aide dit lequel. Non annoncé comme action par TalkBack, mais lu avec « désactivé » |
+| Chargement | `#B83B20` en clair, `#F07B5A` en sombre | Cercle de progression de 20 dp, trait 2 dp, `#FFFFFF` en clair, `#1C120E` en sombre, à gauche du libellé | Bouton inactif, libellé modifié (« Envoi… »), après 300 ms d'attente seulement |
 
 ## 3. Bouton à contour
 
-Même hauteur et forme que le principal. Fond transparent, contour de 1 dp `#7A8A94` en clair, `#667781` en sombre, libellé Roboto 16/24 sp, Medium (500) en `#00735E` en clair, `#25D366` en sombre. Pressé : ondulation.
+Même hauteur et forme (`rayon 16 dp`) que le principal. Fond transparent, contour de 1 dp `#7A6D65` en clair, `#728399` en sombre, libellé Roboto 16/24 sp, Medium (500) en `#A6331A` en clair, `#FF8B6B` en sombre. Pressé : ondulation.
 
 ## 4. Bouton texte
 
 | Attribut | Valeur |
 | --- | --- |
-| Texte | Roboto 14/20 sp, Medium (500), `#00735E` en clair, `#25D366` en sombre |
+| Texte | Roboto 14/20 sp, Medium (500), `#A6331A` en clair, `#FF8B6B` en sombre |
 | Zone tactile | Hauteur 48 dp, largeur du texte plus 12 dp de chaque côté |
 | Pleine largeur | Centré sous le bouton principal |
 | Destructif | `#B3261E` en clair, `#F2B8B5` en sombre |
@@ -48,15 +48,15 @@ Sur les écrans principaux, l'action reste dans une barre fixe, juste au-dessus 
 | --- | --- |
 | Hauteur | 64 dp : 8 dp, bouton de 48 dp, 8 dp |
 | Marges latérales | 16 dp |
-| Fond | `#FFFFFF` en clair, `#0B141A` en sombre |
-| Trait du haut | 1 dp `#E9EDEF` en clair, `#2A3942` en sombre |
+| Fond | `#FAF7F2` en clair, `#0D1520` en sombre |
+| Trait du haut | 1 dp `#E3DCD2` en clair, `#26384F` en sombre |
 | Ombre | Aucune |
 | Un seul bouton | Bouton principal, toute la largeur, icône de 24 dp et libellé |
 | Deux boutons | Écart de 8 dp ; à gauche, bouton à contour, 40 % de la largeur ; à droite, bouton principal, 60 % |
 | Bandeau Annuler | 8 dp au-dessus de la barre |
 | Présence | Accueil et Mon horizon, ainsi que les autres écrans principaux qui ont une action ; absente pendant une tâche et au premier lancement |
 
-Un seul bouton reste vert. Le libellé peut se raccourcir quand deux boutons se partagent la barre (« Noter ») ; TalkBack lit toujours le libellé complet. À 200 % de texte, les deux boutons s'empilent et la barre grandit.
+Un seul bouton reste plein. Le libellé peut se raccourcir quand deux boutons se partagent la barre (« Noter ») ; TalkBack lit toujours le libellé complet. À 200 % de texte, les deux boutons s'empilent et la barre grandit.
 
 ## 6. Puce
 
@@ -71,7 +71,7 @@ Un seul bouton reste vert. Le libellé peut se raccourcir quand deux boutons se 
 
 | État | Fond | Contour | Texte |
 | --- | --- | --- | --- |
-| Repos | Transparent | 1 dp `#7A8A94` en clair, `#667781` en sombre | `#111B21` en clair, `#E9EDEF` en sombre |
-| Appuyée | Ondulation | 1 dp `#7A8A94` en clair, `#667781` en sombre | `#111B21` en clair, `#E9EDEF` en sombre |
-| Sélectionnée | `#D8FDD2` en clair, `#103529` en sombre | Aucun | `#0A3D2E` en clair, `#D9FDD3` en sombre, avec icône `check` |
-| Désactivée | Transparent | 1 dp `#E9EDEF` en clair, `#2A3942` en sombre | `#667781` en clair, `#8696A0` en sombre |
+| Repos | Transparent | 1 dp `#7A6D65` en clair, `#728399` en sombre | `#1C1613` en clair, `#F5F0EB` en sombre |
+| Appuyée | Ondulation | 1 dp `#7A6D65` en clair, `#728399` en sombre | `#1C1613` en clair, `#F5F0EB` en sombre |
+| Sélectionnée | `#F9DFD3` en clair, `#4D2318` en sombre | Aucun | `#5E1D0E` en clair, `#FDE5DA` en sombre, avec icône `check` |
+| Désactivée | Transparent | 1 dp `#E3DCD2` en clair, `#26384F` en sombre | `#6B5E57` en clair, `#948B84` en sombre |

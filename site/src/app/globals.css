@@ -1,44 +1,44 @@
 :root {
-  --bg-canvas: #ffffff;
-  --bg-subtle: #f5f7f8;
-  --bg-selected: #d8fdd2;
+  --bg-canvas: #faf7f2;
+  --bg-subtle: #f1ece4;
+  --bg-selected: #f9dfd3;
   --bg-error: #fbe9e7;
-  --text-primary: #111b21;
-  --text-secondary: #54656f;
-  --text-tertiary: #667781;
-  --text-link: #00735e;
-  --text-selected: #0a3d2e;
+  --text-primary: #1c1613;
+  --text-secondary: #5c514b;
+  --text-tertiary: #6b5e57;
+  --text-link: #a6331a;
+  --text-selected: #5e1d0e;
   --text-error: #b3261e;
-  --action-primary: #25d366;
-  --action-primary-hover: #1fad56;
-  --action-on: #0b141a;
-  --action-disabled-bg: #e9edef;
-  --action-disabled-fg: #667781;
-  --border-subtle: #e9edef;
-  --border-control: #7a8a94;
-  --border-active: #008069;
+  --action-primary: #b83b20;
+  --action-primary-hover: #962e17;
+  --action-on: #ffffff;
+  --action-disabled-bg: #e6dfd5;
+  --action-disabled-fg: #6b5e57;
+  --border-subtle: #e3dcd2;
+  --border-control: #7a6d65;
+  --border-active: #b83b20;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg-canvas: #0b141a;
-    --bg-subtle: #202c33;
-    --bg-selected: #103529;
+    --bg-canvas: #0d1520;
+    --bg-subtle: #142030;
+    --bg-selected: #4d2318;
     --bg-error: #3c1f1e;
-    --text-primary: #e9edef;
-    --text-secondary: #aebac1;
-    --text-tertiary: #8696a0;
-    --text-link: #25d366;
-    --text-selected: #d9fdd3;
+    --text-primary: #f5f0eb;
+    --text-secondary: #b8afa8;
+    --text-tertiary: #948b84;
+    --text-link: #ff8b6b;
+    --text-selected: #fde5da;
     --text-error: #f2b8b5;
-    --action-primary: #25d366;
-    --action-primary-hover: #1fad56;
-    --action-on: #0b141a;
-    --action-disabled-bg: #202c33;
-    --action-disabled-fg: #8696a0;
-    --border-subtle: #2a3942;
-    --border-control: #667781;
-    --border-active: #25d366;
+    --action-primary: #f07b5a;
+    --action-primary-hover: #d96443;
+    --action-on: #1c120e;
+    --action-disabled-bg: #1b2a3e;
+    --action-disabled-fg: #948b84;
+    --border-subtle: #26384f;
+    --border-control: #728399;
+    --border-active: #ff8b6b;
   }
 }
 
@@ -160,7 +160,7 @@ body {
   min-height: 48px;
   padding: 12px 24px;
   border: 0;
-  border-radius: 999px;
+  border-radius: 16px;
   background-color: var(--action-primary);
   color: var(--action-on);
   font-size: 16px;
@@ -186,7 +186,7 @@ body {
   min-height: 44px;
   padding: 10px 16px;
   border: 1px solid var(--border-control);
-  border-radius: 999px;
+  border-radius: 16px;
   background: transparent;
   color: var(--text-primary);
   font-size: 14px;

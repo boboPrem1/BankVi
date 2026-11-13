@@ -1,10 +1,10 @@
 # Design system BankVi
 
-*Version 0.2 · 7 novembre 2026 · Pour : designer, modèle de génération d'écrans et développeur de l'app Android.*
+*Version 0.6 · 13 novembre 2026 · Pour : designer, modèle de génération d'écrans et développeur de l'app Android.*
 
-BankVi reprend les conventions visuelles de WhatsApp sur Android : fond blanc ou presque noir, vert réservé à l'action, boutons en pilule, listes simples, bulles, barre du bas, soulignement des champs. L'utilisateur togolais connaît déjà ces gestes. L'app n'a rien à lui apprendre avant de lui montrer son chiffre.
+BankVi possède sa propre identité visuelle chaleureuse (**Terracotta & Lagune** : fond sable ivoire au soleil, bleu nuit atlantique en sombre, terracotta pour agir, capsules de flux à barre latérale et boutons adoucis à rayon de 16 dp), tout en conservant des gestes familiers (listes simples, barre du bas, soulignement des champs) pour que l'utilisateur togolais n'ait rien à réapprendre.
 
-BankVi garde sa propre marque : son nom, son logo et son icône ne ressemblent pas à ceux de WhatsApp (voir [les limites](01-principes-et-reference-whatsapp.md#3-ce-quon-ne-reprend-pas)).
+BankVi garde sa propre marque : son nom, son logo, ses couleurs et ses composants ne ressemblent pas à ceux de WhatsApp (voir [les limites](01-principes-et-reference-whatsapp.md#3-ce-quon-ne-reprend-pas)).
 
 ## Lire ce dossier
 
@@ -33,23 +33,20 @@ BankVi garde sa propre marque : son nom, son logo et son icône ne ressemblent p
 
 1. Partir du cadre de référence : 360 × 800 dp, thème clair, puis décliner en sombre.
 2. Reprendre uniquement les composants décrits ici. Un besoin nouveau s'ajoute au système avant d'apparaître sur un écran.
-3. Vérifier la règle d'or : **un seul bouton vert par écran.**
+3. Vérifier la règle d'or : **un seul bouton principal terracotta par écran.**
 4. Vérifier les textes avec la [rédaction](14-redaction.md) : montants, tutoiement, aucun reproche, aucun conseil.
 
 ## Fiches autonomes
 
 Chaque fiche d'écran contient en annexe ce qu'il faut du design system, de la philosophie, du parcours et de la bible pour finir l'écran avec ce seul fichier. Ces annexes sont générées : **une règle se change dans son document source, jamais dans une annexe.** On relance ensuite `python generer_annexes.py` depuis le dossier `describe_screens`, et `--verifier` signale une annexe qui n'est plus à jour.
 
-## D'où viennent les valeurs
+## Origine des valeurs et évolution de marque
 
-WhatsApp ne publie **aucune palette ni aucune échelle officielle** de son interface. La page de marque de Meta ne donne que des règles sur le logo et le nom. Les valeurs de ce dossier viennent donc de relevés tiers et de la refonte de mai 2024 décrite par la presse. Elles restent à contrôler à la pipette sur des captures d'un téléphone Android récent, en clair et en sombre.
+À l'origine (v0.1 à v0.5), BankVi s'appuyait sur des repères visuels proches de WhatsApp afin de réduire l'appréhension au premier lancement. Depuis la v0.6, l'identité visuelle est entièrement propre à BankVi (**Terracotta & Lagune**) tout en gardant les gestes familiers (navigation basse à 4 onglets, champs soulignés, listes simples).
 
-| Niveau de certitude | Valeurs |
+| Domaine | Choix BankVi (v0.6 Terracotta & Lagune) |
 | --- | --- |
-| **Recoupé par plusieurs sources** | Vert `#25D366` ; bulle claire `#D9FDD3` ; texte `#111B21` ; fond sombre `#0B141A` ; barre de navigation en bas ; vert utilisé avec parcimonie ; icônes rondes à contour ; illustrations arrondies à contour noir |
-| **Une seule source tierce** | Neutres, bulle sombre `#005C4B`, surface `#202C33`, ombres, rayons, puce sélectionnée |
-| **Décision BankVi** | Lien `#00735E`, soulignements, couleurs d'état, palette des pots, tailles de texte, chiffre du jour, courbe |
-
-Un rapport de WABetaInfo, relayé par SamMobile, indique un fond sombre récent encore plus profond, `#0A1014`. Nous gardons `#0B141A` tant que la comparaison n'est pas faite ; l'écart est invisible à l'œil dans la plupart des conditions.
-
-**Sources :** [Android Authority, refonte](https://www.androidauthority.com/whatsapp-gets-makeover-3441545/) · [Design Compass, refonte de 2024](https://designcompass.org/en/2024/05/27/whatsapp-redesign) · [TalkAndroid](https://www.talkandroid.com/465987-whatsapp-design-overhaul/) · [Galerie de design systems, relevé WhatsApp](https://www.oppadu.com/tools/design-systems-site/brand/whatsapp.html) · [Meta, règles de marque WhatsApp](https://www.meta.com/nb-no/brand/resources/whatsapp/whatsapp-brand/)
+| **Action et marque** | Terracotta `#B83B20` en clair (`#FFFFFF` dessus), `#F07B5A` en sombre (`#1C120E` dessus) ; rayon de `16 dp` sur les boutons (au lieu de pilules) |
+| **Fonds et neutres** | Sable ivoire `#FAF7F2` en clair, bleu nuit atlantique `#0D1520` en sombre ; textes `#1C1613` / `#F5F0EB` ; surfaces `#FFFFFF` / `#172436` |
+| **Flux financier et horizon** | Lagune `#0E6BA8` / `#4DA8DA` pour les revenus et ciels d'horizon ; capsules de flux à `16 dp` avec barre latérale de `3 dp` |
+| **Ergonomie conservée** | Navigation à 4 onglets sans glissement, soulignement de saisie, typographie système Roboto sans téléchargement, cibles tactiles ≥ `48 dp` |
